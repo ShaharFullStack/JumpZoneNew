@@ -20,7 +20,7 @@ Disallow: /.git/
 Disallow: /.claude/
 
 # Sitemap location
-Sitemap: https://jumpzone.co.il/sitemap.xml
+Sitemap: https://shaharfullstack.github.io/JumpZoneNew/sitemap.xml
 
 # Crawl delay for polite crawling
 Crawl-delay: 1
