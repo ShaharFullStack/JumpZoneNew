@@ -239,28 +239,80 @@
             transform: scale(1.2);
         }
 
-        /* Pricing cards */
+        /* Pricing cards - mobile optimized */
         .pricing-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px 20px;
-            margin: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px 15px;
+            margin: 8px 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
-            max-width: 280px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
         }
 
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 97, 53, 0.2);
+        .pricing-card:hover,
+        .pricing-card:active {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 97, 53, 0.3);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .price {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 900;
             color: #FF6135;
-            margin: 15px 0;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Mobile-specific pricing layout */
+        .pricing-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .pricing-features {
+            text-align: right;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .pricing-features li {
+            margin-bottom: 8px;
+            padding-right: 15px;
+            position: relative;
+        }
+
+        .pricing-features li:before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: #FF6135;
+            font-weight: bold;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 360px) {
+            .pricing-card {
+                padding: 15px 12px;
+                margin: 6px 0;
+            }
+            
+            .price {
+                font-size: 2rem;
+            }
+            
+            .mobile-content {
+                padding: 15px;
+                max-width: 320px;
+            }
         }
 
         /* Contact form */
@@ -356,26 +408,17 @@
             <div class="mobile-content">
                 <h2 class="mobile-title">למה לבחור בנו?</h2>
                 <div class="space-y-6 text-right">
-                    <div class="flex items-start gap-4">
-                        <div class="text-2xl">🎯</div>
-                        <div>
-                            <h3 class="mobile-subtitle">אימון מותאם אישית</h3>
-                            <p class="mobile-text">כל אימון מתוכנן במיוחד עבורך בהתאם ליכולות ולמטרות שלך</p>
-                        </div>
+                    <div>
+                        <h3 class="mobile-subtitle">אימון מותאם אישית</h3>
+                        <p class="mobile-text">כל אימון מתוכנן במיוחד עבורך בהתאם ליכולות ולמטרות שלך</p>
                     </div>
-                    <div class="flex items-start gap-4">
-                        <div class="text-2xl">💪</div>
-                        <div>
-                            <h3 class="mobile-subtitle">ניסיון עשיר</h3>
-                            <p class="mobile-text">מעל 10 שנות ניסיון באימון וחיזוק גופני ומנטלי</p>
-                        </div>
+                    <div>
+                        <h3 class="mobile-subtitle">ניסיון עשיר</h3>
+                        <p class="mobile-text">מעל 10 שנות ניסיון באימון וחיזוק גופני ומנטלי</p>
                     </div>
-                    <div class="flex items-start gap-4">
-                        <div class="text-2xl">🏆</div>
-                        <div>
-                            <h3 class="mobile-subtitle">תוצאות מוכחות</h3>
-                            <p class="mobile-text">מאות לקוחות מרוצים שהגיעו למטרות שלהם</p>
-                        </div>
+                    <div>
+                        <h3 class="mobile-subtitle">תוצאות מוכחות</h3>
+                        <p class="mobile-text">מאות לקוחות מרוצים שהגיעו למטרות שלהם</p>
                     </div>
                 </div>
             </div>
@@ -460,27 +503,55 @@
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./assets/pricing-mobile.JPG');"></div>
             <div class="overlay"></div>
             <div class="mobile-content">
-                <h2 class="mobile-title mb-8">תעריפים</h2>
-                <div class="space-y-6">
+                <h2 class="mobile-title mb-6">תעריפים</h2>
+                <div class="pricing-container">
                     <div class="pricing-card">
-                        <h3 class="mobile-subtitle">אימון אישי</h3>
+                        <h3 class="mobile-subtitle mb-2">אימון אישי</h3>
                         <div class="price">₪200</div>
-                        <p class="mobile-text mb-4">אימון אישי של שעה וחצי מותאם לרמה שלך</p>
-                        <ul class="text-right space-y-2 mobile-text">
-                            <li>• הדרכה אישית מלאה</li>
-                            <li>• תוכנית אימון מותאמת</li>
-                            <li>• מעקב התקדמות</li>
+                        <p class="mobile-text mb-4">אימון אישי של שעה וחצי<br/>מותאם לרמה שלך</p>
+                        <ul class="pricing-features mobile-text">
+                            <li>הדרכה אישית מלאה</li>
+                            <li>תוכנית אימון מותאמת</li>
+                            <li>מעקב התקדמות</li>
+                            <li>גמישות בזמנים</li>
                         </ul>
+                        <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20אימון%20אישי!" 
+                           class="cta-button mt-4 text-sm px-6 py-2">
+                            הזמן עכשיו
+                        </a>
                     </div>
+                    
                     <div class="pricing-card">
-                        <h3 class="mobile-subtitle">אימון קבוצתי</h3>
+                        <h3 class="mobile-subtitle mb-2">אימון קבוצתי</h3>
                         <div class="price">₪120</div>
-                        <p class="mobile-text mb-4">אימון בקבוצה קטנה עד 4 משתתפים</p>
-                        <ul class="text-right space-y-2 mobile-text">
-                            <li>• אווירה חברתית ומעודדת</li>
-                            <li>• מחיר משתלם</li>
-                            <li>• מתאים לכל הרמות</li>
+                        <p class="mobile-text mb-4">אימון בקבוצה קטנה<br/>עד 4 משתתפים</p>
+                        <ul class="pricing-features mobile-text">
+                            <li>אווירה חברתית ומעודדת</li>
+                            <li>מחיר משתלם</li>
+                            <li>מתאים לכל הרמות</li>
+                            <li>מוטיבציה קבוצתית</li>
                         </ul>
+                        <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20אימון%20קבוצתי!" 
+                           class="cta-button mt-4 text-sm px-6 py-2">
+                            הזמן עכשיו
+                        </a>
+                    </div>
+                    
+                    <div class="pricing-card" style="background: rgba(255, 97, 53, 0.2); border-color: #FF6135;">
+                        <h3 class="mobile-subtitle mb-2" style="color: #FFD700;">מבצע!</h3>
+                        <div class="price" style="font-size: 1.8rem;">שיעור ניסיון</div>
+                        <div style="font-size: 2.5rem; font-weight: 900; color: #FFD700; margin: 10px 0;">חינם!</div>
+                        <p class="mobile-text mb-4">שיעור ראשון ללא עלות<br/>לחוות את החוויה</p>
+                        <ul class="pricing-features mobile-text">
+                            <li>הכרת המאמן והשיטה</li>
+                            <li>הערכת רמה אישית</li>
+                            <li>תוכנית מומלצת</li>
+                            <li>ללא התחייבות</li>
+                        </ul>
+                        <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון%20חינם!" 
+                           class="cta-button mt-4 text-sm px-6 py-2" style="background: linear-gradient(45deg, #FFD700, #FFA500);">
+                            שיעור ניסיון חינם
+                        </a>
                     </div>
                 </div>
             </div>
@@ -501,7 +572,7 @@
                     צור קשר עכשיו
                 </a>
                 <p class="mobile-text text-sm opacity-75">
-                    📞 050-844-7575 | 📧 nati@jumpzone.co.il
+                    050-844-7575 | nati@jumpzone.co.il
                 </p>
             </div>
         </section>
@@ -533,13 +604,13 @@
                     <h3 class="mobile-subtitle mb-4">או צור קשר ישירות:</h3>
                     <div class="space-y-3">
                         <a href="https://wa.me/972508447575" class="block text-white hover:text-orange-400 transition-colors">
-                            📱 WhatsApp: 050-844-7575
+                            WhatsApp: 050-844-7575
                         </a>
                         <a href="tel:+972508447575" class="block text-white hover:text-orange-400 transition-colors">
-                            📞 טלפון: 050-844-7575
+                            טלפון: 050-844-7575
                         </a>
                         <a href="mailto:nati@jumpzone.co.il" class="block text-white hover:text-orange-400 transition-colors">
-                            📧 אימייל: nati@jumpzone.co.il
+                            אימייל: nati@jumpzone.co.il
                         </a>
                     </div>
                 </div>
@@ -587,7 +658,7 @@
                 
                 setTimeout(() => {
                     isScrolling = false;
-                }, 600);
+                }, 3000); // Balanced timeout for responsive scrolling
             }
             
             // Touch handling for mobile
@@ -595,17 +666,24 @@
             let startTime = 0;
             let startX = 0;
             let isTouching = false;
+            let lastScrollTime = 0;
             
             document.addEventListener('touchstart', function(e) {
-                if (isScrolling) return;
+                if (isScrolling) {
+                    e.preventDefault();
+                    return;
+                }
                 startY = e.touches[0].clientY;
                 startX = e.touches[0].clientX;
                 startTime = Date.now();
                 isTouching = true;
-            }, { passive: true });
+            }, { passive: false });
             
             document.addEventListener('touchmove', function(e) {
-                if (!isTouching || isScrolling) return;
+                if (!isTouching || isScrolling) {
+                    e.preventDefault();
+                    return;
+                }
                 
                 const currentY = e.touches[0].clientY;
                 const currentX = e.touches[0].clientX;
@@ -613,22 +691,33 @@
                 const deltaX = Math.abs(startX - currentX);
                 
                 // If it's more vertical than horizontal, prevent default scrolling
-                if (deltaY > deltaX && deltaY > 10) {
+                if (deltaY > deltaX && deltaY > 15) {
                     e.preventDefault();
                 }
             }, { passive: false });
             
             document.addEventListener('touchend', function(e) {
-                if (!isTouching || isScrolling) return;
+                if (!isTouching || isScrolling) {
+                    isTouching = false;
+                    return;
+                }
                 
                 isTouching = false;
+                const currentTime = Date.now();
+                
+                // Prevent multiple scrolls within 800ms
+                if (currentTime - lastScrollTime < 800) {
+                    return;
+                }
+                
                 const endY = e.changedTouches[0].clientY;
                 const endTime = Date.now();
                 const deltaY = startY - endY;
                 const deltaTime = endTime - startTime;
                 
-                // Reduced minimum swipe distance and increased time window
-                if (Math.abs(deltaY) > 30 && deltaTime < 800) {
+                // Balanced swipe detection - not too sensitive
+                if (Math.abs(deltaY) > 40 && deltaTime < 600) {
+                    lastScrollTime = currentTime;
                     if (deltaY > 0 && currentIndex < totalSections - 1) {
                         // Swipe up - next section
                         goToSection(currentIndex + 1);
@@ -637,7 +726,30 @@
                         goToSection(currentIndex - 1);
                     }
                 }
-            }, { passive: true });
+            }, { passive: false });
+            
+            // Wheel event for desktop and better mobile support
+            document.addEventListener('wheel', function(e) {
+                if (isScrolling) return;
+                
+                const currentTime = Date.now();
+                // Prevent multiple wheel scrolls within 800ms
+                if (currentTime - lastScrollTime < 800) {
+                    e.preventDefault();
+                    return;
+                }
+                
+                e.preventDefault();
+                lastScrollTime = currentTime;
+                
+                if (e.deltaY > 0 && currentIndex < totalSections - 1) {
+                    // Scroll down - next section
+                    goToSection(currentIndex + 1);
+                } else if (e.deltaY < 0 && currentIndex > 0) {
+                    // Scroll up - previous section  
+                    goToSection(currentIndex - 1);
+                }
+            }, { passive: false });
             
             // Keyboard navigation
             document.addEventListener('keydown', function(e) {
