@@ -44,6 +44,15 @@
         }
     </script>
 
+    <!-- Enhanced CSS Architecture - Optimized Loading Order -->
+    <link rel="stylesheet" href="css/mobile-performance.css" />
+
+    <link rel="stylesheet" href="css/design-tokens.css" />
+    <link rel="stylesheet" href="css/mobile-components.css" />
+    <link rel="stylesheet" href="css/mobile-responsive.css" />
+    <link rel="stylesheet" href="css/tablet-optimization.css" />
+    
+
     <style>
         * {
             margin: 0;
@@ -715,8 +724,11 @@
                 const deltaY = startY - endY;
                 const deltaTime = endTime - startTime;
                 
-                // Balanced swipe detection - not too sensitive
-                if (Math.abs(deltaY) > 40 && deltaTime < 600) {
+                // Enhanced swipe detection for better responsiveness
+                const minSwipeDistance = window.innerWidth <= 480 ? 30 : 40; // Shorter distance for small screens
+                const maxSwipeTime = 800;
+                
+                if (Math.abs(deltaY) > minSwipeDistance && deltaTime < maxSwipeTime) {
                     lastScrollTime = currentTime;
                     if (deltaY > 0 && currentIndex < totalSections - 1) {
                         // Swipe up - next section

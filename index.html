@@ -14,14 +14,20 @@
             const userAgent = navigator.userAgent.toLowerCase();
             const mobileKeywords = ['mobile', 'android', 'iphone', 'ipad', 'phone', 'tablet', 'webos', 'blackberry'];
             const hasMobileKeyword = mobileKeywords.some(keyword => userAgent.includes(keyword));
-            const isSmallScreen = window.innerWidth <= 768 || screen.width <= 768;
+            
+            // Enhanced screen size detection for tablets
+            const screenWidth = window.innerWidth || screen.width;
+            const isTabletOrMobile = screenWidth <= 1024; // Include tablets in mobile experience
+            const isMobileSize = screenWidth <= 768;
+            
             const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
             
             // Additional checks
             const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
             
-            // More aggressive mobile detection for small screens
-            return hasMobileKeyword || isMobileUA || isSmallScreen;
+            // Strategy: Tablets (768px-1024px) should use mobile.html for better touch experience
+            return hasMobileKeyword || isMobileUA || isTabletUA || isTabletOrMobile || (hasTouchScreen && isMobileSize);
         }
         
         // Immediate redirect - before any content loads

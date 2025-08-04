@@ -1,0 +1,227 @@
+/* Mobile-First Responsive System */
+/* Base styles for mobile devices */
+
+:root {
+    --mobile-padding: 20px;
+    --mobile-gap: 15px;
+    --mobile-border-radius: 12px;
+    --mobile-font-size-small: 0.9rem;
+    --mobile-font-size-base: 1rem;
+    --mobile-font-size-large: 1.2rem;
+    --mobile-font-size-xl: 1.5rem;
+    --mobile-font-size-2xl: 2rem;
+    --mobile-font-size-3xl: 2.5rem;
+}
+
+/* Extra Small Phones (320px-359px) */
+@media (max-width: 359px) {
+    .mobile-content {
+        padding: 15px !important;
+        max-width: 290px !important;
+    }
+    
+    .mobile-title {
+        font-size: 1.8rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    .mobile-subtitle {
+        font-size: 1.2rem !important;
+    }
+    
+    .mobile-text {
+        font-size: 0.95rem !important;
+    }
+    
+    .pricing-card {
+        padding: 15px 10px !important;
+        margin: 5px 0 !important;
+    }
+    
+    .price {
+        font-size: 1.8rem !important;
+    }
+    
+    .cta-button {
+        padding: 12px 20px !important;
+        font-size: 0.95rem !important;
+    }
+}
+
+/* Small Phones (360px-479px) */
+@media (min-width: 360px) and (max-width: 479px) {
+    .mobile-content {
+        padding: 18px;
+        max-width: 320px;
+    }
+    
+    .mobile-title {
+        font-size: 2rem;
+        line-height: 1.15;
+    }
+    
+    .mobile-subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .mobile-text {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .pricing-card {
+        padding: 18px 12px;
+        margin: 6px 0;
+    }
+    
+    .price {
+        font-size: 2rem;
+    }
+}
+
+/* Large Phones (480px-767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+    .mobile-content {
+        padding: 22px;
+        max-width: 400px;
+    }
+    
+    .mobile-title {
+        font-size: 2.3rem;
+        line-height: 1.2;
+    }
+    
+    .mobile-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .mobile-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .pricing-card {
+        padding: 22px 18px;
+        margin: 8px 0;
+    }
+    
+    .price {
+        font-size: 2.2rem;
+    }
+    
+    .cta-button {
+        padding: 16px 32px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Tablets (768px-1024px) - Enhanced mobile layout */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mobile-content {
+        padding: 30px;
+        max-width: 600px;
+    }
+    
+    .mobile-title {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+    
+    .mobile-subtitle {
+        font-size: 1.6rem;
+    }
+    
+    .mobile-text {
+        font-size: 1.2rem;
+        line-height: 1.7;
+    }
+    
+    .pricing-container {
+        max-width: 500px;
+        gap: 20px;
+    }
+    
+    .pricing-card {
+        padding: 30px 25px;
+        margin: 10px 0;
+        max-width: 450px;
+    }
+    
+    .price {
+        font-size: 2.8rem;
+    }
+    
+    .cta-button {
+        padding: 18px 36px;
+        font-size: 1.2rem;
+    }
+    
+    /* Tablet-specific layout improvements */
+    .testimonials-carousel {
+        max-width: 500px;
+    }
+    
+    .testimonial-slide {
+        padding: 25px;
+    }
+    
+    .contact-form {
+        max-width: 450px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 18px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .mobile-content {
+        max-width: 70%;
+        padding: 25px 40px;
+    }
+    
+    .pricing-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .pricing-card {
+        flex: 1;
+        min-width: 280px;
+        max-width: 320px;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .mobile-title,
+    .mobile-subtitle,
+    .price {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Ensure proper RTL support across all breakpoints */
+@media (max-width: 1024px) {
+    [dir="rtl"] .mobile-content,
+    [dir="rtl"] .pricing-container,
+    [dir="rtl"] .contact-form {
+        text-align: right;
+    }
+    
+    [dir="rtl"] .pricing-features {
+        text-align: right;
+    }
+    
+    [dir="rtl"] .pricing-features li:before {
+        right: 0;
+        left: auto;
+    }
+}

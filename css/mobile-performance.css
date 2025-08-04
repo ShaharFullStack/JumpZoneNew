@@ -1,0 +1,443 @@
+/* ==============================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Critical CSS for fast loading and smooth interactions
+   ============================================== */
+
+/* ===== CRITICAL RENDERING OPTIMIZATIONS ===== */
+/* Prevent layout shifts during load */
+.section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Dynamic viewport height for mobile */
+    contain: layout style paint;
+}
+
+/* GPU acceleration for animated elements */
+.gpu-layer {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Apply GPU acceleration to key mobile elements */
+#sections-container,
+.pricing-card,
+.testimonial-slide,
+.cta-button,
+.testimonials-track {
+    /* Applied GPU acceleration styles directly */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* ===== PAINT OPTIMIZATION ===== */
+/* Reduce paint complexity for mobile */
+.pricing-card,
+.testimonial-slide {
+    /* Simplified borders to reduce paint complexity */
+    border-radius: var(--mobile-border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    /* Optimize backdrop-filter performance */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    /* Contain paint operations */
+    contain: layout style paint;
+}
+
+/* ===== ANIMATION PERFORMANCE ===== */
+/* Optimize transitions for 60fps performance */
+.smooth-transition {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-property: transform, opacity;
+    transition-duration: 0.3s;
+
+    .cta-button,
+    .pricing-card,
+    .carousel-nav,
+    .carousel-dot {
+        transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition-property: transform, opacity;
+        transition-duration: 0.3s;
+    }
+
+    .carousel-dot {
+        transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition-property: transform, opacity;
+        transition-duration: 0.3s;
+    }
+
+    /* Disable expensive transitions on lower-end devices */
+    @media (max-width: 480px) and (max-device-width: 896px) and (-webkit-device-pixel-ratio: 2) {
+
+        .pricing-card:hover,
+        .testimonial-slide:hover {
+            /* Simplified hover effects for older mobile devices */
+            transform: translateY(-2px);
+            transition-duration: 0.2s;
+        }
+    }
+
+    /* ===== MEMORY OPTIMIZATION ===== */
+    /* Reduce memory usage by limiting concurrent animations */
+    .section:not(.active) .pricing-card,
+    .section:not(.active) .testimonial-slide {
+        will-change: auto;
+        /* Remove will-change when not needed */
+    }
+
+    .section.active .pricing-card,
+    .section.active .testimonial-slide {
+        will-change: transform, opacity;
+    }
+
+    /* ===== VIDEO PERFORMANCE OPTIMIZATIONS ===== */
+    .video-bg {
+        /* Optimize video playback performance */
+        transform: translateZ(0);
+        object-fit: cover;
+
+        /* Preload optimization: set preload="metadata" in HTML, not CSS */
+
+        /* Mobile-specific optimizations */
+        /* To enable inline video playback on mobile, add playsinline and webkit-playsinline attributes in your HTML <video> tag */
+    }
+
+    /* Reduce video quality on very small screens to improve performance */
+    @media (max-width: 360px) {
+        .video-bg {
+            /* Lower resolution video can be swapped via JavaScript */
+            filter: brightness(0.8) contrast(1.1);
+        }
+    }
+
+    /* ===== SCROLL PERFORMANCE ===== */
+    /* Optimize scroll performance for section navigation */
+    #sections-container {
+        /* Use transform3d for better performance */
+        transform: translate3d(0, 0, 0);
+
+        /* Enable hardware acceleration */
+        will-change: transform;
+
+        /* Optimize compositing */
+        isolation: isolate;
+    }
+
+    /* Prevent unnecessary repaints during scroll */
+    .section {
+        /* Create separate paint layers */
+        isolation: isolate;
+
+        /* Optimize scrolling performance */
+        -webkit-overflow-scrolling: touch;
+        overflow: hidden;
+    }
+
+    /* ===== FONT LOADING OPTIMIZATION ===== */
+    /* Optimize font rendering for mobile */
+    body {
+        font-display: swap;
+        /* Allow fallback fonts while custom fonts load */
+        text-rendering: optimizeSpeed;
+        /* Prioritize speed over quality on mobile */
+        -webkit-font-smoothing: subpixel-antialiased;
+        -moz-osx-font-smoothing: auto;
+    }
+
+    /* Critical font sizes with fallbacks */
+    .mobile-title {
+        font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-display: swap;
+    }
+
+    .mobile-subtitle,
+    .mobile-text {
+        font-family: 'Heebo', system-ui, sans-serif;
+        font-display: swap;
+    }
+
+    /* ===== IMAGE OPTIMIZATION ===== */
+    .hero-image,
+    .testimonial-avatar {
+        /* Optimize image rendering */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+
+        /* Progressive enhancement for modern browsers */
+        @supports (image-rendering: pixelated) {
+            image-rendering: auto;
+        }
+    }
+
+    /* Lazy loading optimization */
+    .lazy-image {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .lazy-image.loaded {
+        opacity: 1;
+    }
+
+    /* ===== NETWORK OPTIMIZATION ===== */
+    /* Preload critical resources */
+    .preload-critical {
+        /* This class can be applied to critical elements */
+        content-visibility: auto;
+        contain-intrinsic-size: 300px 200px;
+    }
+
+    /* ===== INTERACTION PERFORMANCE ===== */
+    /* Optimize touch interactions */
+    .touch-optimized {
+        /* Reduce touch delay */
+        touch-action: manipulation;
+
+        /* Prevent text selection during gestures */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+
+        .cta-button,
+        .pricing-card,
+        .carousel-nav,
+        .carousel-dot,
+        #nav-dots button {
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .carousel-nav,
+        .carousel-dot,
+        #nav-dots button {
+            /* Inherit touch-optimized styles directly */
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ===== REDUCED MOTION SUPPORT ===== */
+        /* Respect user preferences for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            /* Maintain basic feedback for accessibility */
+            .cta-button:active,
+            .pricing-card:active {
+                opacity: 0.8;
+                transition: opacity 0.1s ease;
+            }
+        }
+
+        /* ===== BATTERY OPTIMIZATION ===== */
+        /* Reduce animations when battery is low (where supported) */
+        @media (battery-level: low) {
+
+            .pricing-card:hover,
+            .testimonial-slide:hover,
+            .cta-button:hover {
+                transform: none;
+                transition: none;
+            }
+
+            .carousel-nav,
+            .carousel-dot {
+                transition-duration: 0.1s;
+            }
+        }
+
+        /* ===== CONNECTION-AWARE OPTIMIZATIONS ===== */
+        /* Simplified styles for slow connections */
+        @media (connection: slow-2g),
+        (connection: 2g) {
+
+            .pricing-card,
+            .testimonial-slide {
+                /* Remove backdrop-filter on slow connections */
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            .video-bg {
+                /* Disable autoplay on slow connections */
+                display: none;
+            }
+
+            .section {
+                /* Use solid background colors instead of videos */
+                background: linear-gradient(135deg, #1f2937 0%, #271f11 100%);
+            }
+        }
+
+        /* ===== MEMORY USAGE OPTIMIZATION ===== */
+        /* Clean up resources when sections are not visible */
+        .section:not(.active) {
+            /* Reduce memory footprint of inactive sections */
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .section.active {
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* ===== CRITICAL CSS LOADING ===== */
+        /* Above-the-fold content optimization */
+        .hero-section {
+            /* Prioritize hero section rendering */
+            contain: none;
+            /* Allow full rendering priority */
+        }
+
+        .hero-section .mobile-content {
+            /* Ensure hero content renders immediately */
+            content-visibility: visible;
+        }
+
+        /* ===== JAVASCRIPT PERFORMANCE HELPERS ===== */
+        /* Classes for JavaScript to optimize performance */
+        .is-animating {
+            will-change: transform, opacity;
+            pointer-events: none;
+            /* Prevent interaction during animation */
+        }
+
+        .animation-complete {
+            will-change: auto;
+            pointer-events: auto;
+        }
+
+        /* ===== DEBUG PERFORMANCE (Development Only) ===== */
+        /* 
+Uncomment for performance debugging:
+
+.debug-paint {
+    outline: 2px solid red !important;
+}
+
+.debug-composite {
+    transform: translateZ(0);
+    outline: 2px solid blue !important;
+}
+*/
+
+        /* ===== LOADING STATES ===== */
+        /* Skeleton loading for better perceived performance */
+        .skeleton {
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.1) 25%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    rgba(255, 255, 255, 0.1) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes skeleton-loading {
+            .loading .mobile-title {
+                background: linear-gradient(90deg,
+                        rgba(255, 255, 255, 0.1) 25%,
+                        rgba(255, 255, 255, 0.2) 50%,
+                        rgba(255, 255, 255, 0.1) 75%);
+                background-size: 200% 100%;
+                animation: skeleton-loading 1.5s infinite;
+                border-radius: 4px;
+                height: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .loading .mobile-text {
+                background: linear-gradient(90deg,
+                        rgba(255, 255, 255, 0.1) 25%,
+                        rgba(255, 255, 255, 0.2) 50%,
+                        rgba(255, 255, 255, 0.1) 75%);
+                background-size: 200% 100%;
+                animation: skeleton-loading 1.5s infinite;
+                border-radius: 4px;
+                height: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.1) 25%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    rgba(255, 255, 255, 0.1) 75%);
+            background-size: 200% 100%;
+        .loading .mobile-text {
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.1) 25%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    rgba(255, 255, 255, 0.1) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 4px;
+            height: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .loading .mobile-text {
+            @extend .skeleton;
+            height: 1rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+        /* Image loading placeholder */
+        .image-placeholder {
+            background: var(--color-gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-500);
+            font-size: var(--font-size-sm);
+        }
+
+        /* Critical above-the-fold styles */
+        .critical-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Lazy loading support */
+        .lazy-load {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Video lazy loading */
+        .lazy-video {
+            pointer-events: none;
+        }
+
+        .lazy-video.loaded {
+            pointer-events: auto;
+        }
+    }
+}
