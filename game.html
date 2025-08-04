@@ -217,52 +217,22 @@
         {
             name: "רבעים",
             bpm: 80,
-            alphaTex: `
-                .
-                \\clef percussion
-                \\ts 4 4
-                \\rhythm
-                c4 c4 c4 c4 |
-                c4 c4 c4 c4
-            `
+            alphaTex: `\\clef percussion \\ts 4 4 \\rhythm c4 c4 c4 c4 | c4 c4 c4 c4`
         },
         {
             name: "שמיניות",
             bpm: 90,
-            alphaTex: `
-                .
-                \\clef percussion
-                \\ts 4 4
-                \\rhythm
-                c8 c8 c8 c8 c8 c8 c8 c8 |
-                c4 c8 c8 c4 c8 c8
-            `
+            alphaTex: `\\clef percussion \\ts 4 4 \\rhythm c8 c8 c8 c8 c8 c8 c8 c8 | c4 c8 c8 c4 c8 c8`
         },
         {
             name: "סינקופות",
             bpm: 100,
-            alphaTex: `
-                .
-                \\clef percussion
-                \\ts 4 4
-                \\rhythm
-                c8 c8 c4 c8 c8. c16 |
-                c4. c8 r8 c8 c8 c8
-            `
+            alphaTex: `\\clef percussion \\ts 4 4 \\rhythm c8 c8 c4 c8 c8. c16 | c4. c8 r8 c8 c8 c8`
         },
         {
             name: "אתגר",
             bpm: 110,
-            alphaTex: `
-                .
-                \\clef percussion
-                \\ts 4 4
-                \\rhythm
-                c16 c16 c16 c16 c8 c8 c4 |
-                c4 r8 c8 c4. |
-                c8 r8 c8 r8 c8 c8 c8 c8 |
-                c4. c8 c4 r4
-            `
+            alphaTex: `\\clef percussion \\ts 4 4 \\rhythm c16 c16 c16 c16 c8 c8 c4 | c4 r8 c8 c4. | c8 r8 c8 r8 c8 c8 c8 c8 | c4. c8 c4 r4`
         }
     ];
 
@@ -315,7 +285,8 @@
 
         setupAlphaTabEvents() {
             // אירוע שמופעל בכל פעימה (beat)
-            this.api.beatTicked.on(beat => {
+            // תיקון: האירועים נמצאים על אובייקט ה-player של ה-API
+            this.api.player.beatTicked.on(beat => {
                 if (!this.isGameActive) return;
                 
                 // הערכת הפעימה הקודמת
@@ -327,7 +298,7 @@
             });
             
             // אירוע שמופעל בסיום הנגינה
-            this.api.playerStateChanged.on(e => {
+            this.api.player.playerStateChanged.on(e => {
                 if (e.state === 0 && this.isGameActive) { // Stopped
                     this.evaluatePreviousBeat(); // בדוק את הפעימה האחרונה
                     this.isGameActive = false;
@@ -350,10 +321,12 @@
             this.showFeedback("התכונן...", 'neutral');
 
             try {
+                // טוען את התווים
                 await this.api.tex(levelData.alphaTex, {
                     settings: { player: { defaultTempo: levelData.bpm } }
                 });
                 
+                // רק אם טעינת התווים הצליחה, נמשיך
                 this.prepareNoteList();
                 await this.clapDetector.start();
 
@@ -372,6 +345,8 @@
         
         prepareNoteList() {
             this.notesInLevel = [];
+            // תיקון: בדיקה שאובייקט ה-score קיים לפני הגישה אליו
+            if (!this.api.score) return;
             const track = this.api.score.tracks[0];
             track.staves.forEach(stave => {
                 stave.voices.forEach(voice => {
