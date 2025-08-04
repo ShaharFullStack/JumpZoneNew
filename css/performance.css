@@ -175,11 +175,7 @@ body {
   justify-content: center;
 }
 
-/* ===== RESOURCE HINTS OPTIMIZATIONS ===== */
-/* Optimize external resource loading */
-.external-link {
-  rel: preload;
-}
+
 
 /* ===== INTERSECTION OBSERVER OPTIMIZATIONS ===== */
 /* Lazy loading support */

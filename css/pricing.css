@@ -82,56 +82,47 @@
         z-index: 10;
     }
 
-    /* Mobile background animated image */
-    .pricing-mobile-background-image {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        pointer-events: none;
-        overflow: hidden;
-    }
-
-    .pricing-mobile-background-image img {
-        position: absolute;
-        right: -60%;
-        top: 50%;
-        transform: translateY(-50%) translateX(120%);
-        height: 60%;
-        width: auto;
-        object-fit: contain;
-        opacity: 0;
-        transition: all 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.3));
-    }
-
-    /* Mobile active animation */
-    .pricing-section.active .pricing-mobile-background-image img {
-        transform: translateY(-50%) translateX(-20%);
-        opacity: 0.2;
-        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
-    }
-
-    /* Mobile scroll-out animation */
-    .pricing-section.scroll-out .pricing-mobile-background-image img {
-        transform: translateY(-50%) translateX(150%);
-        opacity: 0;
-    }
-
     /* Mobile table styling */
     .pricing-mobile table {
-        font-size: 0.875rem; /* Smaller text for mobile */
+        font-size: 1rem; /* Larger text for mobile */
         position: relative;
         z-index: 10;
+        border: 2px solid #FF6135;
+        box-shadow: 0 4px 20px rgba(255, 97, 53, 0.3);
+        min-width: 95%; /* Larger table width */
+    }
+
+    .pricing-mobile thead th {
+        background: linear-gradient(135deg, #FF6135 0%, #FF8A65 100%);
+        color: #ffffff;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 2px solid #FF6135;
+    }
+
+    .pricing-mobile tbody tr:hover {
+        background: rgba(255, 97, 53, 0.2);
+    }
+
+    .pricing-mobile tbody td {
+        border: 1px solid rgba(255, 97, 53, 0.3);
     }
 
     .pricing-mobile th,
     .pricing-mobile td {
-        padding: 0.75rem 0.5rem;
+        padding: 1rem 0.75rem; /* Larger padding */
+        font-size: 1rem; /* Explicit larger font size */
     }
 
     .pricing-mobile h2 {
         position: relative;
         z-index: 10;
+        color: #FF6135 !important;
+        font-size: 4rem !important;
+        font-weight: 900 !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        margin-bottom: 2rem !important;
     }
 
     .pricing-mobile p {
@@ -161,9 +152,9 @@
         display: flex;
     }
 
-    /* Left side: Video container - optimized for SwitchLogo video */
+    /* Right side: Video container - optimized for SwitchLogo video */
     .pricing-video-container {
-        width: 30%;
+        width: 70%;
         height: 100%;
         position: relative;
         overflow: hidden;
@@ -180,9 +171,9 @@
         object-position: center;
     }
 
-    /* Right side: Pricing content - takes more space */
+    /* Left side: Pricing content - takes less space */
     .pricing-content-container {
-        width: 70%;
+        width: 30%;
         height: 100%;
         position: relative;
         background-image: url('../assets/pricingBG.jpg');
@@ -212,54 +203,19 @@
         z-index: 10;
     }
 
-    /* Desktop background animated image */
-    .pricing-background-image {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        pointer-events: none;
-        overflow: hidden;
-    }
-
-    .pricing-background-image img {
-        position: absolute;
-        left: 30%;
-        bottom: 0;
-        transform: translateX(-100%);
-        height: 90%;
-        width: auto;
-        object-fit: contain;
-        opacity: 0;
-        transition: all 1.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        transition-delay: 0.5s;
-        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
-    }
-
-    /* Desktop active animation */
-    .pricing-section.active .pricing-background-image img {
-        transform: translateX(10%);
-        opacity: 1;
-        filter: drop-shadow(6px 6px 12px rgba(0, 0, 0, 0.4));
-    }
-
-    /* Desktop scroll-out animation */
-    .pricing-section.scroll-out .pricing-background-image img {
-        transform: translateX(-120%);
-        opacity: 0;
-    }
-
     /* Desktop table styling */
     .pricing-content table {
-        max-width: 700px;
+        max-width: 900px; /* Larger table width */
         margin: 0 auto;
         position: relative;
         z-index: 10;
+        width: 100%; /* Full width within container */
     }
 
     .pricing-content th,
     .pricing-content td {
-        padding: 1rem;
-        font-size: 1rem;
+        padding: 1.25rem; /* Larger padding */
+        font-size: 1.125rem; /* Larger font size */
     }
 
     /* Desktop title styling */
@@ -268,6 +224,9 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         position: relative;
         z-index: 10;
+        color: #FF6135 !important;
+        font-size: 4rem !important;
+        font-weight: 900 !important;
     }
 
     .pricing-content p {
@@ -279,16 +238,17 @@
 /* Enhanced table styling for both mobile and desktop */
 .pricing-section table {
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 2px solid #FF6135;
+    box-shadow: 0 8px 32px rgba(255, 97, 53, 0.3);
 }
 
 .pricing-section thead th {
-    background: rgba(55, 65, 81, 0.9);
-    color: #f3f4f6;
+    background: linear-gradient(135deg, #FF6135 0%, #FF8A65 100%);
+    color: #ffffff;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    border-bottom: 2px solid #FF6135;
 }
 
 .pricing-section tbody tr {
@@ -296,12 +256,13 @@
 }
 
 .pricing-section tbody tr:hover {
-    background: rgba(75, 85, 99, 0.5);
+    background: rgba(255, 97, 53, 0.2);
 }
 
 .pricing-section tbody td {
     background: rgba(17, 24, 39, 0.9);
     color: #f9fafb;
+    border: 1px solid rgba(255, 97, 53, 0.3);
 }
 
 .pricing-section tbody tr:nth-child(even) td {
@@ -353,7 +314,12 @@
     }
     
     .pricing-content table {
-        font-size: 1.125rem;
+        font-size: 1.25rem; /* Even larger font for big screens */
+    }
+    
+    .pricing-content th,
+    .pricing-content td {
+        padding: 1.5rem; /* Even larger padding for big screens */
     }
 }
 

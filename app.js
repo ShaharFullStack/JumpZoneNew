@@ -309,7 +309,7 @@ function setupHeroVideo(isMobileDevice) {
         mobileVideo.className = 'hero-mobile-video absolute inset-0 w-full h-full object-cover';
         
         const mobileSource = document.createElement('source');
-        mobileSource.src = './assets/Hero-mobile.mp4';
+        mobileSource.src = './assets/Hero-mobile2.mp4';
         mobileSource.type = 'video/mp4';
         
         mobileVideo.appendChild(mobileSource);
