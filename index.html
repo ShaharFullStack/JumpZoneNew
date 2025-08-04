@@ -6,7 +6,59 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
-    <title>Jump Zone | אימוני קפיצה בחבל מקצועיים | המאמן המוביל בישראל</title>
+    <title>Jump Zone</title>
+    
+    <!-- Mobile Detection & Redirect -->
+    <script>
+        function isMobile() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const mobileKeywords = ['mobile', 'android', 'iphone', 'ipad', 'phone', 'tablet', 'webos', 'blackberry'];
+            const hasMobileKeyword = mobileKeywords.some(keyword => userAgent.includes(keyword));
+            const isSmallScreen = window.innerWidth <= 768 || screen.width <= 768;
+            const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            
+            // Additional checks
+            const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // More aggressive mobile detection for small screens
+            return hasMobileKeyword || isMobileUA || isSmallScreen;
+        }
+        
+        // Immediate redirect - before any content loads
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const forceMobile = urlParams.get('mobile') === 'true';
+            const forceDesktop = urlParams.get('desktop') === 'true';
+            
+            // Clear forceDesktop session if desktop param is not explicitly set
+            if (!forceDesktop) {
+                sessionStorage.removeItem('forceDesktop');
+            }
+            
+            // Debug logging
+            console.log('=== Mobile Detection Debug ===');
+            console.log('User Agent:', navigator.userAgent);
+            console.log('Window Width:', window.innerWidth);
+            console.log('Screen Width:', screen.width);
+            console.log('Touch Support:', 'ontouchstart' in window);
+            console.log('Max Touch Points:', navigator.maxTouchPoints);
+            console.log('Force Mobile Param:', forceMobile);
+            console.log('Force Desktop Param:', forceDesktop);
+            console.log('Is Mobile Function Result:', isMobile());
+            console.log('Current URL includes mobile.html:', window.location.href.includes('mobile.html'));
+            console.log('Force Desktop Session:', sessionStorage.getItem('forceDesktop'));
+            
+            if ((isMobile() || forceMobile) && !forceDesktop && !window.location.href.includes('mobile.html') && !sessionStorage.getItem('forceDesktop')) {
+                console.log('🔄 REDIRECTING TO MOBILE');
+                // Stop page from loading further
+                document.write('<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#FF6135;display:flex;align-items:center;justify-content:center;color:white;font-family:Arial;z-index:99999;">מעביר לגרסת מובייל...</div>');
+                window.location.replace('mobile.html');
+                return;
+            } else {
+                console.log('❌ Not redirecting - staying on desktop');
+            }
+        })();
+    </script>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה. הזמן שיעור ניסיון עוד היום!" />
@@ -42,6 +94,7 @@
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#FF6135" />
     <meta name="msapplication-TileColor" content="#FF6135" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="format-detection" content="telephone=yes" />
@@ -56,7 +109,20 @@
     <link rel="manifest" href="assets/icons/site.webmanifest" />
 
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS CDN - Consider switching to production build -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
+    <script>
+        // Suppress Tailwind development warning
+        if (typeof console !== 'undefined' && console.warn) {
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0] && args[0].includes('cdn.tailwindcss.com should not be used in production')) {
+                    return;
+                }
+                originalWarn.apply(console, args);
+            };
+        }
+    </script>
 
     <!-- Google Fonts (Heebo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -233,7 +299,9 @@
                 הקצב ברוח <br>
                 הרוח בקפיצה <br>
               </h1>
-
+          <p class="text-xl md:text-2xl max-w-3xl mb-8" itemprop="description">
+            קפיצתי אומנותי
+          </p>
               <a
                 href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!"
                 target="_blank"
@@ -251,7 +319,6 @@
             class="order-2 md:order-2 flex justify-center items-center object-cover h-full"
           >
             <img src="./assets/NatiHoodi.png" alt="נתנאל מלקר דלגית" />
-            <img src="./assets/BeachTransp.png" alt="חבל דלגית מלקר קפיצה" />
           </div>
           <div
             class="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mb-6 drop-shadow-2xl hero-logo"
@@ -264,7 +331,7 @@
                 הקצב ברוח <br>
                 הרוח בקפיצה <br>          </h1>
           <p class="text-xl md:text-2xl max-w-3xl mb-8" itemprop="description">
-            משפרת את הכושר, מעצימה את הנפש ומחברת אותך לעצמך
+            קפיצתי אומנותי
           </p>
           <a
             href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!"

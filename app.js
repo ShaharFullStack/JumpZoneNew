@@ -275,8 +275,8 @@ function setupMobileVideos() {
         }
 
         const finalCtaVideo = document.querySelector('#final-cta video source');
-        if (finalCtaVideo && !finalCtaVideo.src.includes('services-mobile.mp4')) {
-            finalCtaVideo.src = './assets/services-mobile.mp4';
+        if (finalCtaVideo && !finalCtaVideo.src.includes('servicesBG-mobile.mp4')) {
+            finalCtaVideo.src = './assets/servicesBG-mobile.mp4';
             const videoElement = finalCtaVideo.parentElement;
             videoElement.load();
         }

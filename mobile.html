@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Jump Zone | נתנאל מלקר</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר" />
+    <meta name="keywords" content="אימוני קפיצה בחבל, נתנאל מלקר, אימון אישי" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            line-height: 1.5;
+            color: #333;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: #000;
+        }
+
+        /* ===== MOBILE HERO WITH VIDEO ===== */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 350px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #333;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        /* ===== BASIC ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .benefit-item {
+            animation: none;
+        }
+
+        /* ===== CONTACT BUTTONS MINIMAL ===== */
+        .contact-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: #555;
+        }
+
+        .contact-btn.phone { 
+            background: #555;
+        }
+        
+        .contact-btn.phone:hover {
+            background: #666;
+        }
+        
+        .contact-btn.email { 
+            background: #666;
+        }
+        
+        .contact-btn.email:hover {
+            background: #777;
+        }
+
+        /* ===== MOBILE SECTIONS ===== */
+        .section {
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* ===== BENEFITS WITH VIDEO BACKGROUND ===== */
+        .benefits {
+            background: #000;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefits h2 {
+            color: white;
+        }
+
+        .benefits-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .benefits-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1;
+        }
+
+        .benefits-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .benefit-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-align: right;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .benefit-item h3 {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .benefit-item p {
+            font-size: 1rem;
+            color: #f8f9fa;
+            line-height: 1.5;
+        }
+
+        /* ===== STORY WITH MINIMAL DESIGN ===== */
+        .story {
+            background: #f8f9fa;
+            color: #333;
+            position: relative;
+        }
+
+        .story-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* ===== TESTIMONIALS MINIMAL STYLE ===== */
+        .testimonials {
+            background: #000;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials h2 {
+            color: white;
+        }
+
+        .testimonials-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .testimonials-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+
+        .testimonials-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-carousel {
+            position: relative;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .testimonial img {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ===== PRICING MINIMAL DESIGN ===== */
+        .pricing {
+            background: #f8f9fa;
+            color: #333;
+            position: relative;
+        }
+
+        .pricing-table {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .pricing-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.9rem;
+        }
+
+        .pricing-table th {
+            background: #f8f9fa;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .pricing-note {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            text-align: center;
+            opacity: 0.8;
+            line-height: 1.4;
+            color: #666;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .nav-btn {
+            width: 45px;
+            height: 45px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            background: #555;
+        }
+
+        .nav-btn:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: #333;
+            transform: scale(1.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .dot:hover {
+            background: rgba(255,255,255,0.6);
+            transform: scale(1.1);
+        }
+
+        /* ===== MINIMAL SECTION HEADERS ===== */
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* ===== SIMPLE PRICING ===== */
+        .pricing {
+            background: linear-gradient(135deg, #8e24aa 0%, #ab47bc 100%);
+            color: white;
+        }
+
+        .price-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-service {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .price-amount {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #FFE082;
+        }
+
+        /* ===== SIMPLE CONTACT ===== */
+        .contact {
+            background: #f8f9fa;
+        }
+
+        .contact-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .contact-btn.phone { background: #2196F3; }
+        .contact-btn.email { background: #FF9800; }
+
+        /* ===== IMPROVED FORM STYLING ===== */
+        .contact {
+            background: #f8f9fa;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            direction: rtl;
+            text-align: right;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-submit {
+            width: 100%;
+            background: #333;
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: #555;
+        }
+
+        /* ===== ENHANCED BOTTOM NAV ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .nav-dot:hover {
+            background: rgba(255,255,255,0.7);
+            transform: scale(1.1);
+        }
+
+        /* ===== ENHANCED DESKTOP BUTTON ===== */
+        .desktop-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .desktop-btn:hover {
+            background: rgba(0,0,0,0.9);
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Desktop Switch -->
+    <button class="desktop-btn" onclick="switchToDesktop()">🖥️ Desktop</button>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <!-- Hero Video Background -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/Hero-mobile2.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <img src="assets/logo1.png" alt="נתנאל מלקר" class="hero-image">
+            <h1>הכוח בקצב<br>הקצב ברוח<br>הרוח בקפיצה</h1>
+            <p>קפיצתי אומנותי</p>
+            <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!" 
+               class="cta-btn">� אני רוצה לקבוע שיעור ניסיון!</a>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="section benefits" id="benefits">
+        <!-- Benefits Video Background -->
+        <video class="benefits-video" autoplay muted loop playsinline>
+            <source src="assets/Boxing.mp4" type="video/mp4">
+        </video>
+        <div class="benefits-overlay"></div>
+        
+        <div class="benefits-content">
+            <h2>מה זה Jump Zone?</h2>
+            
+            <div class="benefit-item">
+                <h3>אימונים קבוצתיים ואישיים</h3>
+                <p>בגישה בגובה העיניים</p>
+            </div>
+            
+            <div class="benefit-item">
+                <h3>חיבור בין תנועה, מוזיקה ונפש</h3>
+                <p>הרמוניה מושלמת של גוף ונשמה</p>
+            </div>
+            
+            <div class="benefit-item">
+                <h3>קהילה בטוחה ומכילה</h3>
+                <p>מקום אמיתי לצמיחה פיזית ורגשית</p>
+            </div>
+            
+            <div class="benefit-item">
+                <h3>סדנאות השראה ועצמה</h3>
+                <p>בניית חוסן מנטלי וביטחון עצמי</p>
+            </div>
+            
+            <div class="benefit-item">
+                <h3>אימונים מותאמים</h3>
+                <p>לכל גיל ורמה - מתחילים ומתקדמים</p>
+            </div>
+        </div>
+    </section>
+    <!-- Story -->
+    <section class="section story" id="story">
+        <h2>קפיצה שהצילה חיים</h2>
+        <div class="story-content">
+            <p class="story-text">
+                אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת, חבל קפיצה אחד ולב ענק.
+            </p>
+            <p class="story-text">
+                בשנת 2018 חיי נעצרו. אובחנתי עם גלאוקומה קשה - איבדתי את הראייה בעין שמאל, אבל מה שכאב יותר היה לאבד את הזהות שלי.
+            </p>
+            <p class="story-text">
+                דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה. הוא היה קצב, עוגן, דרך לנשום מחדש. דרכו בניתי את עצמי מהיסוד.
+            </p>
+            <a href="#contact" class="cta-btn" onclick="scrollTo('contact')">בואו נדבר</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials" id="testimonials">
+        <!-- Testimonials Video Background -->
+        <video class="testimonials-video" autoplay muted loop playsinline>
+            <source src="assets/services.mp4" type="video/mp4">
+        </video>
+        <div class="testimonials-overlay"></div>
+        
+        <div class="testimonials-content">
+            <h2>מה אומרים הלקוחות</h2>
+            
+            <div class="testimonial-carousel">
+                <div class="testimonial active">
+                    <img src="assets/testimonials1.jpeg" alt="המלצה 1">
+                </div>
+                <div class="testimonial">
+                    <img src="assets/testimonials2.PNG" alt="המלצה 2">
+                </div>
+                <div class="testimonial">
+                    <img src="assets/testimonials3.PNG" alt="המלצה 3">
+                </div>
+                <div class="testimonial">
+                    <img src="assets/testimonials4.PNG" alt="המלצה 4">
+                </div>
+                <div class="testimonial">
+                    <img src="assets/testimonials5.PNG" alt="המלצה 5">
+                </div>
+            </div>
+            
+            <div class="testimonial-nav">
+                <button class="nav-btn" onclick="prevTestimonial()">‹</button>
+                <button class="nav-btn" onclick="nextTestimonial()">›</button>
+            </div>
+            
+            <div class="dots">
+                <span class="dot active" onclick="currentTestimonial(1)"></span>
+                <span class="dot" onclick="currentTestimonial(2)"></span>
+                <span class="dot" onclick="currentTestimonial(3)"></span>
+                <span class="dot" onclick="currentTestimonial(4)"></span>
+                <span class="dot" onclick="currentTestimonial(5)"></span>
+            </div>
+        </div>
+    </section>
+    <section class="section testimonials" id="testimonials">
+        <h2>מה אומרים עליי</h2>
+        
+        <div class="testimonial">
+            <img src="assets/testimonials1.jpeg" alt="המלצה 1" id="testimonial-img">
+        </div>
+        
+        <div class="testimonial-nav">
+            <button class="nav-btn" onclick="prevTestimonial()">‹</button>
+            <button class="nav-btn" onclick="nextTestimonial()">›</button>
+        </div>
+        
+        <div class="dots">
+            <div class="dot active" onclick="showTestimonial(0)"></div>
+            <div class="dot" onclick="showTestimonial(1)"></div>
+            <div class="dot" onclick="showTestimonial(2)"></div>
+            <div class="dot" onclick="showTestimonial(3)"></div>
+            <div class="dot" onclick="showTestimonial(4)"></div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section pricing" id="pricing">
+        <h2>מחירון Jump Zone</h2>
+        
+        <div class="pricing-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>סוג אימון</th>
+                        <th>משך</th>
+                        <th>מחיר</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>אימון אישי</td>
+                        <td>45-60 דק'</td>
+                        <td>150-250 ₪</td>
+                    </tr>
+                    <tr>
+                        <td>אימון קבוצתי (נוער)</td>
+                        <td>60-90 דק'</td>
+                        <td>65 ₪</td>
+                    </tr>
+                    <tr>
+                        <td>אימון קבוצתי (מבוגרים)</td>
+                        <td>60-90 דק'</td>
+                        <td>58 ₪</td>
+                    </tr>
+                    <tr>
+                        <td>שיעור אונליין/זום</td>
+                        <td>60 דק'</td>
+                        <td>100-150 ₪</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="pricing-note">
+                * כל המחירים לאימון בודד<br>
+                * ניתן לרכוש חבילות מוזלות<br>
+                * כל האימונים כוללים ליווי אישי
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+        <h2>יצירת קשר</h2>
+        
+        <a href="https://wa.me/972508447575?text=שלום!%20אני%20רוצה%20לשמוע%20עוד%20על%20Jump%20Zone" 
+           class="contact-btn" target="_blank">וואטסאפ: 050-8447575</a>
+           
+        <a href="tel:0508447575" class="contact-btn phone">טלפון: 050-8447575</a>
+        
+        <a href="mailto:melker694@gmail.com" class="contact-btn email">melker694@gmail.com</a>
+        
+        <form action="https://formspree.io/f/mqaldzwl" method="POST" style="margin-top: 20px;">
+            <div class="form-group">
+                <input type="text" name="name" class="form-input" placeholder="השם שלך" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" name="phone" class="form-input" placeholder="מספר טלפון" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="message" class="form-input" placeholder="איך אני יכול לעזור?">
+            </div>
+            <button type="submit" class="form-submit">שלח</button>
+        </form>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-dot active" onclick="scrollTo('hero')"></div>
+        <div class="nav-dot" onclick="scrollTo('benefits')"></div>
+        <div class="nav-dot" onclick="scrollTo('story')"></div>
+        <div class="nav-dot" onclick="scrollTo('testimonials')"></div>
+        <div class="nav-dot" onclick="scrollTo('pricing')"></div>
+        <div class="nav-dot" onclick="scrollTo('contact')"></div>
+    </nav>
+
+    <script>
+        // Testimonials carousel functionality
+        let currentTestimonial = 0;
+        const totalTestimonials = 5;
+        
+        function showTestimonial(index) {
+            // Hide all testimonials
+            document.querySelectorAll('.testimonial').forEach((item, i) => {
+                item.style.display = i === index ? 'block' : 'none';
+            });
+            
+            // Update dots
+            document.querySelectorAll('.dots .dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            currentTestimonial = index;
+        }
+        
+        function nextTestimonial() {
+            const next = (currentTestimonial + 1) % totalTestimonials;
+            showTestimonial(next);
+        }
+        
+        function prevTestimonial() {
+            const prev = currentTestimonial === 0 ? totalTestimonials - 1 : currentTestimonial - 1;
+            showTestimonial(prev);
+        }
+        
+        function currentTestimonial(index) {
+            showTestimonial(index - 1);
+        }
+        
+        // Auto-advance testimonials every 5 seconds
+        setInterval(nextTestimonial, 5000);
+        
+        // Initialize first testimonial
+        showTestimonial(0);
+        
+        // Smooth scrolling navigation
+        function scrollTo(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        // Update navigation dots based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = ['hero', 'benefits', 'story', 'testimonials', 'pricing', 'contact'];
+            const navDots = document.querySelectorAll('.bottom-nav .nav-dot');
+            
+            let current = 0;
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                        current = index;
+                    }
+                }
+            });
+            
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        });
+        
+        // Switch to desktop version
+        function switchToDesktop() {
+            sessionStorage.setItem('forceDesktop', 'true');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
