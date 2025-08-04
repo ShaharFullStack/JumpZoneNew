@@ -1,4 +1,3 @@
-
 // Responsive detection that updates on resize
 function getDeviceInfo() {
     const width = window.innerWidth;
@@ -570,21 +569,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Testimonials Carousel
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Loading testimonials carousel...');
+    
     const carousel = document.getElementById('testimonials-carousel');
-    const slides = carousel.querySelectorAll('.testimonial-slide');
+    console.log('Carousel element:', carousel);
+    
+    const slides = carousel?.querySelectorAll('.testimonial-slide');
+    console.log('Found slides:', slides?.length);
+    
     const prevBtn = document.getElementById('testimonials-prev');
     const nextBtn = document.getElementById('testimonials-next');
     const dots = document.querySelectorAll('.carousel-dot');
     
+    console.log('Navigation elements:', { prevBtn, nextBtn, dotsCount: dots.length });
+    
+    if (!carousel || !slides.length) {
+        console.error('Carousel or slides not found!');
+        return;
+    }
+    
     let currentSlide = 0;
     let isTransitioning = false;
-    
     let autoAdvanceInterval;
     
     function startAutoAdvance() {
         autoAdvanceInterval = setInterval(() => {
             if (!isTransitioning) {
+                console.log('Auto advancing to next slide');
                 nextSlide();
             }
         }, 4000);
@@ -595,20 +608,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showSlide(slideIndex) {
+        console.log(`Showing slide ${slideIndex}, current: ${currentSlide}`);
+        
         if (isTransitioning || slideIndex === currentSlide) return;
         
         isTransitioning = true;
         
+        // Remove active classes
         slides[currentSlide].classList.remove('active');
-        dots[currentSlide].classList.remove('active');
+        dots[currentSlide]?.classList.remove('active');
         
+        // Add prev class for smooth transition
         slides[currentSlide].classList.add('prev');
         
+        // Update current slide
         currentSlide = slideIndex;
         
+        // Add active classes
         slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
+        dots[currentSlide]?.classList.add('active');
         
+        console.log(`Active slide is now: ${currentSlide}`);
+        
+        // Clean up after transition
         setTimeout(() => {
             slides.forEach(slide => {
                 if (!slide.classList.contains('active')) {
@@ -629,109 +651,68 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(prevIndex);
     }
     
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            stopAutoAdvance();
-            nextSlide();
-            startAutoAdvance();
-        });
-    }
+    // Navigation event listeners
+    nextBtn?.addEventListener('click', () => {
+        console.log('Next button clicked');
+        stopAutoAdvance();
+        nextSlide();
+        startAutoAdvance();
+    });
     
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            stopAutoAdvance();
-            prevSlide();
-            startAutoAdvance();
-        });
-    }
+    prevBtn?.addEventListener('click', () => {
+        console.log('Prev button clicked');
+        stopAutoAdvance();
+        prevSlide();
+        startAutoAdvance();
+    });
     
+    // Dots navigation
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
+            console.log(`Dot ${index} clicked`);
             stopAutoAdvance();
             showSlide(index);
             startAutoAdvance();
         });
     });
     
+    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-        const testimonialsSection = document.getElementById('testimonials');
-        const currentSection = document.querySelector('.section');
-        
-        if (testimonialsSection && e.target === document.body) {
+        if (e.target === document.body) {
             if (e.key === 'ArrowLeft') {
                 e.preventDefault();
                 stopAutoAdvance();
-                nextSlide();
+                prevSlide();
                 startAutoAdvance();
             } else if (e.key === 'ArrowRight') {
                 e.preventDefault();
                 stopAutoAdvance();
-                prevSlide();
+                nextSlide();
                 startAutoAdvance();
             }
         }
     });
     
+    // Touch/swipe support
     let touchStartX = 0;
     let touchEndX = 0;
-    let touchStartY = 0;
-    let touchEndY = 0;
-    let touchStartTime = 0;
-    let isSwiping = false;
     
     carousel.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-        touchStartTime = Date.now();
-        isSwiping = false;
-        
+        touchStartX = e.touches[0].screenX;
         stopAutoAdvance();
     }, { passive: true });
     
-    carousel.addEventListener('touchmove', (e) => {
-        if (!touchStartX) return;
-        
-        const touchCurrentX = e.changedTouches[0].screenX;
-        const touchCurrentY = e.changedTouches[0].screenY;
-        
-        const diffX = Math.abs(touchCurrentX - touchStartX);
-        const diffY = Math.abs(touchCurrentY - touchStartY);
-        
-        if (diffX > diffY && diffX > 10) {
-            e.preventDefault();
-            isSwiping = true;
-        }
-    }, { passive: false });
-    
     carousel.addEventListener('touchend', (e) => {
-        if (!touchStartX) return;
-        
         touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
-        
         handleSwipe();
-        
-        touchStartX = 0;
-        touchStartY = 0;
-        touchEndX = 0;
-        touchEndY = 0;
-        isSwiping = false;
-        
-        setTimeout(() => {
-            startAutoAdvance();
-        }, 1000);
+        setTimeout(startAutoAdvance, 1000);
     }, { passive: true });
     
     function handleSwipe() {
-        const swipeThreshold = 30;
+        const swipeThreshold = 50;
         const swipeDistance = touchStartX - touchEndX;
-        const verticalDistance = Math.abs(touchStartY - touchEndY);
-        const swipeTime = Date.now() - touchStartTime;
         
-        if (Math.abs(swipeDistance) > swipeThreshold && 
-            Math.abs(swipeDistance) > verticalDistance && 
-            swipeTime < 500) {
-            
+        if (Math.abs(swipeDistance) > swipeThreshold) {
             if (swipeDistance > 0) {
                 nextSlide();
             } else {
@@ -740,38 +721,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    if (!isMobile) {
+    // Pause on hover (desktop only)
+    if (window.innerWidth > 768) {
         carousel.addEventListener('mouseenter', stopAutoAdvance);
         carousel.addEventListener('mouseleave', startAutoAdvance);
     }
     
+    // Start auto-advance
+    console.log('Starting auto-advance...');
     startAutoAdvance();
-    
-    function announceSlideChange() {
-        const announcement = `המלצה ${currentSlide + 1} מתוך ${slides.length}`;
-        
-        let liveRegion = document.getElementById('carousel-live-region');
-        if (!liveRegion) {
-            liveRegion = document.createElement('div');
-            liveRegion.id = 'carousel-live-region';
-            liveRegion.setAttribute('aria-live', 'polite');
-            liveRegion.setAttribute('aria-atomic', 'true');
-            liveRegion.style.position = 'absolute';
-            liveRegion.style.left = '-10000px';
-            liveRegion.style.width = '1px';
-            liveRegion.style.height = '1px';
-            liveRegion.style.overflow = 'hidden';
-            document.body.appendChild(liveRegion);
-        }
-        
-        liveRegion.textContent = announcement;
-    }
-    
-    const originalShowSlide = showSlide;
-    showSlide = function(slideIndex) {
-        originalShowSlide(slideIndex);
-        setTimeout(announceSlideChange, 100);
-    };
 });
 
 document.addEventListener('DOMContentLoaded', function() {

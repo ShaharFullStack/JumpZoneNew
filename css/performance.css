@@ -41,13 +41,6 @@ body {
   aspect-ratio: 9 / 16; /* Vertical video aspect ratio */
 }
 
-/* Testimonial carousel fixed dimensions */
-.testimonials-carousel {
-  aspect-ratio: 3 / 2;
-  max-width: 600px;
-  width: 100%;
-}
-
 /* ===== GPU ACCELERATION ===== */
 /* Force GPU acceleration for smooth animations */
 .hero-section,
@@ -68,10 +61,6 @@ body {
 }
 
 /* Optimize carousel animations */
-.testimonial-slide {
-  transform: translateZ(0);
-  will-change: transform, opacity;
-}
 
 /* ===== RENDER OPTIMIZATIONS ===== */
 /* Contain layout calculations */
@@ -80,7 +69,6 @@ body {
 }
 
 .service-card,
-.testimonial-slide,
 .contact-form-group {
   contain: layout;
 }
@@ -174,8 +162,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-
 
 /* ===== INTERSECTION OBSERVER OPTIMIZATIONS ===== */
 /* Lazy loading support */

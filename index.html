@@ -427,33 +427,27 @@
       </section>
 
       <!-- Testimonials Section -->
-      <section id="services" class="section services-section" itemscope itemtype="https://schema.org/Service" role="main" aria-labelledby="services-title">
-        <div class="services-overlay">
-        </div>
-
-
-        <!-- Video background -->
+      <section id="testimonials" class="section testimonials-section relative text-white" itemscope itemtype="https://schema.org/Review" role="main" aria-labelledby="testimonials-title">
+        <div class="testimonials-overlay"></div>
+        
+        <!-- Background video -->
         <video
-          muted
           autoplay
           loop
+          muted
           playsinline
-          class="services-video-bg"
-          id="services-video"
+          class="testimonials-video-bg"
         >
-          <source src="assets/servicesBG.mp4" type="video/mp4" />
+          <source src="assets/services.mp4" type="video/mp4" />
         </video>
-        <div class="services-container ">
-          <h2 id="services-title" class="services-title" itemprop="name">
-            לשבור חומות בקפיצה
-          </h2>
-        <!-- Sliding image from right -->
-        <div class="services-sliding-image">
-          <img src="assets/NatiBWTransp.png" alt="Nati" class="sliding-nati-image" />
-        </div>
 
+        <div class="testimonials-container">
+          <h2 id="testimonials-title" class="testimonials-title" itemprop="name">
+            מה אומרים הלקוחות
+          </h2>
+          
           <!-- Testimonials Carousel -->
-          <div class="testimonials-carousel-container relative">
+          <div class="testimonials-carousel-wrapper">
             <div class="testimonials-carousel" id="testimonials-carousel">
               <div class="testimonial-slide active">
                 <img
@@ -464,28 +458,28 @@
               </div>
               <div class="testimonial-slide">
                 <img
-                  src="assets/testimonials2.jpeg"
+                  src="assets/testimonials2.PNG"
                   alt="המלצה 2"
                   class="testimonial-image"
                 />
               </div>
               <div class="testimonial-slide">
                 <img
-                  src="assets/testimonials3.jpeg"
+                  src="assets/testimonials3.PNG"
                   alt="המלצה 3"
                   class="testimonial-image"
                 />
               </div>
               <div class="testimonial-slide">
                 <img
-                  src="assets/testimonials4.jpeg"
+                  src="assets/testimonials4.PNG"
                   alt="המלצה 4"
                   class="testimonial-image"
                 />
               </div>
               <div class="testimonial-slide">
                 <img
-                  src="assets/testimonials5.jpeg"
+                  src="assets/testimonials5.PNG"
                   alt="המלצה 5"
                   class="testimonial-image"
                 />
@@ -498,43 +492,23 @@
               id="testimonials-prev"
               aria-label="המלצה קודמת"
             >
-              <span></span>
+              &#8249;
             </button>
             <button
               class="carousel-nav carousel-nav-next"
               id="testimonials-next"
               aria-label="המלצה הבאה"
             >
-              <span></span>
+              &#8250;
             </button>
 
             <!-- Carousel Dots -->
             <div class="carousel-dots" id="testimonials-dots">
-              <button
-                class="carousel-dot active"
-                data-slide="0"
-                aria-label="המלצה 1"
-              ></button>
-              <button
-                class="carousel-dot"
-                data-slide="1"
-                aria-label="המלצה 2"
-              ></button>
-              <button
-                class="carousel-dot"
-                data-slide="2"
-                aria-label="המלצה 3"
-              ></button>
-              <button
-                class="carousel-dot"
-                data-slide="3"
-                aria-label="המלצה 4"
-              ></button>
-              <button
-                class="carousel-dot"
-                data-slide="4"
-                aria-label="המלצה 5"
-              ></button>
+              <button class="carousel-dot active" data-slide="0" aria-label="המלצה 1"></button>
+              <button class="carousel-dot" data-slide="1" aria-label="המלצה 2"></button>
+              <button class="carousel-dot" data-slide="2" aria-label="המלצה 3"></button>
+              <button class="carousel-dot" data-slide="3" aria-label="המלצה 4"></button>
+              <button class="carousel-dot" data-slide="4" aria-label="המלצה 5"></button>
             </div>
           </div>
         </div>

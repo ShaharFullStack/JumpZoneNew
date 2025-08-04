@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Scroll animations for cards
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.card, .service-card, .testimonial');
+        const elements = document.querySelectorAll('.card, .service-card');
         
         elements.forEach(element => {
             const elementTop = element.getBoundingClientRect().top;
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Set initial styles for animation
-    document.querySelectorAll('.card, .service-card, .testimonial').forEach(element => {
+    document.querySelectorAll('.card, .service-card').forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(30px)';
         element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
@@ -113,7 +113,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.querySelectorAll('.content-section, .testimonials, .pricing-table-wrapper, #services').forEach(el => {
+document.querySelectorAll('.content-section, .pricing-table-wrapper, #services').forEach(el => {
     observer.observe(el);
 });
 
@@ -182,7 +182,6 @@ style.innerHTML = `
 }
 .high-contrast .card,
 .high-contrast .content-section,
-.high-contrast .testimonials,
 .high-contrast .contact {
     background: #111 !important;
     border: 1px solid #fff !important;

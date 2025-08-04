@@ -102,7 +102,6 @@
 
          h2 {
             color: #FF6135;
-            /* Custom color for testimonials */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 1), 0 0 10px rgba(255, 97, 53, 0.5);
             font-weight: 900;
         }
@@ -180,28 +179,6 @@
             background-attachment: fixed;
         }
 
-        #testimonials {
-            background-image: url('./assets/testimonials.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        #testimonials img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-
-        #testimonials img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(255, 134, 35, 0.616);
-
-        }
-
         /* Mobile background images (9:16) */
         @media (max-width: 768px) {
             #story {
@@ -210,13 +187,8 @@
                 /* Fixed attachment can cause issues on mobile */
             }
 
-            #testimonials {
-                background-image: url('./assets/testimonials-mobile.JPG');
-                background-attachment: scroll;
-            }
-
             #why-us {
-                background-image: url('./assets/testimonials-mobile.JPG');
+                background-image: url('./assets/services-mobile.png');
                 background-attachment: scroll;
             }
 
@@ -808,12 +780,6 @@
             td {
                 padding: 0.5rem !important;
                 min-width: 80px;
-            }
-
-            /* Testimonials responsive */
-            .testimonial,
-            .bg-gray-800 {
-                margin-bottom: 1rem !important;
             }
 
             /* Services cards responsive */
