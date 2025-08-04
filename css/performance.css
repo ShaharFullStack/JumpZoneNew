@@ -1,0 +1,380 @@
+/* ==============================================
+   PERFORMANCE OPTIMIZATION STYLES
+   Core Web Vitals & Loading Performance
+   ============================================== */
+
+/* ===== CRITICAL LOADING OPTIMIZATIONS ===== */
+/* Prevent layout shifts during font loading */
+@font-face {
+  font-family: 'Heebo';
+  font-display: swap; /* Improves font loading performance */
+  src: local('Heebo');
+}
+
+/* Optimize font loading for Hebrew text */
+body {
+  font-family: var(--font-family-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* ===== LAYOUT SHIFT PREVENTION ===== */
+/* Reserve space for images to prevent CLS */
+/* Hero logo dimensions moved to hero.css to prevent conflicts */
+.hero-logo {
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+/* Video placeholders to prevent layout shift */
+.hero-mobile-video,
+.hero-desktop-video,
+.services-video-bg {
+  aspect-ratio: 16 / 9;
+  background: var(--color-gray-900);
+  object-fit: cover;
+}
+
+.hero-desktop-video {
+  aspect-ratio: 9 / 16; /* Vertical video aspect ratio */
+}
+
+/* Testimonial carousel fixed dimensions */
+.testimonials-carousel {
+  aspect-ratio: 3 / 2;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* ===== GPU ACCELERATION ===== */
+/* Force GPU acceleration for smooth animations */
+.hero-section,
+.services-section,
+.philosophy-section,
+#sections-container {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize sliding animations */
+.sliding-nati-image,
+.order-2 img {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Optimize carousel animations */
+.testimonial-slide {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* ===== RENDER OPTIMIZATIONS ===== */
+/* Contain layout calculations */
+.section {
+  contain: layout style;
+}
+
+.service-card,
+.testimonial-slide,
+.contact-form-group {
+  contain: layout;
+}
+
+/* Optimize paint for video elements */
+video {
+  contain: layout style paint;
+}
+
+/* ===== MEMORY OPTIMIZATIONS ===== */
+/* Optimize images for different screen densities */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero-logo,
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ===== SCROLL PERFORMANCE ===== */
+/* Optimize scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Optimize overscroll behavior */
+body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== PAINT OPTIMIZATIONS ===== */
+/* Create compositing layers for better performance */
+.hero-content,
+.services-container,
+.testimonials-carousel-container {
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+/* Optimize backdrop-filter performance */
+.bg-glass-light,
+.bg-glass-medium,
+.bg-glass-dark {
+  will-change: backdrop-filter;
+}
+
+/* ===== LOADING STATES ===== */
+/* Skeleton loading for better perceived performance */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-200) 25%,
+    var(--color-gray-100) 50%,
+    var(--color-gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Image loading placeholder */
+.image-placeholder {
+  background: var(--color-gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-500);
+  font-size: var(--font-size-sm);
+}
+
+/* ===== CRITICAL CSS INLINING SUPPORT ===== */
+/* Critical above-the-fold styles */
+.critical-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== RESOURCE HINTS OPTIMIZATIONS ===== */
+/* Optimize external resource loading */
+.external-link {
+  rel: preload;
+}
+
+/* ===== INTERSECTION OBSERVER OPTIMIZATIONS ===== */
+/* Lazy loading support */
+.lazy-load {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Video lazy loading */
+.lazy-video {
+  pointer-events: none;
+}
+
+.lazy-video.loaded {
+  pointer-events: auto;
+}
+
+/* ===== MOBILE PERFORMANCE ===== */
+@media (max-width: 768px) {
+  /* Reduce complexity on mobile */
+  .bg-glass-light,
+  .bg-glass-medium,
+  .bg-glass-dark {
+    backdrop-filter: blur(8px); /* Reduce blur intensity */
+  }
+  
+  /* Simplify animations on mobile */
+  .animate-bounce,
+  .animate-pulse {
+    animation-duration: 1s; /* Faster animations */
+  }
+  
+  /* Optimize touch scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+}
+
+/* ===== LOW-END DEVICE OPTIMIZATIONS ===== */
+@media (max-width: 480px) and (max-resolution: 144dpi) {
+  /* Disable expensive effects on low-end devices */
+  .bg-glass-light,
+  .bg-glass-medium,
+  .bg-glass-dark {
+    backdrop-filter: none;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Reduce shadow complexity */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: var(--shadow-base);
+  }
+  
+  /* Disable non-essential animations */
+  .animate-float,
+  .animate-pulse-glow {
+    animation: none;
+  }
+}
+
+/* ===== BATTERY OPTIMIZATION ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  video {
+    animation: none;
+  }
+}
+
+/* ===== MEMORY LEAK PREVENTION ===== */
+/* Clean up animations when not in view */
+.section:not(.active) * {
+  will-change: auto;
+}
+
+.section.active * {
+  will-change: transform, opacity;
+}
+
+/* ===== NETWORK OPTIMIZATION ===== */
+/* Optimize for slow connections */
+@media (prefers-reduced-data: reduce) {
+  /* Disable autoplay videos on slow connections */
+  video[autoplay] {
+    pointer-events: none;
+  }
+  
+  /* Simplify backgrounds */
+  .hero-section,
+  .services-section {
+    background-image: none !important;
+    background: var(--color-gray-900);
+  }
+  
+  /* Remove decorative elements */
+  .sliding-nati-image,
+  .order-2 img {
+    display: none;
+  }
+}
+
+/* ===== PREFETCH OPTIMIZATIONS ===== */
+/* Prefetch next section content */
+.section-prefetch {
+  content-visibility: auto;
+  contain-intrinsic-size: 100vh;
+}
+
+/* ===== CORE WEB VITALS OPTIMIZATIONS ===== */
+/* Largest Contentful Paint (LCP) optimizations */
+.hero-content h1 {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+
+/* First Input Delay (FID) optimizations */
+button,
+a,
+input {
+  touch-action: manipulation; /* Faster touch response */
+}
+
+/* Cumulative Layout Shift (CLS) optimizations */
+.testimonials-carousel-container {
+  min-height: 400px; /* Reserve space */
+}
+
+.contact-form {
+  min-height: 600px; /* Reserve space */
+}
+
+/* ===== PROGRESSIVE ENHANCEMENT ===== */
+/* Base styles for no-JS fallback */
+.no-js .animate-slide-in-right,
+.no-js .animate-fade-in {
+  opacity: 1;
+  transform: none;
+}
+
+.no-js #sections-container {
+  transform: none;
+}
+
+.no-js .section {
+  position: static;
+  height: auto;
+  min-height: auto;
+}
+
+/* ===== ERROR STATE OPTIMIZATIONS ===== */
+.error-fallback {
+  background: var(--color-gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  border-radius: var(--radius-lg);
+}
+
+/* ===== PRINT PERFORMANCE ===== */
+@media print {
+  /* Remove all animations and transitions for faster printing */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    background-image: none !important;
+  }
+  
+  /* Optimize for black and white printing */
+  .text-primary,
+  .text-secondary {
+    color: black !important;
+  }
+  
+  /* Remove interactive elements */
+  video,
+  .carousel-nav,
+  #nav-dots,
+  button {
+    display: none !important;
+  }
+}

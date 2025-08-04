@@ -1,0 +1,444 @@
+/* ==============================================
+   MODERN RESPONSIVE ENHANCEMENTS
+   Container Queries, Logical Properties & Advanced CSS
+   ============================================== */
+
+/* ===== CONTAINER QUERIES ===== */
+/* Modern responsive design using container queries */
+.section {
+  container-type: inline-size;
+  container-name: section;
+}
+
+.hero-section {
+  container-name: hero;
+}
+
+.services-section {
+  container-name: services;
+}
+
+.contact-section {
+  container-name: contact;
+}
+
+/* Container-based responsive typography */
+@container section (max-width: 480px) {
+  .text-heading-1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .text-heading-2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .text-body-lg {
+    font-size: var(--font-size-base);
+  }
+}
+
+@container section (min-width: 768px) {
+  .text-hero {
+    font-size: var(--font-size-7xl);
+  }
+  
+  .text-display {
+    font-size: var(--font-size-6xl);
+  }
+}
+
+/* Container-based layout adjustments */
+@container services (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  
+  .service-card {
+    padding: var(--space-4);
+  }
+}
+
+@container contact (max-width: 500px) {
+  .contact-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== CSS LOGICAL PROPERTIES ===== */
+/* Better RTL support with logical properties */
+.section {
+  padding-block: var(--space-4);
+  padding-inline: var(--space-4);
+}
+
+.btn {
+  margin-inline: auto;
+  padding-block: var(--space-3);
+  padding-inline: var(--space-6);
+}
+
+.form-input {
+  margin-block-end: var(--space-4);
+  padding-block: var(--space-3);
+  padding-inline: var(--space-4);
+}
+
+.text-right {
+  text-align: end;
+}
+
+.text-left {
+  text-align: start;
+}
+
+/* RTL-aware margins and padding */
+.rtl-spacing {
+  margin-inline-start: var(--space-4);
+  margin-inline-end: var(--space-6);
+  padding-inline-start: var(--space-3);
+  padding-inline-end: var(--space-5);
+}
+
+/* ===== MODERN GRID LAYOUTS ===== */
+/* CSS Subgrid support where available */
+@supports (grid-template-rows: subgrid) {
+  .grid-subgrid {
+    display: grid;
+    grid-template-rows: subgrid;
+  }
+}
+
+/* Intrinsic web design patterns */
+.auto-fit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: var(--space-6);
+}
+
+.auto-fill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+/* Modern centering with CSS Grid */
+.grid-center {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+/* ===== ASPECT RATIO UTILITIES ===== */
+.aspect-square {
+  aspect-ratio: 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-portrait {
+  aspect-ratio: 9 / 16;
+}
+
+.aspect-photo {
+  aspect-ratio: 4 / 3;
+}
+
+/* ===== MODERN CLAMP() FUNCTIONS ===== */
+/* Fluid spacing using clamp() */
+.fluid-space-sm {
+  padding: clamp(var(--space-2), 2vw, var(--space-4));
+}
+
+.fluid-space-md {
+  padding: clamp(var(--space-4), 4vw, var(--space-8));
+}
+
+.fluid-space-lg {
+  padding: clamp(var(--space-6), 6vw, var(--space-12));
+}
+
+/* Fluid widths */
+.fluid-width-sm {
+  width: clamp(280px, 90vw, 400px);
+}
+
+.fluid-width-md {
+  width: clamp(320px, 80vw, 768px);
+}
+
+.fluid-width-lg {
+  width: clamp(400px, 70vw, 1200px);
+}
+
+/* ===== CSS CUSTOM SELECTORS ===== */
+/* Enhanced focus management */
+:is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-base);
+}
+
+/* Enhanced hover states */
+:is(.btn, .contact-alt-button):hover {
+  transform: translateY(-2px);
+  transition: transform var(--transition-fast);
+}
+
+/* Modern button variants */
+:is(.btn-primary, .btn-secondary, .btn-accent):active {
+  transform: translateY(0);
+}
+
+/* ===== MODERN PSEUDO-CLASSES ===== */
+/* :where() for lower specificity */
+:where(.text-primary) {
+  color: var(--color-primary);
+}
+
+:where(.bg-primary) {
+  background-color: var(--color-primary);
+}
+
+/* Enhanced form states */
+.form-input:is(:focus, :focus-within) {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+
+.form-input:is(:invalid, [aria-invalid="true"]) {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+/* ===== ADVANCED RESPONSIVE PATTERNS ===== */
+/* Responsive flexbox with gap */
+.flex-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.flex-responsive > * {
+  flex: 1 1 min(250px, 100%);
+}
+
+/* Responsive grid with minimum sizes */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: var(--space-6);
+}
+
+/* Card grid that adapts to content */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+/* ===== SCROLL ENHANCEMENTS ===== */
+/* Smooth scrolling with better control */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Scroll snap for better UX */
+.scroll-snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ===== MODERN COLOR SCHEMES ===== */
+/* Better dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: var(--color-white);
+    --color-background: var(--color-black);
+    --color-surface: var(--color-gray-800);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-text: var(--color-black);
+    --color-background: var(--color-white);
+    --color-surface: var(--color-gray-100);
+  }
+}
+
+/* ===== MODERN MEDIA QUERIES ===== */
+/* Better responsive images */
+/* Hero logo sizing moved to hero.css to prevent conflicts */
+/* @media (max-width: 768px) and (orientation: portrait) { } */
+
+/* Hero desktop layout moved to hero.css to prevent conflicts */
+/* @media (min-width: 768px) and (orientation: landscape) { } */
+
+/* High resolution displays */
+@media (min-resolution: 2dppx) {
+  .high-res-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ===== MODERN LAYOUT TECHNIQUES ===== */
+/* Hero grid layout moved to hero.css to prevent conflicts */
+/* Alternative grid layouts can be defined here for other sections */
+
+/* ===== PROGRESSIVE ENHANCEMENT ===== */
+/* Enhanced features with feature queries */
+@supports (backdrop-filter: blur(10px)) {
+  .glass-enhanced {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-enhanced {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+@supports (color: color(display-p3 1 0 0)) {
+  .wide-color {
+    color: color(display-p3 1 0.2 0.1);
+  }
+}
+
+/* ===== INTERACTION MEDIA QUERIES ===== */
+/* Hover-capable devices */
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--space-3);
+  }
+  
+  .touch-feedback:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+}
+
+/* ===== ENVIRONMENT QUERIES ===== */
+/* Better safe area support */
+@supports (padding: env(safe-area-inset-top)) {
+  .safe-area-padding {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-margin {
+    margin-top: env(safe-area-inset-top);
+    margin-right: env(safe-area-inset-right);
+    margin-bottom: env(safe-area-inset-bottom);
+    margin-left: env(safe-area-inset-left);
+  }
+}
+
+/* ===== MODERN ANIMATIONS ===== */
+/* Better animation performance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Hardware-accelerated animations */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s var(--ease-out) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s var(--ease-bounce) forwards;
+  will-change: transform, opacity;
+}
+
+/* ===== UTILITY COMBINATIONS ===== */
+/* Common pattern combinations */
+.card-modern {
+  background: var(--bg-glass-medium);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.button-modern {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-8);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-primary);
+}
+
+.button-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-lg);
+}
+
+.input-modern {
+  background: var(--bg-glass-light);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  color: var(--color-white);
+  font-family: inherit;
+  transition: all var(--transition-base);
+}
+
+.input-modern:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}

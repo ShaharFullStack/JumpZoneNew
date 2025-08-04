@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Main page -->
+  <url>
+    <loc>https://jumpzone.co.il/</loc>
+    <lastmod>2025-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://jumpzone.co.il/" />
+    
+    <!-- Image annotations -->
+    <image:image>
+      <image:loc>https://jumpzone.co.il/assets/NatiHoodi.png</image:loc>
+      <image:title>נתנאל מלקר - מאמן קפיצה בחבל מקצועי</image:title>
+      <image:caption>נתנאל מלקר, מאמן קפיצה בחבל מקצועי ומייסד Jump Zone</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://jumpzone.co.il/assets/BeachTransp.png</image:loc>
+      <image:title>חבל קפיצה מקצועי</image:title>
+      <image:caption>ציוד קפיצה מקצועי לאימונים</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://jumpzone.co.il/assets/NatiBWTransp.png</image:loc>
+      <image:title>נתנאל מלקר באימון</image:title>
+      <image:caption>נתנאל מלקר במהלך אימון קפיצה בחבל</image:caption>
+    </image:image>
+    
+    <!-- Video annotations -->
+    <video:video>
+      <video:thumbnail_loc>https://jumpzone.co.il/assets/poster1.jpg</video:thumbnail_loc>
+      <video:title>אימוני קפיצה בחבל - Jump Zone</video:title>
+      <video:description>סרטון המציג את שיטת האימון הייחודית של Jump Zone</video:description>
+      <video:content_loc>https://jumpzone.co.il/assets/Hero.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    
+    <video:video>
+      <video:thumbnail_loc>https://jumpzone.co.il/assets/poster2.jpg</video:thumbnail_loc>
+      <video:title>פילוסופיית האימון - כוח רוח וקפיצה</video:title>
+      <video:description>הפילוסופיה מאחורי שיטת האימון של נתנאל מלקר</video:description>
+      <video:content_loc>https://jumpzone.co.il/assets/PowerRhythmSoul.mp4</video:content_loc>
+      <video:duration>45</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    
+    <video:video>
+      <video:thumbnail_loc>https://jumpzone.co.il/assets/poster3.jpg</video:thumbnail_loc>
+      <video:title>אימוני כוח וכושר עם קפיצה בחבל</video:title>
+      <video:description>אימוני כוח וכושר מתקדמים המשלבים קפיצה בחבל</video:description>
+      <video:content_loc>https://jumpzone.co.il/assets/Boxing.mp4</video:content_loc>
+      <video:duration>35</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  
+  <!-- Service pages (virtual sections) -->
+  <url>
+    <loc>https://jumpzone.co.il/#services</loc>
+    <lastmod>2025-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://jumpzone.co.il/#services" />
+  </url>
+  
+  <url>
+    <loc>https://jumpzone.co.il/#philosophy</loc>
+    <lastmod>2025-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://jumpzone.co.il/#philosophy" />
+  </url>
+  
+  <url>
+    <loc>https://jumpzone.co.il/#pricing</loc>
+    <lastmod>2025-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://jumpzone.co.il/#pricing" />
+  </url>
+  
+  <url>
+    <loc>https://jumpzone.co.il/#contact</loc>
+    <lastmod>2025-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://jumpzone.co.il/#contact" />
+  </url>
+  
+</urlset>

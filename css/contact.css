@@ -1,0 +1,211 @@
+/* Contact Section - Clean & Professional */
+
+.contact-section {
+  min-height: 100vh;
+  color: white;
+  position: relative;
+}
+
+/* Simple background overlay */
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.contact-section .z-10 {
+  position: relative;
+  z-index: 10;
+}
+
+/* Contact Form */
+.contact-form {
+  background: rgba(40, 40, 40, 0.9);
+  border: 1px solid #555;
+  border-radius: 12px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Form Inputs */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  background: rgba(60, 60, 60, 0.8);
+  border: 1px solid #666;
+  color: white;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #ff6135;
+  box-shadow: 0 0 0 2px rgba(255, 97, 53, 0.2);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #aaa;
+}
+
+.contact-form select option {
+  background: #333;
+  color: white;
+}
+
+/* Submit Button */
+.contact-form button[type="submit"] {
+  background: linear-gradient(135deg, #ff6135 0%, #ff4500 100%);
+  border: none;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.contact-form button[type="submit"]:hover {
+  background: linear-gradient(135deg, #ff4500 0%, #e63900 100%);
+  transform: translateY(-1px);
+}
+
+/* Contact Cards */
+.contact-card {
+  background: rgba(40, 40, 40, 0.9);
+  border: 1px solid #555;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  border-color: #777;
+  transform: translateY(-2px);
+}
+
+/* Contact Method Links */
+.contact-method {
+  padding: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.contact-method:hover {
+  background: rgba(60, 60, 60, 0.5);
+  border-color: #666;
+}
+
+/* WhatsApp */
+.whatsapp-link:hover {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: #25d366;
+}
+
+/* Phone */
+.phone-link:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+/* Email */
+.email-link:hover {
+  background: rgba(147, 51, 234, 0.1);
+  border-color: #9333ea;
+}
+
+/* Quick Action Buttons */
+.quick-action-btn {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  display: block;
+  text-align: center;
+}
+
+.quick-action-btn:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: white;
+}
+
+/* Trial button */
+.trial-btn {
+  background: #10b981;
+}
+.trial-btn:hover {
+  background: #059669;
+}
+
+/* Pricing button */
+.pricing-btn {
+  background: #3b82f6;
+}
+.pricing-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Group button */
+.group-btn {
+  background: #8b5cf6;
+}
+.group-btn:hover {
+  background: #7c3aed;
+}
+
+/* Bottom CTA */
+.bottom-cta a {
+  background: linear-gradient(135deg, #ff6135 0%, #ff4500 100%);
+  color: white;
+  padding: 1.5rem 3rem;
+  border-radius: 50px;
+  font-weight: 900;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.bottom-cta a:hover {
+  background: linear-gradient(135deg, #ff4500 0%, #e63900 100%);
+  transform: scale(1.05);
+  text-decoration: none;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-form,
+  .contact-card {
+    padding: 1.5rem;
+  }
+  
+  .contact-method {
+    justify-content: center;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .contact-form input,
+[dir="rtl"] .contact-form textarea {
+  text-align: right;
+}
+
+[dir="rtl"] .contact-form input[type="email"] {
+  text-align: left;
+}
+
+
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 150px;
+  min-width: 100%;
+}

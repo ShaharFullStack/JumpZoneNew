@@ -1,0 +1,411 @@
+/* ==============================================
+   PRICING SECTION WITH VIDEO LAYOUT
+   Based on Hero Section Design Pattern
+   ============================================== */
+
+/* Pricing Section - Modern CSS Grid Layout */
+.pricing-section {
+    /* CSS Container for responsive design */
+    container-type: inline-size;
+    container-name: pricing;
+    
+    /* CSS Custom Properties for dynamic sizing */
+    --pricing-video-width: 30%;
+    --pricing-content-width: 70%;
+    --pricing-padding: var(--space-4);
+    --pricing-gap: var(--space-6);
+    
+    position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    isolation: isolate; /* Create stacking context */
+    padding: 0; /* Override any global padding */
+    background: linear-gradient(135deg, #1f2937 0%, #271f11 100%);
+}
+
+/* Performance optimizations */
+.pricing-section * {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Mobile: Full-screen video background layout */
+@container pricing (max-width: 767px) {
+    #pricing-video-container {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    
+    #pricing-video-container .pricing-mobile-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.3; /* Dim the video for better text readability */
+        
+        /* Modern video optimizations */
+        image-rendering: crisp-edges;
+        transform: translateZ(0); /* Force GPU acceleration */
+    }
+
+    /* Mobile content wrapper */
+    .pricing-mobile {
+        padding: 2rem 1rem;
+        position: relative;
+        min-height: 100vh;
+        justify-content: center;
+        z-index: 10;
+        background-image: url('../assets/pricingBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* Add overlay for mobile text readability */
+    .pricing-mobile::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
+
+    /* Ensure mobile content is above overlay */
+    .pricing-mobile > * {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Mobile background animated image */
+    .pricing-mobile-background-image {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .pricing-mobile-background-image img {
+        position: absolute;
+        right: -60%;
+        top: 50%;
+        transform: translateY(-50%) translateX(120%);
+        height: 60%;
+        width: auto;
+        object-fit: contain;
+        opacity: 0;
+        transition: all 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.3));
+    }
+
+    /* Mobile active animation */
+    .pricing-section.active .pricing-mobile-background-image img {
+        transform: translateY(-50%) translateX(-20%);
+        opacity: 0.2;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Mobile scroll-out animation */
+    .pricing-section.scroll-out .pricing-mobile-background-image img {
+        transform: translateY(-50%) translateX(150%);
+        opacity: 0;
+    }
+
+    /* Mobile table styling */
+    .pricing-mobile table {
+        font-size: 0.875rem; /* Smaller text for mobile */
+        position: relative;
+        z-index: 10;
+    }
+
+    .pricing-mobile th,
+    .pricing-mobile td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .pricing-mobile h2 {
+        position: relative;
+        z-index: 10;
+    }
+
+    .pricing-mobile p {
+        position: relative;
+        z-index: 10;
+    }
+}
+
+/* Desktop: Split layout (768px and above) */
+@media (min-width: 768px) {
+    .pricing-section {
+        overflow: hidden;
+    }
+
+    /* Desktop video container positioning */
+    #pricing-video-container {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .pricing-desktop-layout {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+    }
+
+    /* Left side: Video container - optimized for SwitchLogo video */
+    .pricing-video-container {
+        width: 30%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pricing-video-container .pricing-desktop-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* Right side: Pricing content - takes more space */
+    .pricing-content-container {
+        width: 70%;
+        height: 100%;
+        position: relative;
+        background-image: url('../assets/pricingBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    /* Add overlay for better text readability */
+    .pricing-content-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(55, 65, 81, 0.8) 0%, rgba(31, 41, 55, 0.8) 100%);
+        z-index: 1;
+    }
+
+    .pricing-content {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Desktop background animated image */
+    .pricing-background-image {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .pricing-background-image img {
+        position: absolute;
+        left: 30%;
+        bottom: 0;
+        transform: translateX(-100%);
+        height: 90%;
+        width: auto;
+        object-fit: contain;
+        opacity: 0;
+        transition: all 1.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transition-delay: 0.5s;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    /* Desktop active animation */
+    .pricing-section.active .pricing-background-image img {
+        transform: translateX(10%);
+        opacity: 1;
+        filter: drop-shadow(6px 6px 12px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Desktop scroll-out animation */
+    .pricing-section.scroll-out .pricing-background-image img {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+
+    /* Desktop table styling */
+    .pricing-content table {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+    }
+
+    .pricing-content th,
+    .pricing-content td {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    /* Desktop title styling */
+    .pricing-content h2 {
+        margin-bottom: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 10;
+    }
+
+    .pricing-content p {
+        position: relative;
+        z-index: 10;
+    }
+}
+
+/* Enhanced table styling for both mobile and desktop */
+.pricing-section table {
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-section thead th {
+    background: rgba(55, 65, 81, 0.9);
+    color: #f3f4f6;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pricing-section tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.pricing-section tbody tr:hover {
+    background: rgba(75, 85, 99, 0.5);
+}
+
+.pricing-section tbody td {
+    background: rgba(17, 24, 39, 0.9);
+    color: #f9fafb;
+}
+
+.pricing-section tbody tr:nth-child(even) td {
+    background: rgba(31, 41, 55, 0.9);
+}
+
+/* Animation effects */
+@media (min-width: 768px) {
+    .pricing-content {
+        animation: slideInFromRight 1s ease-out;
+    }
+
+    .pricing-video-container {
+        animation: slideInFromLeft 1s ease-out;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive breakpoints */
+@media (min-width: 1024px) {
+    .pricing-content-container {
+        padding: 3rem;
+        background-attachment: fixed; /* Parallax effect for larger screens */
+    }
+    
+    .pricing-content h2 {
+        font-size: 3.5rem;
+    }
+    
+    .pricing-content table {
+        font-size: 1.125rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .pricing-video-container {
+        width: 35%;
+    }
+    
+    .pricing-content-container {
+        width: 65%;
+        padding: 4rem;
+    }
+}
+
+/* Accessibility improvements */
+.pricing-section table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.pricing-section th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Focus states for keyboard navigation */
+.pricing-section table:focus-within {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .pricing-section table {
+        border: 2px solid #ffffff;
+    }
+    
+    .pricing-section th,
+    .pricing-section td {
+        border: 1px solid #ffffff;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .pricing-content,
+    .pricing-video-container {
+        animation: none;
+    }
+    
+    .pricing-section tbody tr {
+        transition: none;
+    }
+}

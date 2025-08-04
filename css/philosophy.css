@@ -1,0 +1,285 @@
+/* Philosophy Section - CSS Management */
+/* This CSS supplements the working Tailwind classes in HTML */
+
+/* Section background with proper image */
+#philosophy {
+    overflow: hidden;
+    background-image: url('../assets/philosophy.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Mobile background image */
+@media (max-width: 768px) {
+    #philosophy {
+        background-image: url('../assets/philosophy-mobile-bg.png') !important;
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+    
+    /* Mobile philosophy animated image */
+    .philosophy-background-image img {
+        left: -40%;
+        height: 70%;
+        transform: translateY(-50%) translateX(-100%);
+        transition: all 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    
+    /* Mobile active animation */
+    #philosophy.active .philosophy-background-image img {
+        transform: translateY(-50%) translateX(20%);
+        opacity: 0.08;
+    }
+}
+
+/* Ensure proper text contrast on content box */
+#philosophy-content {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000 !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Philosophy background animated image */
+.philosophy-background-image {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.philosophy-background-image img {
+    position: absolute;
+    left: -30%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-120%);
+    height: 80%;
+    width: auto;
+    object-fit: contain;
+    opacity: 0;
+    transition: all 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* Philosophy active animation */
+#philosophy.active .philosophy-background-image img {
+    transform: translateY(-50%) translateX(30%);
+    opacity: 0.1;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Philosophy scroll-out animation */
+#philosophy.scroll-out .philosophy-background-image img {
+    transform: translateY(-50%) translateX(-150%);
+    opacity: 0;
+}
+
+#philosophy-content > h2 {
+    color: #FF6135 !important;
+    font-size: 3rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+#philosophy-content > p {
+    color: #000 !important;
+    font-size: 1.325rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.25rem !important;
+    font-weight: 800 !important;
+}
+
+/* Desktop-specific sizing */
+@media (min-width: 769px) {
+    #philosophy-content h2 {
+        font-size: 3rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    #philosophy-content p {
+        font-size: 1.45rem !important;
+        line-height: 1.7 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    #philosophy-content {
+        padding: 1.5rem !important;
+    }
+    
+    /* Desktop animation for the main philosophy image */
+    #philosophy .philosophy-transparent-image img {
+        transform: translateX(100%);
+        opacity: 0;
+        transition: all 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transition-delay: 0.5s;
+        filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+    }
+    
+    /* Desktop active animation for main image */
+    #philosophy.active .philosophy-transparent-image img {
+        transform: translateX(0);
+        opacity: 1;
+        filter: drop-shadow(6px 6px 12px rgba(0, 0, 0, 0.4));
+    }
+    
+    /* Desktop scroll-out animation for main image */
+    #philosophy.scroll-out .philosophy-transparent-image img {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    #philosophy .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        max-height: 100vh !important;
+        overflow: hidden !important;
+    }
+    
+    #philosophy {
+        padding: 1rem !important;
+        overflow: hidden !important;
+    }
+    
+    #philosophy .order-1 {
+        order: 1 !important;
+
+    }
+    
+    #philosophy .philosophy-transparent-image {
+        order: 2 !important;
+        text-align: center;
+        overflow: visible !important;
+        position: relative;
+        min-height: 300px;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Animation for the main philosophy image */
+    #philosophy .philosophy-transparent-image img {
+        width: 100% !important;
+        max-width: 450px !important;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+        object-fit: contain;
+        transform: translateX(100%);
+        opacity: 0;
+        transition: all 1.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transition-delay: 0.3s;
+    }
+    
+    /* Active animation for main image */
+    #philosophy.active .philosophy-transparent-image img {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
+    /* Scroll-out animation for main image */
+    #philosophy.scroll-out .philosophy-transparent-image img {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    
+    #philosophy-content {
+        padding: 1.5rem !important;
+        max-width: 95%;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.9) !important;
+        color: #000 !important;
+    }
+    
+    #philosophy h2 {
+        font-size: 2rem !important;
+        margin-bottom: 1rem !important;
+        text-align: center;
+    }
+    
+    #philosophy p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        text-align: right;
+    }
+    
+    #philosophy a {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #philosophy .order-2 {
+        min-height: 250px !important;
+        max-height: 250px !important;
+        overflow: hidden !important;
+    }
+    
+    #philosophy img {
+        width: 100% !important;
+        max-width: 280px !important;
+        transform: scale(1.2) !important;
+        z-index: 100 !important;
+
+    }
+    
+    #philosophy-content {
+        padding: 1rem !important;
+        max-height: 60vh !important;
+        overflow-y: auto !important;
+    }
+    
+    #philosophy h2 {
+        font-size: 1.75rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    #philosophy p {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    #philosophy .grid {
+        gap: 0.5rem !important;
+    }
+}
+
+@media (max-width: 375px) {
+    #philosophy .order-2 {
+        min-height: 200px !important;
+        max-height: 200px !important;
+    }
+    
+    #philosophy img {
+        width: 100% !important;
+        max-width: 240px !important;
+        transform: scale(0.9) !important;
+    }
+    
+    #philosophy-content {
+        padding: 0.75rem !important;
+        max-height: 55vh !important;
+    }
+    
+    #philosophy h2 {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    #philosophy p {
+        font-size: 0.8rem !important;
+    }
+    
+    #philosophy {
+        padding: 0.5rem !important;
+    }
+}
