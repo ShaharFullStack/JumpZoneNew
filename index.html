@@ -12,22 +12,42 @@
     <script>
         function isMobile() {
             const userAgent = navigator.userAgent.toLowerCase();
-            const mobileKeywords = ['mobile', 'android', 'iphone', 'ipad', 'phone', 'tablet', 'webos', 'blackberry'];
-            const hasMobileKeyword = mobileKeywords.some(keyword => userAgent.includes(keyword));
             
-            // Enhanced screen size detection for tablets
+            // Enhanced mobile/tablet detection
             const screenWidth = window.innerWidth || screen.width;
-            const isTabletOrMobile = screenWidth <= 1024; // Include tablets in mobile experience
-            const isMobileSize = screenWidth <= 768;
+            const screenHeight = window.innerHeight || screen.height;
+            const aspectRatio = screenWidth / screenHeight;
             
+            // Touch detection
             const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
             
-            // Additional checks
-            const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            // User agent checks - more comprehensive
+            const isMobileUA = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
+            const isKindleUA = /Kindle|Silk/i.test(navigator.userAgent);
             
-            // Strategy: Tablets (768px-1024px) should use mobile.html for better touch experience
-            return hasMobileKeyword || isMobileUA || isTabletUA || isTabletOrMobile || (hasTouchScreen && isMobileSize);
+            // Screen size thresholds
+            const isSmallScreen = screenWidth <= 768;
+            const isTabletSize = screenWidth > 768 && screenWidth <= 1024;
+            const isMediumScreen = screenWidth <= 1024;
+            
+            // Special cases
+            const isIPhone = /iPhone/i.test(navigator.userAgent);
+            const isIPad = /iPad/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isAndroidTablet = /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+            
+            // Portrait orientation preference for mobile experience
+            const isPortrait = screenHeight > screenWidth;
+            
+            // Strategy: Use mobile.html for:
+            // 1. All actual mobile devices
+            // 2. All tablets (better touch experience)
+            // 3. Small screens with touch
+            // 4. Portrait orientation devices <= 1024px
+            return isMobileUA || isTabletUA || isKindleUA || isIPhone || isIPad || isAndroidTablet || 
+                   isSmallScreen || (isTabletSize && hasTouchScreen) || 
+                   (isMediumScreen && isPortrait && hasTouchScreen) ||
+                   (hasTouchScreen && screenWidth <= 1080); // Include larger phones/small tablets
         }
         
         // Immediate redirect - before any content loads
