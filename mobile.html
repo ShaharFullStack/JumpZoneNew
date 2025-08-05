@@ -172,6 +172,16 @@
         transition: background 0.8s ease-out;
       }
 
+      .overlay-philosophy {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        height: 100%;
+        z-index: -1;
+        transition: background 0.8s ease-out;
+      }
+
       .overlay.lighter {
         background: rgba(0, 0, 0, 0.8);
       }
@@ -360,7 +370,7 @@
         }
 
         .mobile-text {
-          font-size: 1.3rem;
+          font-size: 1.5rem;
         }
 
         .mobile-content {
@@ -380,6 +390,22 @@
         .cta-button {
           font-size: 1.3rem;
           padding: 18px 35px;
+        }
+
+        .contact-form {
+          max-width: 500px;
+          padding: 0 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+          padding: 18px;
+          font-size: 1.1rem;
+        }
+
+        .contact-alternatives a {
+          font-size: 1.2rem;
+          padding: 15px;
         }
       }
 
@@ -403,17 +429,20 @@
       /* Contact form */
       .contact-form {
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
+        padding: 0 10px;
       }
 
       .form-group {
         margin-bottom: 20px;
         text-align: right;
+        width: 100%;
       }
 
       .form-group input,
       .form-group textarea {
         width: 100%;
+        max-width: 100%;
         padding: 15px;
         border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 10px;
@@ -421,11 +450,36 @@
         color: white;
         font-family: "Heebo", sans-serif;
         backdrop-filter: blur(10px);
+        box-sizing: border-box;
+        font-size: 16px; /* Prevents zoom on iOS */
       }
 
       .form-group input::placeholder,
       .form-group textarea::placeholder {
         color: rgba(255, 255, 255, 0.7);
+      }
+
+      .contact-alternatives {
+        margin-top: 2rem;
+        width: 100%;
+      }
+
+      .contact-alternatives a {
+        display: block;
+        margin-bottom: 1rem;
+        padding: 12px;
+        text-align: center;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        text-decoration: none;
+        color: white;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+      }
+
+      .contact-alternatives a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
       }
 
       /* Responsive text sizes */
@@ -445,10 +499,10 @@
       }
 
       .mobile-text {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        opacity: 0.95;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        font-size: 1.4rem;
+        line-height: 1;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+        font-weight: 700;
       }
 
       /* Hide scrollbar but keep functionality */
@@ -458,14 +512,12 @@
 
       /* Hero text slide-in animation */
       .hero-text-row {
-
         position: relative;
         margin-top: 1rem;
         margin-bottom: 1rem;
         opacity: 0;
         transform: translateX(100px);
         transition: all 0.6s ease-out;
-
       }
 
       .hero-text-row.slide-in {
@@ -486,6 +538,127 @@
         margin-bottom: 2rem;
         transform: translateX(0);
       }
+
+      /* Why-us section slide-in animation */
+      .why-us-section .mobile-content {
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.6s ease-out;
+      }
+
+      .why-us-section .mobile-content.slide-in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Philosophy section animations */
+      .philosophy-section .mobile-content {
+        max-width: none;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+
+      .philosophy-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .philosophy-image {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%) translateX(-100vw);
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        opacity: 0;
+        transition: all 0.8s ease-out;
+        z-index: 1;
+      }
+
+      .philosophy-image.slide-in {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+
+      .philosophy-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translateY(30px);
+        z-index: 2;
+        opacity: 0;
+        transition: all 0.6s ease-out 1.2s;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 90vw;
+        width: 100%;
+        text-align: center;
+      }
+
+      .philosophy-text.slide-in {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+      }
+
+      /* Final CTA section animations */
+      .final-cta-section .mobile-content {
+        max-width: none;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+
+      .final-cta-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .final-cta-image {
+        position: absolute;
+        left: 50%;
+        top: 62%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 600px;
+        height: auto;
+        opacity: 0;
+        transition: all 1.2s ease-out 1s;
+        z-index: 1;
+      }
+
+      .final-cta-image.slide-in {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .final-cta-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translateY(30px);
+        z-index: 2;
+        opacity: 0;
+        transition: all 0.8s ease-out 2.5s;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 90vw;
+        width: 100%;
+        text-align: center;
+      }
+
+      .final-cta-text.slide-in {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+      }
     </style>
   </head>
 
@@ -502,37 +675,31 @@
         </video>
         <div class="overlay"></div>
         <div class="mobile-content">
-            <div class="hero-image"></div>
-            <div class="hero-container">
-          <div class="mobile-title hero-text-row text-orange-600"><h1>
-            קפיצתי אומנותי
-          </h1>
-          <hr>
-        </div>
-          <h1 class="mobile-title">
-            <div class="hero-text-row">הכוח בקצב</div>
-            <div class="hero-text-row">הקצב ברוח</div>
-            <div class="hero-text-row">הרוח בקפיצה</div>
-          </h1>
-          <br>
-          <a
-            href="#philosophy"
-            class="cta-button hero-cta"
-          >
-          עוד פרטים
-        </a>
-        </div>
+          <div class="hero-image"></div>
+          <div class="hero-container">
+            <div class="mobile-title hero-text-row text-orange-600">
+              <h1>קפיצתי אומנותי</h1>
+              <hr />
+            </div>
+            <h1 class="mobile-title">
+              <div class="hero-text-row">הכוח בקצב</div>
+              <div class="hero-text-row">הקצב ברוח</div>
+              <div class="hero-text-row">הרוח בקפיצה</div>
+            </h1>
+            <br />
+            <a href="#philosophy" class="cta-button hero-cta"> עוד פרטים </a>
+          </div>
         </div>
       </section>
 
       <!-- Why Us Section -->
-      <section id="why-us" class="section relative text-white">
+      <section id="why-us" class="section why-us-section relative text-white">
         <video autoplay loop muted playsinline class="video-bg">
           <source src="./assets/Boxing-mobile.mp4" type="video/mp4" />
         </video>
         <div class="overlay"></div>
         <div class="mobile-content">
-          <h2 class="mobile-title">מה זה Jump Zone?</h2>
+          <h2 class="mobile-title text-orange-600">מה זה Jump Zone?</h2>
           <div class="space-y-6 text-right">
             <div>
               <p class="mobile-text">
@@ -565,57 +732,38 @@
       </section>
 
       <!-- Philosophy Section -->
-      <section id="philosophy" class="section relative text-white">
+      <section id="philosophy" class="section philosophy-section relative text-white">
         <div
           class="absolute inset-0 bg-cover bg-center bg-black/60"
-          style="background-image: url('./assets/philosophy-mobile2.PNG')"
+          style="background-image: url('./assets/philosophy-mobile-bg.PNG')"
         ></div>
-        <div class="overlay"></div>
         <div class="mobile-content">
-          <h2 class="mobile-title">פילוסופיית הקפיצה: החיים דרך חבל אחד</h2>
-          <p class="mobile-text mb-6">
-            קפיצה בחבל היא השתקפות של החיים עצמם. כל קפיצה היא בחירה: לבחור לנוע
-            גם כשכואב. לטעות, להסתבך, ואז לחזור לקצב. להתאזן, לנשום, לקפוץ שוב
-            גם אחרי נפילה.
-          </p>
-          <p class="mobile-text">
-            החבל הזה לימד אותי שאם אני יכול לשלוט בתנועה אני יכול לשלוט בסיפור
-            שלי. שאם אני מצליח לסנכרן בין נשימה, קצב ותודעה אני יכול לנצח גם את
-            הפחדים הכי עמוקים שלי. זו לא רק שיטה לשיפור כושר זו דרך להתחבר
-            לעצמך. דרך לפרוץ גבולות פנימיים, לשחרר מתחים, לבנות חוסן מנטלי
-            ולהיזכר בכוח שיש בך.
-          </p>
-          <a href="#contact" class="cta-button mt-8">
-            מוכן לגלות את הכוח שיש בך?
-          </a>
+          <div class="philosophy-container">
+            <img 
+              src="./assets/NatiBWTransp.png" 
+              alt="נתנאל מלקר" 
+              class="philosophy-image"
+            />
+            <div class="philosophy-text">
+              <h2 class="mobile-title">פילוסופיית הקפיצה: החיים דרך חבל אחד</h2>
+              <p class="mobile-text mb-6">
+                קפיצה בחבל היא השתקפות של החיים עצמם. כל קפיצה היא בחירה: לבחור לנוע
+                גם כשכואב. לטעות, להסתבך, ואז לחזור לקצב. להתאזן, לנשום, לקפוץ שוב
+                גם אחרי נפילה.
+              </p>
+              <p class="mobile-text">
+                החבל הזה לימד אותי שאם אני יכול לשלוט בתנועה אני יכול לשלוט בסיפור
+                שלי. שאם אני מצליח לסנכרן בין נשימה, קצב ותודעה אני יכול לנצח גם את
+                הפחדים הכי עמוקים שלי. זו לא רק שיטה לשיפור כושר זו דרך להתחבר
+                לעצמך. דרך לפרוץ גבולות פנימיים, לשחרר מתחים, לבנות חוסן מנטלי
+                ולהיזכר בכוח שיש בך.
+              </p>
+              <a href="#contact" class="cta-button mt-8"> לפרטים נוספים </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Story Section -->
-      <section id="story" class="section relative text-white">
-        <div
-          class="absolute inset-0 bg-cover bg-center bg-black/60"
-          style="background-image: url('./assets/story-mobile.PNG')"
-        ></div>
-        <div class="overlay"></div>
-        <div class="mobile-content">
-          <h2 class="mobile-title">קפיצה שהצילה חיים.</h2>
-          <p class="mobile-text mb-4">
-            אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת, חבל
-            קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו. אובחנתי עם גלאוקומה קשה
-            שהביאה איתה כאבים בלתי נסבלים, לילות בלי שינה ודיכאון עמוק. איבדתי
-            את הראייה בעין שמאל – אבל מה שכאב יותר היה לאבד את הזהות שלי, את
-            האנרגיה, את הביטחון. את עצמי.
-          </p>
-          <p class="mobile-text">
-            הייתי במקום חשוך. מנותק מהעולם. עם חרדה חברתית, פחדים, ואפס תקווה.
-            אבל דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה. הוא לא היה
-            רק כלי לאימון. הוא היה קצב. עוגן. דרך לנשום מחדש. דרכו בניתי את עצמי
-            מהיסוד – גוף, נפש ולב.
-          </p>
-          <a href="#contact" class="cta-button mt-8"> בואו נדבר </a>
-        </div>
-      </section>
 
       <!-- Testimonials Section -->
       <section id="testimonials" class="section relative text-white">
@@ -734,26 +882,43 @@
       </section>
 
       <!-- Final CTA Section -->
-      <section id="final-cta" class="section relative text-white">
-        <video autoplay loop muted playsinline class="video-bg">
+      <section id="final-cta" class="section final-cta-section relative text-white">
+        <video autoplay muted playsinline class="video-bg">
           <source src="./assets/servicesBG-mobile.mp4" type="video/mp4" />
         </video>
         <div class="overlay"></div>
         <div class="mobile-content">
-          <h2 class="mobile-title">מוכן לעשות את הקפיצה?</h2>
-          <p class="mobile-text mb-8">
-            אם אתה מחפש לא רק אימון אלא דרך חדשה לחיות, לנשום ולנצח את עצמך<br />
-            Jump Zone זה המקום בשבילך.
-          </p>
-          <a
-            href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%20שיעור%20ניסיון?"
-            class="cta-button mb-4 block"
-          >
-            אני מוכן לקפוץ! קובעים שיעור ניסיון?
-          </a>
-          <p class="mobile-text text-sm opacity-75">
-            050-844-7575 | melker694@gmail.com
-          </p>
+          <div class="final-cta-container">
+            <img 
+              src="./assets/BeachTransp.png" 
+              alt="נתנאל מלקר" 
+              class="final-cta-image"
+            />
+            <div class="final-cta-text">
+              <h2 class="mobile-title">הקפיצה של חיי.</h2>
+              <p class="mobile-text mb-4">
+                אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת, חבל
+                קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו.  אסבלתי מגלאוקומה, כאבים קשים, דיכאונות וחרדות, איבדתי
+                את הראייה בעין שמאל – אבל מה שכאב יותר היה לאבד את הזהות שלי, את
+                האנרגיה, את הביטחון. את עצמי.
+              </p>
+              <p class="mobile-text mb-8">
+                הייתי במקום חשוך. מנותק מהעולם. עם חרדה חברתית, פחדים, ואפס תקווה.
+                אבל דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה. הוא לא היה
+                רק כלי לאימון. הוא היה קצב. עוגן. דרך לנשום מחדש. דרכו בניתי את עצמי
+                מהיסוד – גוף, נפש ולב.
+              </p>
+              <a
+                href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%20שיעור%20ניסיון?"
+                class="cta-button text-center mb-4 block"
+              >
+              לקביעת אימון בווצאפ
+            </a>
+              <p class="mobile-text text-sm opacity-75">
+                050-844-7575 | melker694@gmail.com
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -793,28 +958,17 @@
             <button type="submit" class="cta-button w-full">שלח הודעה</button>
           </form>
 
-          <div class="mt-8 text-center">
-            <h3 class="mobile-subtitle mb-4">או צור קשר ישירות:</h3>
-            <div class="space-y-3">
-              <a
-                href="https://wa.me/972508447575"
-                class="block text-white hover:text-orange-400 transition-colors"
-              >
-                WhatsApp: 050-844-7575
-              </a>
-              <a
-                href="tel:+972508447575"
-                class="block text-white hover:text-orange-400 transition-colors"
-              >
-                טלפון: 050-844-7575
-              </a>
-              <a
-                href="mailto:melker694@gmail.com"
-                class="block text-white hover:text-orange-400 transition-colors"
-              >
-                אימייל: melker694@gmail.com
-              </a>
-            </div>
+          <div class="contact-alternatives">
+            <h3 class="mobile-subtitle mb-4 text-center">או צור קשר ישירות:</h3>
+            <a href="https://wa.me/972508447575">
+              📱 WhatsApp: 050-844-7575
+            </a>
+            <a href="tel:+972508447575">
+              📞 טלפון: 050-844-7575
+            </a>
+            <a href="mailto:melker694@gmail.com">
+              ✉️ אימייל: melker694@gmail.com
+            </a>
           </div>
         </div>
       </section>
@@ -858,6 +1012,65 @@
             currentIndex * vh
           }px)`;
           updateNavDots();
+
+          // Trigger why-us animation when scrolling to section index 1 (why-us)
+          if (index === 1) {
+            setTimeout(() => {
+              const whyUsContent = document.querySelector('.why-us-section .mobile-content');
+              const whyUsOverlay = document.querySelector('.why-us-section .overlay');
+              
+              if (whyUsContent) {
+                whyUsContent.classList.add('slide-in');
+              }
+              if (whyUsOverlay) {
+                whyUsOverlay.classList.add('lighter');
+              }
+            }, 1500); // 1 second delay
+          }
+
+          // Trigger philosophy animation when scrolling to section index 2 (philosophy)
+          if (index === 2) {
+            setTimeout(() => {
+              const philosophyImage = document.querySelector('.philosophy-image');
+              const philosophyText = document.querySelector('.philosophy-text');
+              
+              if (philosophyImage) {
+                philosophyImage.classList.add('slide-in');
+              }
+              if (philosophyText) {
+                philosophyText.classList.add('slide-in');
+              }
+            }, 500); // 0.5 second delay
+          }
+
+          // Trigger final CTA animation when scrolling to that section (index 5 - after testimonials and pricing)
+          if (index === 5) {
+            // Start image animation immediately (has 1s CSS delay)
+            setTimeout(() => {
+              const finalCtaImage = document.querySelector('.final-cta-image');
+              if (finalCtaImage) {
+                finalCtaImage.classList.add('slide-in');
+              }
+            }, 200); // 0.2 second delay for image trigger
+            
+            // Start text animation after image completes (1s CSS delay + 1.2s animation + 2.5s gap)
+            setTimeout(() => {
+              const finalCtaText = document.querySelector('.final-cta-text');
+              if (finalCtaText) {
+                finalCtaText.classList.add('slide-in');
+              }
+            }, 1600); // Total: 0.2 + 1 + 1.2 + 2.5 = 4.9 seconds
+          }
+
+          // Restart videos for all sections except hero (index 0)
+          if (index > 0) {
+            const currentSection = sections[index];
+            const video = currentSection.querySelector('video');
+            if (video) {
+              video.currentTime = 0;
+              video.play().catch(e => console.log('Video play failed:', e));
+            }
+          }
 
           setTimeout(() => {
             isScrolling = false;
@@ -969,6 +1182,26 @@
 
         // Initialize
         updateNavDots();
+
+        // Handle internal navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            
+            // Find which section contains the target element
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              const sectionIndex = Array.from(sections).findIndex(section => 
+                section.contains(targetElement) || section.id === targetId
+              );
+              
+              if (sectionIndex !== -1) {
+                goToSection(sectionIndex);
+              }
+            }
+          });
+        });
 
         // Hero text slide-in animation after 3.5 seconds - each row individually
         setTimeout(() => {
