@@ -7,147 +7,249 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
     <title>Jump Zone</title>
-    
+
     <!-- Mobile Detection & Redirect -->
     <script>
-        function isMobile() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            
-            // Enhanced mobile/tablet detection
-            const screenWidth = window.innerWidth || screen.width;
-            const screenHeight = window.innerHeight || screen.height;
-            const aspectRatio = screenWidth / screenHeight;
-            
-            // Touch detection
-            const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            
-            // User agent checks - more comprehensive
-            const isMobileUA = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
-            const isKindleUA = /Kindle|Silk/i.test(navigator.userAgent);
-            
-            // Screen size thresholds
-            const isSmallScreen = screenWidth <= 768;
-            const isTabletSize = screenWidth > 768 && screenWidth <= 1024;
-            const isMediumScreen = screenWidth <= 1024;
-            
-            // Special cases
-            const isIPhone = /iPhone/i.test(navigator.userAgent);
-            const isIPad = /iPad/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            const isAndroidTablet = /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
-            
-            // Portrait orientation preference for mobile experience
-            const isPortrait = screenHeight > screenWidth;
-            
-            // Strategy: Use mobile.html for:
-            // 1. All actual mobile devices
-            // 2. All tablets (better touch experience)
-            // 3. Small screens with touch
-            // 4. Portrait orientation devices <= 1024px
-            return isMobileUA || isTabletUA || isKindleUA || isIPhone || isIPad || isAndroidTablet || 
-                   isSmallScreen || (isTabletSize && hasTouchScreen) || 
-                   (isMediumScreen && isPortrait && hasTouchScreen) ||
-                   (hasTouchScreen && screenWidth <= 1080); // Include larger phones/small tablets
+      function isMobile() {
+        const userAgent = navigator.userAgent.toLowerCase();
+
+        // Enhanced mobile/tablet detection
+        const screenWidth = window.innerWidth || screen.width;
+        const screenHeight = window.innerHeight || screen.height;
+        const aspectRatio = screenWidth / screenHeight;
+
+        // Touch detection
+        const hasTouchScreen =
+          "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+        // User agent checks - more comprehensive
+        const isMobileUA =
+          /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          );
+        const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(
+          navigator.userAgent
+        );
+        const isKindleUA = /Kindle|Silk/i.test(navigator.userAgent);
+
+        // Screen size thresholds
+        const isSmallScreen = screenWidth <= 768;
+        const isTabletSize = screenWidth > 768 && screenWidth <= 1024;
+        const isMediumScreen = screenWidth <= 1024;
+
+        // Special cases
+        const isIPhone = /iPhone/i.test(navigator.userAgent);
+        const isIPad =
+          /iPad/i.test(navigator.userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const isAndroidTablet =
+          /Android/i.test(navigator.userAgent) &&
+          !/Mobile/i.test(navigator.userAgent);
+
+        // Portrait orientation preference for mobile experience
+        const isPortrait = screenHeight > screenWidth;
+
+        // Strategy: Use mobile.html for:
+        // 1. All actual mobile devices
+        // 2. All tablets (better touch experience)
+        // 3. Small screens with touch
+        // 4. Portrait orientation devices <= 1024px
+        return (
+          isMobileUA ||
+          isTabletUA ||
+          isKindleUA ||
+          isIPhone ||
+          isIPad ||
+          isAndroidTablet ||
+          isSmallScreen ||
+          (isTabletSize && hasTouchScreen) ||
+          (isMediumScreen && isPortrait && hasTouchScreen) ||
+          (hasTouchScreen && screenWidth <= 1080)
+        ); // Include larger phones/small tablets
+      }
+
+      // Immediate redirect - before any content loads
+      (function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const forceMobile = urlParams.get("mobile") === "true";
+        const forceDesktop = urlParams.get("desktop") === "true";
+
+        // Clear forceDesktop session if desktop param is not explicitly set
+        if (!forceDesktop) {
+          sessionStorage.removeItem("forceDesktop");
         }
-        
-        // Immediate redirect - before any content loads
-        (function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const forceMobile = urlParams.get('mobile') === 'true';
-            const forceDesktop = urlParams.get('desktop') === 'true';
-            
-            // Clear forceDesktop session if desktop param is not explicitly set
-            if (!forceDesktop) {
-                sessionStorage.removeItem('forceDesktop');
-            }
-            
-            // Debug logging
-            console.log('=== Mobile Detection Debug ===');
-            console.log('User Agent:', navigator.userAgent);
-            console.log('Window Width:', window.innerWidth);
-            console.log('Screen Width:', screen.width);
-            console.log('Touch Support:', 'ontouchstart' in window);
-            console.log('Max Touch Points:', navigator.maxTouchPoints);
-            console.log('Force Mobile Param:', forceMobile);
-            console.log('Force Desktop Param:', forceDesktop);
-            console.log('Is Mobile Function Result:', isMobile());
-            console.log('Current URL includes mobile.html:', window.location.href.includes('mobile.html'));
-            console.log('Force Desktop Session:', sessionStorage.getItem('forceDesktop'));
-            
-            if ((isMobile() || forceMobile) && !forceDesktop && !window.location.href.includes('mobile.html') && !sessionStorage.getItem('forceDesktop')) {
-                console.log('🔄 REDIRECTING TO MOBILE');
-                // Stop page from loading further
-                document.write('<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#FF6135;display:flex;align-items:center;justify-content:center;color:white;font-family:Arial;z-index:99999;">מעביר לגרסת מובייל...</div>');
-                window.location.replace('mobile.html');
-                return;
-            } else {
-                console.log('❌ Not redirecting - staying on desktop');
-            }
-        })();
+
+        // Debug logging
+        console.log("=== Mobile Detection Debug ===");
+        console.log("User Agent:", navigator.userAgent);
+        console.log("Window Width:", window.innerWidth);
+        console.log("Screen Width:", screen.width);
+        console.log("Touch Support:", "ontouchstart" in window);
+        console.log("Max Touch Points:", navigator.maxTouchPoints);
+        console.log("Force Mobile Param:", forceMobile);
+        console.log("Force Desktop Param:", forceDesktop);
+        console.log("Is Mobile Function Result:", isMobile());
+        console.log(
+          "Current URL includes mobile.html:",
+          window.location.href.includes("mobile.html")
+        );
+        console.log(
+          "Force Desktop Session:",
+          sessionStorage.getItem("forceDesktop")
+        );
+
+        if (
+          (isMobile() || forceMobile) &&
+          !forceDesktop &&
+          !window.location.href.includes("mobile.html") &&
+          !sessionStorage.getItem("forceDesktop")
+        ) {
+          console.log("🔄 REDIRECTING TO MOBILE");
+          // Stop page from loading further
+          document.write(
+            '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#FF6135;display:flex;align-items:center;justify-content:center;color:white;font-family:Arial;z-index:99999;">מעביר לגרסת מובייל...</div>'
+          );
+          window.location.replace("mobile.html");
+          return;
+        } else {
+          console.log("❌ Not redirecting - staying on desktop");
+        }
+      })();
     </script>
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה. הזמן שיעור ניסיון עוד היום!" />
-    <meta name="keywords" content="אימוני קפיצה בחבל, מאמן כושר, נתנאל מלקר, אימון אישי, אימון קבוצתי, כושר גופני, חוסן מנטלי, קפיצה בחבל ישראל, פעילות גופנית, הרזה, שיפור כושר, דלגית, דלגיות, חבל, אימוני כוח" />
+    <meta
+      name="description"
+      content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה. הזמן אימון ניסיון עוד היום!"
+    />
+    <meta
+      name="keywords"
+      content="אימוני קפיצה בחבל, מאמן כושר, נתנאל מלקר, אימון אישי, אימון קבוצתי, כושר גופני, חוסן מנטלי, קפיצה בחבל ישראל, פעילות גופנית, הרזה, שיפור כושר, דלגית, דלגיות, חבל, אימוני כוח"
+    />
     <meta name="author" content="נתנאל מלקר | Jump Zone" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
     <meta name="language" content="Hebrew" />
     <meta name="geo.region" content="IL" />
     <meta name="geo.country" content="Israel" />
-    
+
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://shaharfullstack.github.io/JumpZoneNew/" />
-    
+    <link
+      rel="canonical"
+      href="https://shaharfullstack.github.io/JumpZoneNew/"
+    />
+
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Jump Zone | אימוני קפיצה בחבל מקצועיים | המאמן המוביל בישראל" />
-    <meta property="og:description" content="אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. שיפור כושר, בניית חוסן מנטלי והעצמה אישית. אימונים אישיים וקבוצתיים לכל הגילאים." />
+    <meta
+      property="og:title"
+      content="Jump Zone | אימוני קפיצה בחבל מקצועיים | המאמן המוביל בישראל"
+    />
+    <meta
+      property="og:description"
+      content="אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. שיפור כושר, בניית חוסן מנטלי והעצמה אישית. אימונים אישיים וקבוצתיים לכל הגילאים."
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://shaharfullstack.github.io/JumpZoneNew/" />
-    <meta property="og:image" content="https://shaharfullstack.github.io/JumpZoneNew/assets/NatiHoodi.png" />
+    <meta
+      property="og:url"
+      content="https://shaharfullstack.github.io/JumpZoneNew/"
+    />
+    <meta
+      property="og:image"
+      content="https://shaharfullstack.github.io/JumpZoneNew/assets/NatiHoodi.png"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="נתנאל מלקר - מאמן קפיצה בחבל מקצועי" />
+    <meta
+      property="og:image:alt"
+      content="נתנאל מלקר - מאמן קפיצה בחבל מקצועי"
+    />
     <meta property="og:locale" content="he_IL" />
     <meta property="og:site_name" content="Jump Zone" />
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Jump Zone | אימוני קפיצה בחבל מקצועיים" />
-    <meta name="twitter:description" content="אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. שיפור כושר, בניית חוסן מנטלי והעצמה אישית." />
-    <meta name="twitter:image" content="https://shaharfullstack.github.io/JumpZoneNew/assets/NatiHoodi.png" />
-    <meta name="twitter:image:alt" content="נתנאל מלקר - מאמן קפיצה בחבל מקצועי" />
-    
+    <meta
+      name="twitter:title"
+      content="Jump Zone | אימוני קפיצה בחבל מקצועיים"
+    />
+    <meta
+      name="twitter:description"
+      content="אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. שיפור כושר, בניית חוסן מנטלי והעצמה אישית."
+    />
+    <meta
+      name="twitter:image"
+      content="https://shaharfullstack.github.io/JumpZoneNew/assets/NatiHoodi.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="נתנאל מלקר - מאמן קפיצה בחבל מקצועי"
+    />
+
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#FF6135" />
     <meta name="msapplication-TileColor" content="#FF6135" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="format-detection" content="telephone=yes" />
-    
+
     <!-- Favicon and App Icons -->
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/android-chrome-512x512.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/icons/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/icons/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/icons/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="assets/icons/android-chrome-512x512.png"
+    />
     <link rel="manifest" href="assets/icons/site.webmanifest" />
 
     <!-- Tailwind CSS CDN -->
     <!-- Tailwind CSS CDN - Consider switching to production build -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
     <script>
-        // Suppress Tailwind development warning
-        if (typeof console !== 'undefined' && console.warn) {
-            const originalWarn = console.warn;
-            console.warn = function(...args) {
-                if (args[0] && args[0].includes('cdn.tailwindcss.com should not be used in production')) {
-                    return;
-                }
-                originalWarn.apply(console, args);
-            };
-        }
+      // Suppress Tailwind development warning
+      if (typeof console !== "undefined" && console.warn) {
+        const originalWarn = console.warn;
+        console.warn = function (...args) {
+          if (
+            args[0] &&
+            args[0].includes(
+              "cdn.tailwindcss.com should not be used in production"
+            )
+          ) {
+            return;
+          }
+          originalWarn.apply(console, args);
+        };
+      }
     </script>
 
     <!-- Google Fonts (Heebo) -->
@@ -167,110 +269,108 @@
     </script>
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Jump Zone",
-      "description": "אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה.",
-      "image": "https://shaharfullstack.github.io/JumpZoneNew/assets/NatiHoodi.png",
-      "logo": "https://shaharfullstack.github.io/JumpZoneNew/assets/logo1.png",
-      "url": "https://shaharfullstack.github.io/JumpZoneNew/",
-      "telephone": "+972-50-844-7575",
-      "email": "melker694@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "IL",
-        "addressRegion": "Israel"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "31.046051",
-        "longitude": "34.851612"
-      },
-      "openingHours": "Mo-Su 06:00-22:00",
-      "priceRange": "₪₪",
-      "founder": {
-        "@type": "Person",
-        "name": "נתנאל מלקר",
-        "jobTitle": "מאמן קפיצה בחבל מקצועי",
-        "description": "מאמן כושר מקצועי המתמחה באימוני קפיצה בחבל, העצמה אישית וחוסן מנטלי"
-      },
-      "serviceArea": {
-        "@type": "Country",
-        "name": "Israel"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "שירותי אימון",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "אימון אישי",
-              "description": "אימון אישי בקפיצה בחבל למתחילים ומתקדמים"
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Jump Zone",
+        "description": "אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה.",
+        "image": "https://shaharfullstack.github.io/JumpZoneNew/assets/NatiHoodi.png",
+        "logo": "https://shaharfullstack.github.io/JumpZoneNew/assets/logo1.png",
+        "url": "https://shaharfullstack.github.io/JumpZoneNew/",
+        "telephone": "+972-50-844-7575",
+        "email": "melker694@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "IL",
+          "addressRegion": "Israel"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "31.046051",
+          "longitude": "34.851612"
+        },
+        "openingHours": "Mo-Su 06:00-22:00",
+        "priceRange": "₪₪",
+        "founder": {
+          "@type": "Person",
+          "name": "נתנאל מלקר",
+          "jobTitle": "מאמן קפיצה בחבל מקצועי",
+          "description": "מאמן כושר מקצועי המתמחה באימוני קפיצה בחבל, העצמה אישית וחוסן מנטלי"
+        },
+        "serviceArea": {
+          "@type": "Country",
+          "name": "Israel"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "שירותי אימון",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "אימון אישי",
+                "description": "אימון אישי בקפיצה בחבל למתחילים ומתקדמים"
+              },
+              "price": "150-250",
+              "priceCurrency": "ILS"
             },
-            "price": "150-250",
-            "priceCurrency": "ILS"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "אימון קבוצתי למבוגרים",
-              "description": "אימוני קבוצה דינמיים לשיפור כושר והעצמה אישית"
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "אימון קבוצתי למבוגרים",
+                "description": "אימוני קבוצה דינמיים לשיפור כושר והעצמה אישית"
+              },
+              "price": "58",
+              "priceCurrency": "ILS"
             },
-            "price": "58",
-            "priceCurrency": "ILS"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "אימון קבוצתי לנוער",
-              "description": "אימוני קבוצה מותאמים לגילאי נוער"
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "אימון קבוצתי לנוער",
+                "description": "אימוני קבוצה מותאמים לגילאי נוער"
+              },
+              "price": "65",
+              "priceCurrency": "ILS"
             },
-            "price": "65",
-            "priceCurrency": "ILS"
-          },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "אימון אונליין",
+                "description": "אימונים מרחוק דרך זום עם הדרכה אישית"
+              },
+              "price": "100-150",
+              "priceCurrency": "ILS"
+            }
+          ]
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": "50"
+        },
+        "review": [
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "שיעור אונליין",
-              "description": "אימונים מרחוק דרך זום עם הדרכה אישית"
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
             },
-            "price": "100-150",
-            "priceCurrency": "ILS"
+            "author": {
+              "@type": "Person",
+              "name": "לקוח מרוצה"
+            },
+            "reviewBody": "אימונים מדהימים עם נתנאל! שיפר לי את הכושר והביטחון העצמי בצורה משמעותית."
           }
-        ]
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "bestRating": "5",
-        "worstRating": "1",
-        "ratingCount": "50"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "author": {
-            "@type": "Person",
-            "name": "לקוח מרוצה"
-          },
-          "reviewBody": "אימונים מדהימים עם נתנאל! שיפר לי את הכושר והביטחון העצמי בצורה משמעותית."
-        }
-      ],
-      "sameAs": [
-        "https://wa.me/972508447575"
-      ]
-    }
+        ],
+        "sameAs": ["https://wa.me/972508447575"]
+      }
     </script>
 
     <script defer type="module" src="./app.js"></script>
@@ -295,17 +395,23 @@
     <!-- Sections Container for the "jump" scroll -->
     <div id="sections-container">
       <!-- Hero Section -->
-      <section class="section hero-section relative text-white" itemscope itemtype="https://schema.org/WebPageElement" role="banner" aria-label="עמוד ראשי">
+      <section
+        class="section hero-section relative text-white"
+        itemscope
+        itemtype="https://schema.org/WebPageElement"
+        role="banner"
+        aria-label="עמוד ראשי"
+      >
         <!-- Video container - populated by JavaScript based on device -->
         <div id="hero-video-container"></div>
-        
+
         <!-- Desktop: Split layout -->
         <div class="hero-desktop-layout hidden md:flex h-full">
           <!-- Left side: 9:16 video -->
           <div class="hero-video-container">
             <!-- Desktop video will be injected here by JavaScript -->
           </div>
-          
+
           <!-- Right side: Background image with content -->
           <div class="hero-content-container">
             <div class="hero-content">
@@ -318,22 +424,26 @@
                 class="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mb-6 drop-shadow-2xl hero-logo"
               ></div>
               <h1
+                class="text-5xl max-w-4xl md:text-7xl lg:text-8xl text-white leading-tight mb-4 text-center md:text-right"
+                itemprop="headline"
+              >
+                קפיצתי אומנותי
+              </h1>
+              <h1
                 class="text-5xl max-w-4xl md:text-7xl lg:text-8xl font-black leading-tight mb-4 text-center md:text-right"
                 itemprop="headline"
               >
-                הכוח בקצב <br>
-                הקצב ברוח <br>
-                הרוח בקפיצה <br>
+                הכוח בקצב <br />
+                הקצב ברוח <br />
+                הרוח בקפיצה <br />
               </h1>
-          <p class="text-xl md:text-2xl max-w-3xl mb-8" itemprop="description">
-            קפיצתי אומנותי
-          </p>
+
               <a
-                href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!"
+                href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20אימון%20ניסיון!"
                 target="_blank"
                 class="px-8 py-4 bg-orange-600 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-105"
               >
-                אני רוצה לקבוע שיעור ניסיון!
+                אני רוצה לקבוע אימון ניסיון!
               </a>
             </div>
           </div>
@@ -353,24 +463,32 @@
             class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-4"
             itemprop="headline"
           >
-                הכוח בקצב <br>
-                הקצב ברוח <br>
-                הרוח בקפיצה <br>          </h1>
+            הכוח בקצב <br />
+            הקצב ברוח <br />
+            הרוח בקפיצה <br />
+          </h1>
           <p class="text-xl md:text-2xl max-w-3xl mb-8" itemprop="description">
             קפיצתי אומנותי
           </p>
           <a
-            href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!"
+            href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%אימון%20ניסיון!"
             target="_blank"
             class="px-8 py-4 bg-orange-600 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-105"
           >
-            אני רוצה לקבוע שיעור ניסיון!
+            אני רוצה לקבוע אימון ניסיון!
           </a>
         </div>
       </section>
 
       <!-- Why Us Section -->
-      <section id="why-us" class="section relative text-right text-white p-4" itemscope itemtype="https://schema.org/AboutPage" role="main" aria-labelledby="why-us-title">
+      <section
+        id="why-us"
+        class="section relative text-right text-white p-4"
+        itemscope
+        itemtype="https://schema.org/AboutPage"
+        role="main"
+        aria-labelledby="why-us-title"
+      >
         <div class="absolute inset-0 opacity-60 z-0"></div>
         <video
           autoplay
@@ -385,7 +503,11 @@
           id="why-us-content"
           class="z-10 flex flex-col items-center max-w-4xl mx-auto"
         >
-          <h2 id="why-us-title" class="text-4xl md:text-5xl font-bold mb-6 text-orange-400" itemprop="headline">
+          <h2
+            id="why-us-title"
+            class="text-4xl md:text-5xl font-bold mb-6 text-orange-400"
+            itemprop="headline"
+          >
             מה זה Jump Zone?
           </h2>
           <ul class="grid md:grid-cols-1 gap-y-4 text-lg mb-8 text-right">
@@ -431,7 +553,14 @@
       </section>
 
       <!-- Philosophy Section -->
-      <section id="philosophy" class="section p-8 md:p-12 text-white" itemscope itemtype="https://schema.org/Article" role="main" aria-labelledby="philosophy-title">
+      <section
+        id="philosophy"
+        class="section p-8 md:p-12 text-white"
+        itemscope
+        itemtype="https://schema.org/Article"
+        role="main"
+        aria-labelledby="philosophy-title"
+      >
         <div class="grid md:grid-cols-2 mx-auto items-center max-w-6xl">
           <div
             class="philosophy-transparent-image order-1 md:order-1 flex justify-center items-center object-cover h-full"
@@ -446,7 +575,11 @@
             <div class="philosophy-background-image">
               <img src="./assets/logo1.png" alt="Jump Zone Logo" />
             </div>
-            <h2 id="philosophy-title" class="text-4xl md:text-5xl font-bold mb-6 text-orange-400 relative z-10" itemprop="headline">
+            <h2
+              id="philosophy-title"
+              class="text-4xl md:text-5xl font-bold mb-6 text-orange-400 relative z-10"
+              itemprop="headline"
+            >
               פילוסופיית הקפיצה: החיים דרך חבל אחד
             </h2>
             <p class="mb-4 text-lg leading-relaxed relative z-10">
@@ -466,53 +599,7 @@
                 href="#contact"
                 class="inline-block px-6 py-3 bg-orange-600 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-105 scroll-to-contact"
               >
-              לחצו עכשיו לאימון ניסיון!
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Story Section -->
-      <section id="story" class="section p-8 md:p-12 bg-black/80 text-white" itemscope itemtype="https://schema.org/Person" role="main" aria-labelledby="story-title">
-        <div class="grid md:grid-cols-2 gap-12 mx-auto items-center">
-          <div class="hidden md:block">
-            <!-- תמונה/וידאו כאן -->
-          </div>
-
-          <div class="p-10 bg-white/80 rounded-2xl shadow-xl relative">
-            <!-- Background animated image for story content -->
-            <div class="story-background-image">
-              <img src="./assets/logo1.png" alt="Jump Zone Logo" />
-            </div>
-            <h2 id="story-title" class="text-4xl md:text-5xl font-bold mb-6 text-indigo-900 relative z-10" itemprop="name">
-              קפיצה שהצילה חיים.
-            </h2>
-
-            <p
-              class="mb-4 text-2xl md:text-3xl text-black font-semibold leading-relaxed relative z-10"
-            >
-              אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת,
-              חבל קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו. אובחנתי עם גלאוקומה
-              קשה שהביאה איתה כאבים בלתי נסבלים, לילות בלי שינה ודיכאון עמוק.
-              איבדתי את הראייה בעין שמאל – אבל מה שכאב יותר היה לאבד את הזהות
-              שלי, את האנרגיה, את הביטחון. את עצמי.
-            </p>
-
-            <p
-              class="text-2xl md:text-3xl text-black font-semibold leading-relaxed mb-6 relative z-10"
-            >
-              הייתי במקום חשוך. מנותק מהעולם. עם חרדה חברתית, פחדים, ואפס תקווה.
-              אבל דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה. הוא לא
-              היה רק כלי לאימון. הוא היה קצב. עוגן. דרך לנשום מחדש. דרכו בניתי
-              את עצמי מהיסוד – גוף, נפש ולב.
-            </p>
-
-            <div class="text-center mt-8 relative z-10">
-              <a
-                href="#contact"
-                class="inline-block px-6 py-3 bg-indigo-600 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 scroll-to-contact"
-              >
-                בואו נדבר
+                לחצו עכשיו לאימון ניסיון!
               </a>
             </div>
           </div>
@@ -520,25 +607,30 @@
       </section>
 
       <!-- Testimonials Section -->
-      <section id="testimonials" class="section testimonials-section relative text-white" itemscope itemtype="https://schema.org/Review" role="main" aria-labelledby="testimonials-title">
+      <section
+        id="testimonials"
+        class="section testimonials-section relative text-white"
+        itemscope
+        itemtype="https://schema.org/Review"
+        role="main"
+        aria-labelledby="testimonials-title"
+      >
         <div class="testimonials-overlay"></div>
-        
+
         <!-- Background video -->
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          class="testimonials-video-bg"
-        >
+        <video autoplay loop muted playsinline class="testimonials-video-bg">
           <source src="assets/services.mp4" type="video/mp4" />
         </video>
 
         <div class="testimonials-container">
-          <h2 id="testimonials-title" class="testimonials-title" itemprop="name">
-            מה אומרים הלקוחות
-          </h2>
-          
+          <h2
+            id="testimonials-title"
+            class="testimonials-title"
+            itemprop="name"
+          >
+          קופצים ממליצים
+        </h2>
+
           <!-- Testimonials Carousel -->
           <div class="testimonials-carousel-wrapper">
             <div class="testimonials-carousel" id="testimonials-carousel">
@@ -597,21 +689,48 @@
 
             <!-- Carousel Dots -->
             <div class="carousel-dots" id="testimonials-dots">
-              <button class="carousel-dot active" data-slide="0" aria-label="המלצה 1"></button>
-              <button class="carousel-dot" data-slide="1" aria-label="המלצה 2"></button>
-              <button class="carousel-dot" data-slide="2" aria-label="המלצה 3"></button>
-              <button class="carousel-dot" data-slide="3" aria-label="המלצה 4"></button>
-              <button class="carousel-dot" data-slide="4" aria-label="המלצה 5"></button>
+              <button
+                class="carousel-dot active"
+                data-slide="0"
+                aria-label="המלצה 1"
+              ></button>
+              <button
+                class="carousel-dot"
+                data-slide="1"
+                aria-label="המלצה 2"
+              ></button>
+              <button
+                class="carousel-dot"
+                data-slide="2"
+                aria-label="המלצה 3"
+              ></button>
+              <button
+                class="carousel-dot"
+                data-slide="3"
+                aria-label="המלצה 4"
+              ></button>
+              <button
+                class="carousel-dot"
+                data-slide="4"
+                aria-label="המלצה 5"
+              ></button>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Pricing Section -->
-      <section id="pricing" class="section pricing-section relative text-white" itemscope itemtype="https://schema.org/PriceSpecification" role="main" aria-labelledby="pricing-title">
+      <section
+        id="pricing"
+        class="section pricing-section relative text-white"
+        itemscope
+        itemtype="https://schema.org/PriceSpecification"
+        role="main"
+        aria-labelledby="pricing-title"
+      >
         <!-- Video container for desktop and mobile -->
         <div id="pricing-video-container"></div>
-        
+
         <!-- Desktop: Split layout -->
         <div class="pricing-desktop-layout hidden md:flex h-full">
           <!-- Left side: Pricing content -->
@@ -626,7 +745,9 @@
                 מחירון Jump Zone
               </h2>
               <div class="overflow-x-auto">
-                <table class="w-ha text-center bg-gray-900 bg-opacity-90 rounded-lg shadow-lg">
+                <table
+                  class="w-ha text-center bg-gray-900 bg-opacity-90 rounded-lg shadow-lg"
+                >
                   <thead class="bg-gray-700 bg-opacity-90">
                     <tr>
                       <th class="p-4 font-bold">סוג אימון</th>
@@ -651,7 +772,7 @@
                       <td class="p-4">58 ₪</td>
                     </tr>
                     <tr>
-                      <td class="p-4">שיעור אונליין/זום</td>
+                      <td class="p-4">אימון אונליין/זום</td>
                       <td class="p-4">60 דק'</td>
                       <td class="p-4">100-150 ₪</td>
                     </tr>
@@ -665,7 +786,7 @@
               </p>
             </div>
           </div>
-          
+
           <!-- Right side: SwitchLogo video -->
           <div class="pricing-video-container">
             <!-- Desktop video will be injected here by JavaScript -->
@@ -673,7 +794,9 @@
         </div>
 
         <!-- Mobile: Original content layout with background video -->
-        <div class="pricing-mobile z-10 flex flex-col text-center items-center md:hidden px-8">
+        <div
+          class="pricing-mobile z-10 flex flex-col text-center items-center md:hidden px-8"
+        >
           <h2
             class="text-4xl md:text-5xl font-bold mb-8 text-center text-pink-400"
             itemprop="name"
@@ -681,7 +804,9 @@
             מחירון Jump Zone
           </h2>
           <div class="overflow-x-auto w-full">
-            <table class="w-full text-center bg-gray-900 bg-opacity-90 rounded-lg shadow-lg">
+            <table
+              class="w-full text-center bg-gray-900 bg-opacity-90 rounded-lg shadow-lg"
+            >
               <thead class="bg-gray-700 bg-opacity-90">
                 <tr>
                   <th class="p-4 font-bold">סוג אימון</th>
@@ -706,7 +831,7 @@
                   <td class="p-4">58 ₪</td>
                 </tr>
                 <tr>
-                  <td class="p-4">שיעור אונליין/זום</td>
+                  <td class="p-4">אימון אונליין/זום</td>
                   <td class="p-4">60 דק'</td>
                   <td class="p-4">100-150 ₪</td>
                 </tr>
@@ -722,43 +847,65 @@
       </section>
 
       <!-- Final CTA Section -->
-      <section
-        id="final-cta"
-        class="section relative text-center text-white"
-      >
+      <section id="final-cta" class="section relative text-center text-white">
         <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
         <video
           autoplay
-          loop
           muted
           playsinline
           class="absolute inset-0 w-full h-full object-cover z-[-1]"
         >
-          <source src="./assets/services.mp4" type="video/mp4" />
+          <source src="./assets/servicesBG-mobile.mp4" type="video/mp4" />
         </video>
-        <div class="z-10 flex flex-col items-center px-4">
-          <h2 class="text-5xl md:text-7xl font-black mb-6">
-            בואו לאימון
+
+        <!-- Background Image -->
+        <img src="./assets/BeachTransp.png" alt="" class="final-cta-image" />
+
+        <!-- Text Content -->
+        <div class="final-cta-text">
+          <h2 class="text-4xl md:text-6xl font-black mb-8 text-center">
+            לשבור חומות בקפיצה
           </h2>
-          <p class="text-xl md:text-2xl max-w-xl mb-8">
-           זה לא רק אימון, זו דרך חדשה לחיות, קפיצתי אומנותי.
-            <br />
-            Jump Zone זה המקום בשבילך.
+          <p
+            class="text-xl md:text-2xl max-w-3xl mb-6 text-center leading-relaxed"
+          >
+            אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת, חבל
+            קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו. אובחנתי עם גלאוקומה קשה
+            שהביאה איתה כאבים בלתי נסבלים, לילות בלי שינה ודיכאון עמוק. איבדתי
+            את הראייה בעין שמאל – אבל מה שכאב יותר היה לאבד את הזהות שלי, את
+            האנרגיה, את הביטחון. את עצמי.
+          </p>
+          <p
+            class="text-xl md:text-2xl max-w-3xl mb-8 text-center leading-relaxed"
+          >
+            הייתי במקום חשוך. מנותק מהעולם. עם חרדה חברתית, פחדים, ואפס תקווה.
+            אבל דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה. הוא לא היה
+            רק כלי לאימון. הוא היה קצב. עוגן. דרך לנשום מחדש. דרכו בניתי את עצמי
+            מהיסוד – גוף, נפש ולב.
           </p>
           <a
-            href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%20שיעור%20ניסיון?"
+            href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%אימון%20ניסיון?"
             target="_blank"
-            class="px-8 py-4 bg-pink-500 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-pink-600 transition-all duration-300 transform hover:scale-105"
+            class="px-8 py-4 bg-orange-600 text-white font-bold text-xl rounded-lg shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-105"
           >
-            אני מוכן לקפוץ! קובעים שיעור ניסיון?
+            אני רוצה לשבור חומות בקפיצה
           </a>
         </div>
       </section>
 
       <!-- Contact Form Section -->
-      <section id="contact" class="section contact-section flex flex-col-reverse md:flex-row max-w-4xl mx-auto" itemscope itemtype="https://schema.org/ContactPage" role="form" aria-labelledby="contact-title">
-        <div class="contact-container ">
-          <h2 id="contact-title" class="contact-title" itemprop="headline">בואו נתחיל את המסע יחד</h2>
+      <section
+        id="contact"
+        class="section contact-section flex flex-col-reverse md:flex-row max-w-4xl mx-auto"
+        itemscope
+        itemtype="https://schema.org/ContactPage"
+        role="form"
+        aria-labelledby="contact-title"
+      >
+        <div class="contact-container">
+          <h2 id="contact-title" class="contact-title" itemprop="headline">
+            בואו נתחיל את המסע יחד
+          </h2>
           <p class="contact-subtitle">
             מעוניינים לשמוע עוד? השאירו פרטים ונחזור אליכם בהקדם
           </p>
@@ -767,7 +914,7 @@
             id="contact-form"
             action="https://formspree.io/f/mqaldzwl"
             method="POST"
-            class="contact-form "
+            class="contact-form"
           >
             <div class="contact-form-grid">
               <div class="contact-form-group">
@@ -819,7 +966,7 @@
               </select>
             </div>
 
-            <div class="contact-form-group full-width ">
+            <div class="contact-form-group full-width">
               <label for="message" class="contact-label">הודעה</label>
               <textarea
                 id="message"

@@ -131,8 +131,62 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
+            const finalCtaSection = document.getElementById('final-cta');
+            const finalCtaSectionIndex = 5;
+            
+            if (finalCtaSection) {
+                if (currentIndex === finalCtaSectionIndex) {
+                    finalCtaSection.classList.remove('scroll-out');
+                    finalCtaSection.classList.add('active');
+                    
+                    // Trigger image animation with 1 second delay
+                    const finalCtaImage = finalCtaSection.querySelector('.final-cta-image');
+                    const finalCtaText = finalCtaSection.querySelector('.final-cta-text');
+                    
+                    if (finalCtaImage) {
+                        finalCtaImage.classList.remove('slide-in');
+                        setTimeout(() => {
+                            finalCtaImage.classList.add('slide-in');
+                        }, 1000);
+                    }
+                    
+                    // Trigger text animation after 2.5 seconds
+                    if (finalCtaText) {
+                        finalCtaText.classList.remove('slide-in');
+                        setTimeout(() => {
+                            finalCtaText.classList.add('slide-in');
+                        }, 2500);
+                    }
+                    
+                    // Restart video
+                    const video = finalCtaSection.querySelector('video');
+                    if (video) {
+                        video.currentTime = 0;
+                        video.play().catch(e => console.log('Video play failed:', e));
+                    }
+                }
+                else if (previousIndex === finalCtaSectionIndex && currentIndex !== finalCtaSectionIndex) {
+                    finalCtaSection.classList.add('scroll-out');
+                    finalCtaSection.classList.remove('active');
+                    
+                    // Reset animations
+                    const finalCtaImage = finalCtaSection.querySelector('.final-cta-image');
+                    const finalCtaText = finalCtaSection.querySelector('.final-cta-text');
+                    
+                    if (finalCtaImage) finalCtaImage.classList.remove('slide-in');
+                    if (finalCtaText) finalCtaText.classList.remove('slide-in');
+                }
+                else if (previousIndex < finalCtaSectionIndex && currentIndex > finalCtaSectionIndex) {
+                    finalCtaSection.classList.add('scroll-out');
+                    finalCtaSection.classList.remove('active');
+                }
+                else if (currentIndex !== finalCtaSectionIndex) {
+                    finalCtaSection.classList.remove('active');
+                }
+            }
+            
             const pricingSection = document.getElementById('pricing');
-            const pricingSectionIndex = 5;
+            const pricingSectionIndex = 4;
             
             if (pricingSection) {
                 if (currentIndex === pricingSectionIndex) {
@@ -317,7 +371,6 @@ function setupHeroVideo(isMobileDevice) {
         // Create desktop split-layout video only
         const desktopVideo = document.createElement('video');
         desktopVideo.autoplay = true;
-        desktopVideo.loop = true;
         desktopVideo.muted = true;
         desktopVideo.playsInline = true;
         desktopVideo.className = 'hero-desktop-video';

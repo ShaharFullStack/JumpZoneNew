@@ -11,7 +11,7 @@
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה. הזמן שיעור ניסיון עוד היום!"
+      content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה. הזמן אימון ניסיון עוד היום!"
     />
     <meta
       name="keywords"
@@ -866,7 +866,7 @@
                   <td class="p-4">58 ₪</td>
                 </tr>
                 <tr>
-                  <td class="p-4">שיעור אונליין/זום</td>
+                  <td class="p-4">אימון אונליין/זום</td>
                   <td class="p-4">60 דק'</td>
                   <td class="p-4">100-150 ₪</td>
                 </tr>
@@ -895,7 +895,7 @@
               class="final-cta-image"
             />
             <div class="final-cta-text">
-              <h2 class="mobile-title">הקפיצה של חיי.</h2>
+              <h2 class="mobile-title">שובר חומות בקפיצה.</h2>
               <p class="mobile-text mb-4">
                 אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת, חבל
                 קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו.  אסבלתי מגלאוקומה, כאבים קשים, דיכאונות וחרדות, איבדתי
@@ -909,10 +909,10 @@
                 מהיסוד – גוף, נפש ולב.
               </p>
               <a
-                href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%20שיעור%20ניסיון?"
+                href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%20אימון%20ניסיון?"
                 class="cta-button text-center mb-4 block"
               >
-              לקביעת אימון בווצאפ
+              אני רוצה אימון!
             </a>
               <p class="mobile-text text-sm opacity-75">
                 050-844-7575 | melker694@gmail.com
@@ -1000,12 +1000,54 @@
           });
         }
 
+        // Reset animations for a section
+        function resetSectionAnimations(sectionIndex) {
+          // Reset hero animations
+          if (sectionIndex === 0) {
+            document.querySelectorAll('.hero-text-row').forEach(row => {
+              row.classList.remove('slide-in');
+            });
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const heroCta = document.querySelector('.hero-cta');
+            if (heroSubtitle) heroSubtitle.classList.remove('slide-in');
+            if (heroCta) heroCta.classList.remove('slide-in');
+          }
+          
+          // Reset why-us animations
+          if (sectionIndex === 1) {
+            const whyUsContent = document.querySelector('.why-us-section .mobile-content');
+            if (whyUsContent) whyUsContent.classList.remove('slide-in');
+          }
+          
+          // Reset philosophy animations
+          if (sectionIndex === 2) {
+            const philosophyImage = document.querySelector('.philosophy-image');
+            const philosophyText = document.querySelector('.philosophy-text');
+            if (philosophyImage) philosophyImage.classList.remove('slide-in');
+            if (philosophyText) philosophyText.classList.remove('slide-in');
+          }
+          
+          // Reset final CTA animations
+          if (sectionIndex === 5) {
+            const finalCtaImage = document.querySelector('.final-cta-image');
+            const finalCtaText = document.querySelector('.final-cta-text');
+            if (finalCtaImage) finalCtaImage.classList.remove('slide-in');
+            if (finalCtaText) finalCtaText.classList.remove('slide-in');
+          }
+        }
+
         // Go to specific section
         function goToSection(index) {
           if (index < 0 || index >= totalSections || isScrolling) return;
 
           isScrolling = true;
+          const previousIndex = currentIndex;
           currentIndex = index;
+
+          // Reset animations from previous section
+          if (previousIndex !== currentIndex) {
+            resetSectionAnimations(previousIndex);
+          }
 
           const vh = window.innerHeight;
           sectionsContainer.style.transform = `translateY(-${
