@@ -1,47 +1,80 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
     <title>Jump Zone | נתנאל מלקר</title>
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה. הזמן שיעור ניסיון עוד היום!" />
-    <meta name="keywords" content="אימוני קפיצה בחבל, מאמן כושר, נתנאל מלקר, אימון אישי, אימון קבוצתי, כושר גופני, חוסן מנטלי, קפיצה בחבל ישראל, פעילות גופנית, הרזה, שיפור כושר, דלגית, דלגיות, חבל, אימוני כוח" />
+    <meta
+      name="description"
+      content="Jump Zone - אימוני קפיצה בחבל מקצועיים עם נתנאל מלקר. אימונים אישיים וקבוצתיים לכל הגילאים. שיפור כושר, בניית חוסן מנטלי והעצמה אישית דרך הקפיצה. הזמן שיעור ניסיון עוד היום!"
+    />
+    <meta
+      name="keywords"
+      content="אימוני קפיצה בחבל, מאמן כושר, נתנאל מלקר, אימון אישי, אימון קבוצתי, כושר גופני, חוסן מנטלי, קפיצה בחבל ישראל, פעילות גופנית, הרזה, שיפור כושר, דלגית, דלגיות, חבל, אימוני כוח"
+    />
     <meta name="author" content="נתנאל מלקר | Jump Zone" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+
     <!-- Theme Colors -->
     <meta name="theme-color" content="#FF6135" />
     <meta name="msapplication-TileColor" content="#FF6135" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/icons/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/icons/favicon-32x32.png"
+    />
     <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;900&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
     <script>
-        // Suppress Tailwind development warning
-        if (typeof console !== 'undefined' && console.warn) {
-            const originalWarn = console.warn;
-            console.warn = function(...args) {
-                if (args[0] && args[0].includes('cdn.tailwindcss.com should not be used in production')) {
-                    return;
-                }
-                originalWarn.apply(console, args);
-            };
-        }
+      // Suppress Tailwind development warning
+      if (typeof console !== "undefined" && console.warn) {
+        const originalWarn = console.warn;
+        console.warn = function (...args) {
+          if (
+            args[0] &&
+            args[0].includes(
+              "cdn.tailwindcss.com should not be used in production"
+            )
+          ) {
+            return;
+          }
+          originalWarn.apply(console, args);
+        };
+      }
     </script>
 
     <!-- Enhanced CSS Architecture - Optimized Loading Order -->
@@ -51,797 +84,992 @@
     <link rel="stylesheet" href="css/mobile-components.css" />
     <link rel="stylesheet" href="css/mobile-responsive.css" />
     <link rel="stylesheet" href="css/tablet-optimization.css" />
-    
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Heebo', sans-serif;
-            overflow: hidden;
-            background: #000;
-            height: 100vh;
-            height: 100dvh; /* Dynamic viewport height for mobile */
-            width: 100vw;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        /* Full-screen sections container */
-        #sections-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            height: 100dvh; /* Dynamic viewport height for mobile */
-            width: 100vw;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+      body {
+        font-family: "Heebo", sans-serif;
+        overflow: hidden;
+        background: #000;
+        height: 100vh;
+        height: 100dvh; /* Dynamic viewport height for mobile */
+        width: 100vw;
+      }
 
-        .section {
-            min-height: 100vh;
-            min-height: 100dvh; /* Dynamic viewport height for mobile */
-            width: 100vw;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-        }
+      /* Full-screen sections container */
+      #sections-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        height: 100dvh; /* Dynamic viewport height for mobile */
+        width: 100vw;
+        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
 
-        /* Navigation dots */
-        #nav-dots {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+      .section {
+        min-height: 100vh;
+        min-height: 100dvh; /* Dynamic viewport height for mobile */
+        width: 100vw;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+      }
 
-        #nav-dots button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+      /* Navigation dots */
+      #nav-dots {
+        position: fixed;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
 
-        #nav-dots button.active {
-            background: #FF6135;
-            border-color: #FF6135;
-            transform: scale(1.2);
-        }
+      #nav-dots button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-        /* Video backgrounds */
-        .video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-        }
+      #nav-dots button.active {
+        background: #ff6135;
+        border-color: #ff6135;
+        transform: scale(1.2);
+      }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
+      /* Video backgrounds */
+      .video-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+      }
 
-        /* Mobile-specific styles */
-        .mobile-content {
-            padding: 20px;
-            max-width: 350px;
-            z-index: 10;
-        }
+      .overlay {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        transition: background 0.8s ease-out;
+      }
 
-        .hero-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            border: 3px solid white;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
+      .overlay.lighter {
+        background: rgba(0, 0, 0, 0.8);
+      }
 
-        .cta-button {
-            background: linear-gradient(45deg, #FF6135, #FF8A65);
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 97, 53, 0.3);
-            text-decoration: none;
-            display: inline-block;
-        }
+      /* Mobile-specific styles */
+      .mobile-content {
+        padding: 20px;
+        max-width: 350px;
+        z-index: 10;
+      }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 97, 53, 0.4);
-        }
+      .hero-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 3px solid transparent;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
 
-        /* Testimonials carousel */
-        .testimonials-carousel {
-            position: relative;
-            width: 100%;
-            max-width: 350px;
-            overflow: hidden;
-        }
+      .cta-button {
+        background: linear-gradient(45deg, #ff6135, #ff8a65);
+        border: none;
+        padding: 15px 30px;
+        border-radius: 50px;
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 97, 53, 0.3);
+        text-decoration: none;
+        display: inline-block;
+      }
 
-        .testimonials-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 97, 53, 0.4);
+      }
 
-        .testimonial-slide {
-            min-width: 100%;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            margin: 0 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+      /* Testimonials carousel */
+      .testimonials-carousel {
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+        overflow: hidden;
+      }
 
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            border: 2px solid #FF6135;
-        }
+      .testimonials-track {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
 
-        /* Carousel navigation */
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
+      .testimonial-slide {
+        min-width: 100%;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        margin: 0 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
 
-        .carousel-nav-prev { left: -20px; }
-        .carousel-nav-next { right: -20px; }
+      .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+        border: 2px solid #ff6135;
+      }
 
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
+      /* Carousel navigation */
+      .carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+      }
 
-        .carousel-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+      .carousel-nav-prev {
+        left: -20px;
+      }
+      .carousel-nav-next {
+        right: -20px;
+      }
 
-        .carousel-dot.active {
-            background: #FF6135;
-            transform: scale(1.2);
-        }
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+      }
 
-        /* Pricing cards - mobile optimized */
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            border-radius: 15px;
-            padding: 20px 15px;
-            margin: 8px 0;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-        }
+      .carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-        .pricing-card:hover,
-        .pricing-card:active {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 97, 53, 0.3);
-            background: rgba(255, 255, 255, 0.2);
-        }
+      .carousel-dot.active {
+        background: #ff6135;
+        transform: scale(1.2);
+      }
 
-        .price {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #FF6135;
-            margin: 10px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+      /* Pricing cards - mobile optimized */
+      .pricing-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        border-radius: 15px;
+        padding: 20px 15px;
+        margin: 8px 0;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
 
-        /* Mobile-specific pricing layout */
-        .pricing-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            max-width: 320px;
-        }
+      .pricing-card:hover,
+      .pricing-card:active {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 97, 53, 0.3);
+        background: rgba(255, 255, 255, 0.2);
+      }
 
-        .pricing-features {
-            text-align: right;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
+      .price {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #ff6135;
+        margin: 10px 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
 
-        .pricing-features li {
-            margin-bottom: 8px;
-            padding-right: 15px;
-            position: relative;
-        }
+      /* Mobile-specific pricing layout */
+      .pricing-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        max-width: 320px;
+      }
 
-        .pricing-features li:before {
-            content: "•";
-            position: absolute;
-            right: 0;
-            color: #FF6135;
-            font-weight: bold;
-        }
+      .pricing-features {
+        text-align: right;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
 
-        /* Tablet responsive adjustments */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .mobile-title {
-                font-size: 3rem;
-            }
-            
-            .mobile-subtitle {
-                font-size: 1.8rem;
-            }
-            
-            .mobile-text {
-                font-size: 1.3rem;
-            }
-            
-            .mobile-content {
-                max-width: 500px;
-                padding: 30px;
-            }
-            
-            .pricing-card {
-                max-width: 400px;
-                padding: 25px 20px;
-            }
-            
-            .price {
-                font-size: 2.8rem;
-            }
-            
-            .cta-button {
-                font-size: 1.3rem;
-                padding: 18px 35px;
-            }
-        }
+      .pricing-features li {
+        margin-bottom: 8px;
+        padding-right: 15px;
+        position: relative;
+      }
 
-        /* Mobile responsive adjustments */
-        @media (max-width: 360px) {
-            .pricing-card {
-                padding: 15px 12px;
-                margin: 6px 0;
-            }
-            
-            .price {
-                font-size: 2rem;
-            }
-            
-            .mobile-content {
-                padding: 15px;
-                max-width: 320px;
-            }
-        }
+      .pricing-features li:before {
+        content: "•";
+        position: absolute;
+        right: 0;
+        color: #ff6135;
+        font-weight: bold;
+      }
 
-        /* Contact form */
-        .contact-form {
-            width: 100%;
-            max-width: 350px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: right;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-family: 'Heebo', sans-serif;
-            backdrop-filter: blur(10px);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Responsive text sizes */
+      /* Tablet responsive adjustments */
+      @media (min-width: 768px) and (max-width: 1024px) {
         .mobile-title {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+          font-size: 3rem;
         }
 
         .mobile-subtitle {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #FF6135;
+          font-size: 1.8rem;
         }
 
         .mobile-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.95;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+          font-size: 1.3rem;
         }
 
-        /* Hide scrollbar but keep functionality */
-        ::-webkit-scrollbar {
-            display: none;
+        .mobile-content {
+          max-width: 500px;
+          padding: 30px;
         }
+
+        .pricing-card {
+          max-width: 400px;
+          padding: 25px 20px;
+        }
+
+        .price {
+          font-size: 2.8rem;
+        }
+
+        .cta-button {
+          font-size: 1.3rem;
+          padding: 18px 35px;
+        }
+      }
+
+      /* Mobile responsive adjustments */
+      @media (max-width: 360px) {
+        .pricing-card {
+          padding: 15px 12px;
+          margin: 6px 0;
+        }
+
+        .price {
+          font-size: 2rem;
+        }
+
+        .mobile-content {
+          padding: 15px;
+          max-width: 320px;
+        }
+      }
+
+      /* Contact form */
+      .contact-form {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        text-align: right;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-family: "Heebo", sans-serif;
+        backdrop-filter: blur(10px);
+      }
+
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Responsive text sizes */
+      .mobile-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: 15px;
+        line-height: 1.2;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .mobile-subtitle {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #ff6135;
+      }
+
+      .mobile-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0.95;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Hide scrollbar but keep functionality */
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hero text slide-in animation */
+      .hero-text-row {
+
+        position: relative;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.6s ease-out;
+
+      }
+
+      .hero-text-row.slide-in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .hero-subtitle,
+      .hero-cta {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.6s ease-out;
+      }
+
+      .hero-subtitle.slide-in,
+      .hero-cta.slide-in {
+        opacity: 1;
+        margin-bottom: 2rem;
+        transform: translateX(0);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Navigation Dots -->
     <div id="nav-dots"></div>
 
     <!-- Sections Container -->
     <div id="sections-container">
-        
-        <!-- Hero Section -->
-        <section class="section hero-section relative text-white">
-            <video autoplay loop muted playsinline class="video-bg">
-                <source src="./assets/PowerRhythmSoul.mp4" type="video/mp4" />
-            </video>
-            <div class="overlay"></div>
-            <div class="mobile-content">
-                <img src="./assets/logo1.png" alt="נתנאל מלקר" class="hero-image mx-auto" />
-                <h1 class="mobile-title">נתנאל מלקר</h1>
-                <h2 class="mobile-subtitle">מאמן קפיצה בחבל</h2>
-                <p class="mobile-text mb-6">
-                    מוביל בתחום אימוני הקפיצה בחבל בישראל. אימונים אישיים וקבוצתיים המשלבים כושר גופני, חוסן מנטלי והעצמה אישית.
-                </p>
-                <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!" class="cta-button">
-                    הזמן שיעור ניסיון
-                </a>
-            </div>
-        </section>
+      <!-- Hero Section -->
+      <section class="section hero-section relative text-white">
+        <video autoplay muted playsinline class="video-bg">
+          <source src="./assets/PowerRhythmSoul.mp4" type="video/mp4" />
+        </video>
+        <div class="overlay"></div>
+        <div class="mobile-content">
+            <div class="hero-image"></div>
+            <div class="hero-container">
+          <div class="mobile-title hero-text-row text-orange-600"><h1>
+            קפיצתי אומנותי
+          </h1>
+          <hr>
+        </div>
+          <h1 class="mobile-title">
+            <div class="hero-text-row">הכוח בקצב</div>
+            <div class="hero-text-row">הקצב ברוח</div>
+            <div class="hero-text-row">הרוח בקפיצה</div>
+          </h1>
+          <br>
+          <a
+            href="#philosophy"
+            class="cta-button hero-cta"
+          >
+          עוד פרטים
+        </a>
+        </div>
+        </div>
+      </section>
 
-        <!-- Why Us Section -->
-        <section id="why-us" class="section relative text-white">
-            <video autoplay loop muted playsinline class="video-bg">
-                <source src="./assets/Boxing-mobile.mp4" type="video/mp4" />
-            </video>
-            <div class="overlay"></div>
-            <div class="mobile-content">
-                <h2 class="mobile-title">למה לבחור בנו?</h2>
-                <div class="space-y-6 text-right">
-                    <div>
-                        <h3 class="mobile-subtitle">אימון מותאם אישית</h3>
-                        <p class="mobile-text">כל אימון מתוכנן במיוחד עבורך בהתאם ליכולות ולמטרות שלך</p>
-                    </div>
-                    <div>
-                        <h3 class="mobile-subtitle">ניסיון עשיר</h3>
-                        <p class="mobile-text">מעל 10 שנות ניסיון באימון וחיזוק גופני ומנטלי</p>
-                    </div>
-                    <div>
-                        <h3 class="mobile-subtitle">תוצאות מוכחות</h3>
-                        <p class="mobile-text">מאות לקוחות מרוצים שהגיעו למטרות שלהם</p>
-                    </div>
-                </div>
+      <!-- Why Us Section -->
+      <section id="why-us" class="section relative text-white">
+        <video autoplay loop muted playsinline class="video-bg">
+          <source src="./assets/Boxing-mobile.mp4" type="video/mp4" />
+        </video>
+        <div class="overlay"></div>
+        <div class="mobile-content">
+          <h2 class="mobile-title">מה זה Jump Zone?</h2>
+          <div class="space-y-6 text-right">
+            <div>
+              <p class="mobile-text">
+                • אימונים קבוצתיים ואישיים בגישה בגובה העיניים
+              </p>
             </div>
-        </section>
-
-        <!-- Philosophy Section -->
-        <section id="philosophy" class="section relative text-white">
-            <div class="absolute inset-0 bg-cover bg-center bg-black/60" style="background-image: url('./assets/philosophy-mobile2.PNG');"></div>
-            <div class="overlay"></div>
-            <div class="mobile-content">
-                <h2 class="mobile-title">הפילוסופיה שלי</h2>
-                <p class="mobile-text mb-6">
-                    "קפיצה בחבל היא יותר מסך תרגיל גופני - היא מסע של גילוי עצמי, בניית ביטחון והתמודדות עם אתגרים. אני מאמין שכל אדם יכול להגיע למטרות שלו עם הגישה הנכונה והמרץ המתאים."
-                </p>
-                <p class="mobile-text">
-                    האימונים שלי משלבים טכניקות מתקדמות עם הבנה עמוקה של הצרכים האישיים של כל מתאמן, ויוצרים חוויה שמשנה חיים.
-                </p>
+            <div>
+              <p class="mobile-text">• חיבור בין תנועה, מוזיקה ונפש</p>
             </div>
-        </section>
-
-        <!-- Story Section -->
-        <section id="story" class="section relative text-white">
-            <div class="absolute inset-0 bg-cover bg-center bg-black/60" style="background-image: url('./assets/story-mobile.PNG');"></div>
-            <div class="overlay"></div>
-            <div class="mobile-content">
-                <h2 class="mobile-title">הסיפור שלי</h2>
-                <p class="mobile-text mb-4">
-                    התחלתי את המסע שלי בקפיצה בחבל כדרך להתמודד עם אתגרים אישיים. מה שהתחיל כתחביב הפך לתשוקה, ולבסוף למקצוע.
-                </p>
-                <p class="mobile-text mb-4">
-                    לאורך השנים פיתחתי שיטות אימון ייחודיות המשלבות כושר גופני עם חיזוק מנטלי, וגיליתי שקפיצה בחבל היא כלי עוצמתי לשינוי חיים.
-                </p>
-                <p class="mobile-text">
-                    היום אני גאה לחלק את הידע והניסיון שלי עם מתאמנים מכל הגילאים והרמות.
-                </p>
+            <div>
+              <p class="mobile-text">• קהילה בטוחה ומכילה</p>
             </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="section relative text-white">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./assets/testimonials-mobile.JPG');"></div>
-            <div class="overlay"></div>
-            <div class="mobile-content">
-                <h2 class="mobile-title mb-8">מה אומרים עלינו</h2>
-                <div class="testimonials-carousel">
-                    <div class="testimonials-track" id="testimonials-track">
-                        <div class="testimonial-slide">
-                            <img src="./assets/testimonials1.jpeg" alt="לקוח מרוצה" class="testimonial-avatar" />
-                            <p class="mobile-text mb-4">"נתנאל שינה לי את החיים. בתוך חודשיים הרגשתי יותר חזקה ובטוחה בעצמי מאי פעם."</p>
-                            <h4 class="font-bold text-lg">שרה כהן</h4>
-                        </div>
-                        <div class="testimonial-slide">
-                            <img src="./assets/testimonials2.PNG" alt="לקוח מרוצה" class="testimonial-avatar" />
-                            <p class="mobile-text mb-4">"האימונים עם נתנאל הם הדבר הכי טוב שקרה לי השנה. מקצועי, סבלני ומעורר השראה."</p>
-                            <h4 class="font-bold text-lg">דוד לוי</h4>
-                        </div>
-                        <div class="testimonial-slide">
-                            <img src="./assets/testimonials3.PNG" alt="לקוח מרוצה" class="testimonial-avatar" />
-                            <p class="mobile-text mb-4">"פעם חשבתי שקפיצה בחבל זה רק לילדים. נתנאל הוכיח לי שזה האימון הכי יעיל שיש."</p>
-                            <h4 class="font-bold text-lg">מיכל אברהם</h4>
-                        </div>
-                        <div class="testimonial-slide">
-                            <img src="./assets/testimonials4.PNG" alt="לקוח מרוצה" class="testimonial-avatar" />
-                            <p class="mobile-text mb-4">"בזכות נתנאל גיליתי שאני יכולה להיות חזקה יותר ממה שחשבתי. תודה על השינוי!"</p>
-                            <h4 class="font-bold text-lg">רונית ישראל</h4>
-                        </div>
-                        <div class="testimonial-slide">
-                            <img src="./assets/testimonials5.PNG" alt="לקוח מרוצה" class="testimonial-avatar" />
-                            <p class="mobile-text mb-4">"האימונים מאתגרים אבל מהנים. נתנאל יודע איך להוציא ממני את המיטב."</p>
-                            <h4 class="font-bold text-lg">אמיר כהן</h4>
-                        </div>
-                    </div>
-                    <button class="carousel-nav carousel-nav-prev" id="testimonials-prev">‹</button>
-                    <button class="carousel-nav carousel-nav-next" id="testimonials-next">›</button>
-                    <div class="carousel-dots" id="testimonials-dots"></div>
-                </div>
+            <div>
+              <p class="mobile-text">• סדנאות השראה, העצמה וחוסן מנטלי</p>
             </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section id="pricing" class="section relative text-white">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./assets/pricing-mobile.JPG');"></div>
-            <div class="overlay"></div>
-            <div class="mobile-content">
-                <h2 class="mobile-title mb-6">תעריפים</h2>
-                <div class="pricing-container">
-                    <div class="pricing-card">
-                        <h3 class="mobile-subtitle mb-2">אימון אישי</h3>
-                        <div class="price">₪200</div>
-                        <p class="mobile-text mb-4">אימון אישי של שעה וחצי<br/>מותאם לרמה שלך</p>
-                        <ul class="pricing-features mobile-text">
-                            <li>הדרכה אישית מלאה</li>
-                            <li>תוכנית אימון מותאמת</li>
-                            <li>מעקב התקדמות</li>
-                            <li>גמישות בזמנים</li>
-                        </ul>
-                        <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20אימון%20אישי!" 
-                           class="cta-button mt-4 text-sm px-6 py-2">
-                            הזמן עכשיו
-                        </a>
-                    </div>
-                    
-                    <div class="pricing-card">
-                        <h3 class="mobile-subtitle mb-2">אימון קבוצתי</h3>
-                        <div class="price">₪120</div>
-                        <p class="mobile-text mb-4">אימון בקבוצה קטנה<br/>עד 4 משתתפים</p>
-                        <ul class="pricing-features mobile-text">
-                            <li>אווירה חברתית ומעודדת</li>
-                            <li>מחיר משתלם</li>
-                            <li>מתאים לכל הרמות</li>
-                            <li>מוטיבציה קבוצתית</li>
-                        </ul>
-                        <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20אימון%20קבוצתי!" 
-                           class="cta-button mt-4 text-sm px-6 py-2">
-                            הזמן עכשיו
-                        </a>
-                    </div>
-                    
-                    <div class="pricing-card" style="background: rgba(255, 97, 53, 0.2); border-color: #FF6135;">
-                        <h3 class="mobile-subtitle mb-2" style="color: #FFD700;">מבצע!</h3>
-                        <div class="price" style="font-size: 1.8rem;">שיעור ניסיון</div>
-                        <div style="font-size: 2.5rem; font-weight: 900; color: #FFD700; margin: 10px 0;">חינם!</div>
-                        <p class="mobile-text mb-4">שיעור ראשון ללא עלות<br/>לחוות את החוויה</p>
-                        <ul class="pricing-features mobile-text">
-                            <li>הכרת המאמן והשיטה</li>
-                            <li>הערכת רמה אישית</li>
-                            <li>תוכנית מומלצת</li>
-                            <li>ללא התחייבות</li>
-                        </ul>
-                        <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון%20חינם!" 
-                           class="cta-button mt-4 text-sm px-6 py-2" style="background: linear-gradient(45deg, #FFD700, #FFA500);">
-                            שיעור ניסיון חינם
-                        </a>
-                    </div>
-                </div>
+            <div>
+              <p class="mobile-text">• מקום אמיתי לצמיחה פיזית ורגשית</p>
             </div>
-        </section>
-
-        <!-- Final CTA Section -->
-        <section id="final-cta" class="section relative text-white">
-            <video autoplay loop muted playsinline class="video-bg">
-                <source src="./assets/servicesBG-mobile.mp4" type="video/mp4" />
-            </video>
-            <div class="overlay"></div>
-            <div class="mobile-content">
-                <h2 class="mobile-title">מוכן להתחיל?</h2>
-                <p class="mobile-text mb-8">
-                    הצטרף אלי למסע של שינוי, חיזוק והעצמה. שיעור הניסיון הראשון עליי!
-                </p>
-                <a href="https://wa.me/972508447575?text=אני%20רוצה%20לקבוע%20שיעור%20ניסיון!" class="cta-button mb-4 block">
-                    צור קשר עכשיו
-                </a>
-                <p class="mobile-text text-sm opacity-75">
-                    050-844-7575 | nati@jumpzone.co.il
-                </p>
+            <div>
+              <p class="mobile-text">• אימונים מותאמים לכל גיל ורמה</p>
             </div>
-        </section>
+          </div>
+          <a
+            href="https://wa.me/972508447575?text=אני%20רוצה%20לשמוע%20עוד%20פרטים"
+            class="cta-button mt-8"
+          >
+            אני רוצה לשמוע עוד פרטים
+          </a>
+        </div>
+      </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section relative text-white">
-            <div class="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"></div>
-            <div class="mobile-content">
-                <h2 class="mobile-title mb-8">צור קשר</h2>
-                <form class="contact-form" action="https://formspree.io/f/mqaldzwl" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="שם מלא" required />
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" name="phone" placeholder="מספר טלפון" required />
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="אימייל" required />
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" rows="4" placeholder="הודעה (אופציונלי)"></textarea>
-                    </div>
-                    <button type="submit" class="cta-button w-full">
-                        שלח הודעה
-                    </button>
-                </form>
-                
-                <div class="mt-8 text-center">
-                    <h3 class="mobile-subtitle mb-4">או צור קשר ישירות:</h3>
-                    <div class="space-y-3">
-                        <a href="https://wa.me/972508447575" class="block text-white hover:text-orange-400 transition-colors">
-                            WhatsApp: 050-844-7575
-                        </a>
-                        <a href="tel:+972508447575" class="block text-white hover:text-orange-400 transition-colors">
-                            טלפון: 050-844-7575
-                        </a>
-                        <a href="mailto:nati@jumpzone.co.il" class="block text-white hover:text-orange-400 transition-colors">
-                            אימייל: nati@jumpzone.co.il
-                        </a>
-                    </div>
-                </div>
+      <!-- Philosophy Section -->
+      <section id="philosophy" class="section relative text-white">
+        <div
+          class="absolute inset-0 bg-cover bg-center bg-black/60"
+          style="background-image: url('./assets/philosophy-mobile2.PNG')"
+        ></div>
+        <div class="overlay"></div>
+        <div class="mobile-content">
+          <h2 class="mobile-title">פילוסופיית הקפיצה: החיים דרך חבל אחד</h2>
+          <p class="mobile-text mb-6">
+            קפיצה בחבל היא השתקפות של החיים עצמם. כל קפיצה היא בחירה: לבחור לנוע
+            גם כשכואב. לטעות, להסתבך, ואז לחזור לקצב. להתאזן, לנשום, לקפוץ שוב
+            גם אחרי נפילה.
+          </p>
+          <p class="mobile-text">
+            החבל הזה לימד אותי שאם אני יכול לשלוט בתנועה אני יכול לשלוט בסיפור
+            שלי. שאם אני מצליח לסנכרן בין נשימה, קצב ותודעה אני יכול לנצח גם את
+            הפחדים הכי עמוקים שלי. זו לא רק שיטה לשיפור כושר זו דרך להתחבר
+            לעצמך. דרך לפרוץ גבולות פנימיים, לשחרר מתחים, לבנות חוסן מנטלי
+            ולהיזכר בכוח שיש בך.
+          </p>
+          <a href="#contact" class="cta-button mt-8">
+            מוכן לגלות את הכוח שיש בך?
+          </a>
+        </div>
+      </section>
+
+      <!-- Story Section -->
+      <section id="story" class="section relative text-white">
+        <div
+          class="absolute inset-0 bg-cover bg-center bg-black/60"
+          style="background-image: url('./assets/story-mobile.PNG')"
+        ></div>
+        <div class="overlay"></div>
+        <div class="mobile-content">
+          <h2 class="mobile-title">קפיצה שהצילה חיים.</h2>
+          <p class="mobile-text mb-4">
+            אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת, חבל
+            קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו. אובחנתי עם גלאוקומה קשה
+            שהביאה איתה כאבים בלתי נסבלים, לילות בלי שינה ודיכאון עמוק. איבדתי
+            את הראייה בעין שמאל – אבל מה שכאב יותר היה לאבד את הזהות שלי, את
+            האנרגיה, את הביטחון. את עצמי.
+          </p>
+          <p class="mobile-text">
+            הייתי במקום חשוך. מנותק מהעולם. עם חרדה חברתית, פחדים, ואפס תקווה.
+            אבל דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה. הוא לא היה
+            רק כלי לאימון. הוא היה קצב. עוגן. דרך לנשום מחדש. דרכו בניתי את עצמי
+            מהיסוד – גוף, נפש ולב.
+          </p>
+          <a href="#contact" class="cta-button mt-8"> בואו נדבר </a>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="section relative text-white">
+        <div
+          class="absolute inset-0 bg-cover bg-center"
+          style="background-image: url('./assets/testimonials-mobile.JPG')"
+        ></div>
+        <div class="overlay"></div>
+        <div class="mobile-content">
+          <h2 class="mobile-title mb-8">מה אומרים הלקוחות</h2>
+          <div class="testimonials-carousel">
+            <div class="testimonials-track" id="testimonials-track">
+              <div class="testimonial-slide">
+                <img
+                  src="./assets/testimonials1.jpeg"
+                  alt="המלצה 1"
+                  class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                />
+              </div>
+              <div class="testimonial-slide">
+                <img
+                  src="./assets/testimonials2.PNG"
+                  alt="המלצה 2"
+                  class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                />
+              </div>
+              <div class="testimonial-slide">
+                <img
+                  src="./assets/testimonials3.PNG"
+                  alt="המלצה 3"
+                  class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                />
+              </div>
+              <div class="testimonial-slide">
+                <img
+                  src="./assets/testimonials4.PNG"
+                  alt="המלצה 4"
+                  class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                />
+              </div>
+              <div class="testimonial-slide">
+                <img
+                  src="./assets/testimonials5.PNG"
+                  alt="המלצה 5"
+                  class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                />
+              </div>
             </div>
-        </section>
+            <button
+              class="carousel-nav carousel-nav-prev"
+              id="testimonials-prev"
+            >
+              ‹
+            </button>
+            <button
+              class="carousel-nav carousel-nav-next"
+              id="testimonials-next"
+            >
+              ›
+            </button>
+            <div class="carousel-dots" id="testimonials-dots"></div>
+          </div>
+        </div>
+      </section>
 
+      <!-- Pricing Section -->
+      <section id="pricing" class="section relative text-white">
+        <div
+          class="absolute inset-0 bg-cover bg-center"
+          style="background-image: url('./assets/pricing-mobile.JPG')"
+        ></div>
+        <div class="overlay"></div>
+        <div class="mobile-content">
+          <h2 class="mobile-title mb-6">מחירון Jump Zone</h2>
+          <div class="overflow-x-auto w-full">
+            <table
+              class="w-full text-center bg-gray-900 bg-opacity-90 rounded-lg shadow-lg"
+            >
+              <thead class="bg-gray-700 bg-opacity-90">
+                <tr>
+                  <th class="p-4 font-bold">סוג אימון</th>
+                  <th class="p-4 font-bold">משך</th>
+                  <th class="p-4 font-bold">מחיר לאימון בודד</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-gray-700">
+                  <td class="p-4">אימון אישי</td>
+                  <td class="p-4">45-60 דק'</td>
+                  <td class="p-4">150-250 ₪</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                  <td class="p-4">אימון קבוצתי (נוער)</td>
+                  <td class="p-4">60-90 דק'</td>
+                  <td class="p-4">65 ₪</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                  <td class="p-4">אימון קבוצתי (מבוגרים)</td>
+                  <td class="p-4">60-90 דק'</td>
+                  <td class="p-4">58 ₪</td>
+                </tr>
+                <tr>
+                  <td class="p-4">שיעור אונליין/זום</td>
+                  <td class="p-4">60 דק'</td>
+                  <td class="p-4">100-150 ₪</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-center mt-6 text-gray-300 mobile-text">
+            * כל המחירים לאימון בודד. ניתן לרכוש חבילות מוזלות – לפרטים צרו
+            קשר.<br />
+            * כל האימונים כוללים ליווי אישי, תוכנית מותאמת וקהילה תומכת.
+          </p>
+        </div>
+      </section>
+
+      <!-- Final CTA Section -->
+      <section id="final-cta" class="section relative text-white">
+        <video autoplay loop muted playsinline class="video-bg">
+          <source src="./assets/servicesBG-mobile.mp4" type="video/mp4" />
+        </video>
+        <div class="overlay"></div>
+        <div class="mobile-content">
+          <h2 class="mobile-title">מוכן לעשות את הקפיצה?</h2>
+          <p class="mobile-text mb-8">
+            אם אתה מחפש לא רק אימון אלא דרך חדשה לחיות, לנשום ולנצח את עצמך<br />
+            Jump Zone זה המקום בשבילך.
+          </p>
+          <a
+            href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%20שיעור%20ניסיון?"
+            class="cta-button mb-4 block"
+          >
+            אני מוכן לקפוץ! קובעים שיעור ניסיון?
+          </a>
+          <p class="mobile-text text-sm opacity-75">
+            050-844-7575 | melker694@gmail.com
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section relative text-white">
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"
+        ></div>
+        <div class="mobile-content">
+          <h2 class="mobile-title mb-8">צור קשר</h2>
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/mqaldzwl"
+            method="POST"
+          >
+            <div class="form-group">
+              <input type="text" name="name" placeholder="שם מלא" required />
+            </div>
+            <div class="form-group">
+              <input
+                type="tel"
+                name="phone"
+                placeholder="מספר טלפון"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="אימייל" required />
+            </div>
+            <div class="form-group">
+              <textarea
+                name="message"
+                rows="4"
+                placeholder="הודעה (אופציונלי)"
+              ></textarea>
+            </div>
+            <button type="submit" class="cta-button w-full">שלח הודעה</button>
+          </form>
+
+          <div class="mt-8 text-center">
+            <h3 class="mobile-subtitle mb-4">או צור קשר ישירות:</h3>
+            <div class="space-y-3">
+              <a
+                href="https://wa.me/972508447575"
+                class="block text-white hover:text-orange-400 transition-colors"
+              >
+                WhatsApp: 050-844-7575
+              </a>
+              <a
+                href="tel:+972508447575"
+                class="block text-white hover:text-orange-400 transition-colors"
+              >
+                טלפון: 050-844-7575
+              </a>
+              <a
+                href="mailto:melker694@gmail.com"
+                class="block text-white hover:text-orange-400 transition-colors"
+              >
+                אימייל: melker694@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <script>
-        // Mobile-specific scroll navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            const sectionsContainer = document.getElementById('sections-container');
-            const sections = document.querySelectorAll('.section');
-            const navDotsContainer = document.getElementById('nav-dots');
-            let currentIndex = 0;
-            let isScrolling = false;
-            const totalSections = sections.length;
-            
-            // Create navigation dots
-            for (let i = 0; i < totalSections; i++) {
-                const dot = document.createElement('button');
-                dot.setAttribute('aria-label', `Go to section ${i + 1}`);
-                dot.addEventListener('click', () => goToSection(i));
-                navDotsContainer.appendChild(dot);
+      // Mobile-specific scroll navigation
+      document.addEventListener("DOMContentLoaded", function () {
+        const sectionsContainer = document.getElementById("sections-container");
+        const sections = document.querySelectorAll(".section");
+        const navDotsContainer = document.getElementById("nav-dots");
+        let currentIndex = 0;
+        let isScrolling = false;
+        const totalSections = sections.length;
+
+        // Create navigation dots
+        for (let i = 0; i < totalSections; i++) {
+          const dot = document.createElement("button");
+          dot.setAttribute("aria-label", `Go to section ${i + 1}`);
+          dot.addEventListener("click", () => goToSection(i));
+          navDotsContainer.appendChild(dot);
+        }
+        const navDots = navDotsContainer.querySelectorAll("button");
+
+        // Update navigation dots
+        function updateNavDots() {
+          navDots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentIndex);
+          });
+        }
+
+        // Go to specific section
+        function goToSection(index) {
+          if (index < 0 || index >= totalSections || isScrolling) return;
+
+          isScrolling = true;
+          currentIndex = index;
+
+          const vh = window.innerHeight;
+          sectionsContainer.style.transform = `translateY(-${
+            currentIndex * vh
+          }px)`;
+          updateNavDots();
+
+          setTimeout(() => {
+            isScrolling = false;
+          }, 1000); // Prevent multiple rapid scrolls
+        }
+
+        // Touch handling for mobile - simplified approach from desktop version
+        let touchStartY = 0;
+        let touchEndY = 0;
+        let touchStartTime = 0;
+        let isTouching = false;
+
+        window.addEventListener(
+          "touchstart",
+          (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+            touchStartTime = Date.now();
+            isTouching = false;
+          },
+          { passive: true }
+        );
+
+        window.addEventListener(
+          "touchmove",
+          (e) => {
+            if (Math.abs(e.changedTouches[0].screenY - touchStartY) > 20) {
+              e.preventDefault();
             }
-            const navDots = navDotsContainer.querySelectorAll('button');
-            
-            // Update navigation dots
-            function updateNavDots() {
-                navDots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
-                });
-            }
-            
-            // Go to specific section
-            function goToSection(index) {
-                if (index < 0 || index >= totalSections || isScrolling) return;
-                
-                isScrolling = true;
-                currentIndex = index;
-                
-                const vh = window.innerHeight;
-                sectionsContainer.style.transform = `translateY(-${currentIndex * vh}px)`;
-                updateNavDots();
-                
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 1000); // Prevent multiple rapid scrolls
-            }
-            
-            // Touch handling for mobile - simplified approach from desktop version
-            let touchStartY = 0;
-            let touchEndY = 0;
-            let touchStartTime = 0;
-            let isTouching = false;
-            
-            window.addEventListener('touchstart', e => {
-                touchStartY = e.changedTouches[0].screenY;
-                touchStartTime = Date.now();
+          },
+          { passive: false }
+        );
+
+        window.addEventListener(
+          "touchend",
+          (e) => {
+            if (isTouching) return;
+
+            touchEndY = e.changedTouches[0].screenY;
+            const touchDiff = touchStartY - touchEndY;
+            const touchTime = Date.now() - touchStartTime;
+
+            const minSwipeDistance = 30;
+            const maxSwipeTime = 800;
+
+            if (
+              Math.abs(touchDiff) > minSwipeDistance &&
+              touchTime < maxSwipeTime
+            ) {
+              isTouching = true;
+              const direction = touchDiff > 0 ? 1 : -1;
+              goToSection(currentIndex + direction);
+
+              setTimeout(() => {
                 isTouching = false;
-            }, { passive: true });
-
-            window.addEventListener('touchmove', e => {
-                if (Math.abs(e.changedTouches[0].screenY - touchStartY) > 20) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-
-            window.addEventListener('touchend', e => {
-                if (isTouching) return;
-                
-                touchEndY = e.changedTouches[0].screenY;
-                const touchDiff = touchStartY - touchEndY;
-                const touchTime = Date.now() - touchStartTime;
-                
-                const minSwipeDistance = 30;
-                const maxSwipeTime = 800;
-                
-                if (Math.abs(touchDiff) > minSwipeDistance && touchTime < maxSwipeTime) {
-                    isTouching = true;
-                    const direction = touchDiff > 0 ? 1 : -1;
-                    goToSection(currentIndex + direction);
-                    
-                    setTimeout(() => { isTouching = false; }, 800);
-                }
-            }, { passive: true });
-            
-            // Wheel event - simplified approach from desktop version
-            window.addEventListener('wheel', event => {
-                event.preventDefault();
-                if (isScrolling) return;
-
-                if (Math.abs(event.deltaY) > 50) {
-                    isScrolling = true;
-                    const direction = event.deltaY > 0 ? 1 : -1;
-                    goToSection(currentIndex + direction);
-
-                    setTimeout(() => { isScrolling = false; }, 1500);
-                }
-            }, { passive: false });
-            
-            // Keyboard navigation
-            document.addEventListener('keydown', function(e) {
-                if (isScrolling) return;
-                
-                switch(e.key) {
-                    case 'ArrowDown':
-                    case ' ':
-                        e.preventDefault();
-                        if (currentIndex < totalSections - 1) {
-                            goToSection(currentIndex + 1);
-                        }
-                        break;
-                    case 'ArrowUp':
-                        e.preventDefault();
-                        if (currentIndex > 0) {
-                            goToSection(currentIndex - 1);
-                        }
-                        break;
-                    case 'Home':
-                        e.preventDefault();
-                        goToSection(0);
-                        break;
-                    case 'End':
-                        e.preventDefault();
-                        goToSection(totalSections - 1);
-                        break;
-                }
-            });
-            
-            // Initialize
-            updateNavDots();
-            
-            // Testimonials Carousel
-            const testimonialsTrack = document.getElementById('testimonials-track');
-            const testimonialsPrev = document.getElementById('testimonials-prev');
-            const testimonialsNext = document.getElementById('testimonials-next');
-            const testimonialsDotsContainer = document.getElementById('testimonials-dots');
-            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-            let currentTestimonial = 0;
-            
-            // Create testimonial dots
-            testimonialSlides.forEach((_, index) => {
-                const dot = document.createElement('button');
-                dot.classList.add('carousel-dot');
-                dot.addEventListener('click', () => showTestimonial(index));
-                testimonialsDotsContainer.appendChild(dot);
-            });
-            const testimonialDots = testimonialsDotsContainer.querySelectorAll('.carousel-dot');
-            
-            function showTestimonial(index) {
-                currentTestimonial = index;
-                const translateX = -index * 100;
-                testimonialsTrack.style.transform = `translateX(${translateX}%)`;
-                
-                testimonialDots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                });
+              }, 800);
             }
-            
-            testimonialsPrev.addEventListener('click', () => {
-                const newIndex = currentTestimonial > 0 ? currentTestimonial - 1 : testimonialSlides.length - 1;
-                showTestimonial(newIndex);
-            });
-            
-            testimonialsNext.addEventListener('click', () => {
-                const newIndex = currentTestimonial < testimonialSlides.length - 1 ? currentTestimonial + 1 : 0;
-                showTestimonial(newIndex);
-            });
-            
-            // Auto-advance testimonials
-            setInterval(() => {
-                const newIndex = currentTestimonial < testimonialSlides.length - 1 ? currentTestimonial + 1 : 0;
-                showTestimonial(newIndex);
-            }, 5000);
-            
-            // Initialize testimonials
-            showTestimonial(0);
-            
-            // Handle viewport changes
-            window.addEventListener('resize', () => {
-                const vh = window.innerHeight;
-                sectionsContainer.style.transform = `translateY(-${currentIndex * vh}px)`;
-            });
+          },
+          { passive: true }
+        );
+
+        // Wheel event - simplified approach from desktop version
+        window.addEventListener(
+          "wheel",
+          (event) => {
+            event.preventDefault();
+            if (isScrolling) return;
+
+            if (Math.abs(event.deltaY) > 50) {
+              isScrolling = true;
+              const direction = event.deltaY > 0 ? 1 : -1;
+              goToSection(currentIndex + direction);
+
+              setTimeout(() => {
+                isScrolling = false;
+              }, 1500);
+            }
+          },
+          { passive: false }
+        );
+
+        // Keyboard navigation
+        document.addEventListener("keydown", function (e) {
+          if (isScrolling) return;
+
+          switch (e.key) {
+            case "ArrowDown":
+            case " ":
+              e.preventDefault();
+              if (currentIndex < totalSections - 1) {
+                goToSection(currentIndex + 1);
+              }
+              break;
+            case "ArrowUp":
+              e.preventDefault();
+              if (currentIndex > 0) {
+                goToSection(currentIndex - 1);
+              }
+              break;
+            case "Home":
+              e.preventDefault();
+              goToSection(0);
+              break;
+            case "End":
+              e.preventDefault();
+              goToSection(totalSections - 1);
+              break;
+          }
         });
+
+        // Initialize
+        updateNavDots();
+
+        // Hero text slide-in animation after 3.5 seconds - each row individually
+        setTimeout(() => {
+          const textRows = document.querySelectorAll(".hero-text-row");
+          const subtitle = document.querySelector(".hero-subtitle");
+          const cta = document.querySelector(".hero-cta");
+          const heroOverlay = document.querySelector(".hero-section .overlay");
+
+          // Lighten the overlay
+          if (heroOverlay) {
+            heroOverlay.classList.add("lighter");
+          }
+
+          // Animate each text row with staggered timing
+          textRows.forEach((row, index) => {
+            setTimeout(() => {
+              row.classList.add("slide-in");
+            }, index * 200); // 200ms delay between each row
+          });
+
+          // Animate subtitle after all text rows
+          if (subtitle) {
+            setTimeout(() => {
+              subtitle.classList.add("slide-in");
+            }, textRows.length * 200 + 300);
+          }
+
+          // Animate CTA button last
+          if (cta) {
+            setTimeout(() => {
+              cta.classList.add("slide-in");
+            }, textRows.length * 200 + 600);
+          }
+        }, 4200);
+
+        // Testimonials Carousel
+        const testimonialsTrack = document.getElementById("testimonials-track");
+        const testimonialsPrev = document.getElementById("testimonials-prev");
+        const testimonialsNext = document.getElementById("testimonials-next");
+        const testimonialsDotsContainer =
+          document.getElementById("testimonials-dots");
+        const testimonialSlides =
+          document.querySelectorAll(".testimonial-slide");
+        let currentTestimonial = 0;
+
+        // Create testimonial dots
+        testimonialSlides.forEach((_, index) => {
+          const dot = document.createElement("button");
+          dot.classList.add("carousel-dot");
+          dot.addEventListener("click", () => showTestimonial(index));
+          testimonialsDotsContainer.appendChild(dot);
+        });
+        const testimonialDots =
+          testimonialsDotsContainer.querySelectorAll(".carousel-dot");
+
+        function showTestimonial(index) {
+          currentTestimonial = index;
+          const translateX = -index * 100;
+          testimonialsTrack.style.transform = `translateX(${translateX}%)`;
+
+          testimonialDots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === index);
+          });
+        }
+
+        testimonialsPrev.addEventListener("click", () => {
+          const newIndex =
+            currentTestimonial > 0
+              ? currentTestimonial - 1
+              : testimonialSlides.length - 1;
+          showTestimonial(newIndex);
+        });
+
+        testimonialsNext.addEventListener("click", () => {
+          const newIndex =
+            currentTestimonial < testimonialSlides.length - 1
+              ? currentTestimonial + 1
+              : 0;
+          showTestimonial(newIndex);
+        });
+
+        // Auto-advance testimonials
+        setInterval(() => {
+          const newIndex =
+            currentTestimonial < testimonialSlides.length - 1
+              ? currentTestimonial + 1
+              : 0;
+          showTestimonial(newIndex);
+        }, 5000);
+
+        // Initialize testimonials
+        showTestimonial(0);
+
+        // Handle viewport changes
+        window.addEventListener("resize", () => {
+          const vh = window.innerHeight;
+          sectionsContainer.style.transform = `translateY(-${
+            currentIndex * vh
+          }px)`;
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
