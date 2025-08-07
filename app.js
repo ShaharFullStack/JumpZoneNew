@@ -402,7 +402,7 @@ function setupPricingVideo(isMobileDevice) {
         mobileVideo.className = 'pricing-mobile-video absolute inset-0 w-full h-full object-cover';
         
         const mobileSource = document.createElement('source');
-        mobileSource.src = './assets/SwitchLogo.mp4';
+        mobileSource.src = './assets/Switch9_16.mp4';
         mobileSource.type = 'video/mp4';
         
         mobileVideo.appendChild(mobileSource);
@@ -417,7 +417,7 @@ function setupPricingVideo(isMobileDevice) {
         desktopVideo.className = 'pricing-desktop-video';
         
         const desktopSource = document.createElement('source');
-        desktopSource.src = './assets/SwitchLogo.mp4';
+        desktopSource.src = './assets/Switch9_16.mp4';
         desktopSource.type = 'video/mp4';
         
         desktopVideo.appendChild(desktopSource);
