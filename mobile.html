@@ -60,19 +60,32 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
     <script>
-      // Suppress Tailwind development warning
-      if (typeof console !== "undefined" && console.warn) {
+      // Suppress Tailwind development warnings and other console noise
+      if (typeof console !== "undefined") {
         const originalWarn = console.warn;
+        const originalError = console.error;
+        const originalLog = console.log;
+        
         console.warn = function (...args) {
           if (
             args[0] &&
-            args[0].includes(
-              "cdn.tailwindcss.com should not be used in production"
-            )
+            (args[0].includes("cdn.tailwindcss.com should not be used in production") ||
+             args[0].includes("tailwindcss"))
           ) {
             return;
           }
           originalWarn.apply(console, args);
+        };
+        
+        console.error = function (...args) {
+          if (
+            args[0] &&
+            (args[0].includes("iframe which has both allow-scripts") ||
+             args[0].includes("sandbox attribute"))
+          ) {
+            return;
+          }
+          originalError.apply(console, args);
         };
       }
     </script>
@@ -127,13 +140,13 @@
       /* Navigation dots */
       #nav-dots {
         position: fixed;
-        right: 20px;
+        right: 2px;
         top: 50%;
         transform: translateY(-50%);
         z-index: 1000;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 15px;
       }
 
       #nav-dots button {
@@ -141,7 +154,7 @@
         height: 12px;
         border-radius: 50%;
         border: 2px solid rgba(255, 255, 255, 0.5);
-        background: transparent;
+        background: #ff613558;
         cursor: pointer;
         transition: all 0.3s ease;
       }
@@ -189,8 +202,13 @@
       /* Mobile-specific styles */
       .mobile-content {
         padding: 20px;
-        max-width: 350px;
+        width: 100%;
+        height: auto;
+        max-width: 450px;
+        max-height: 600px;
         z-index: 10;
+        box-sizing: border-box;
+        margin: 0 auto;
       }
 
       .hero-image {
@@ -200,6 +218,13 @@
         margin-bottom: 20px;
         border: 3px solid transparent;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-text-row {
+        right: 25px;
+        display: flex;
+        text-align: right;
+        flex-direction: column;
       }
 
       .cta-button {
@@ -223,42 +248,88 @@
       }
 
       /* Testimonials carousel */
+      .testimonials-overlay {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        transition: background 0.8s ease-out;
+      }
       .testimonials-carousel {
         position: relative;
-        width: 100%;
-        max-width: 350px;
-        overflow: hidden;
+        width: 95%;
+        right: 15px;
+        max-width: 330px;
+        overflow: visible;
+        z-index: 20; /* Ensure it's above other elements */
+      }
+      .testimonials-carousel {
+        position: relative;
+        right: 35px;
+        text-align: center !important;
+        font-size: 1.5rem;
+        color: #ff6135;
+        z-index: 15;
       }
 
       .testimonials-track {
         display: flex;
         transition: transform 0.5s ease;
+        width: 500%; /* 5 slides * 100% each */
+        height: auto;
+        align-items: center;
+        justify-content: center;
       }
 
       .testimonial-slide {
-        min-width: 100%;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.1);
+        min-width: 20%; /* 100% / 5 slides = 20% each */
+        max-width: 20%;
+        flex-shrink: 0;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.1rem;
+        background: rgba(225, 145, 76, 0.1);
         backdrop-filter: blur(10px);
         border-radius: 15px;
-        margin: 0 10px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 0;
+        border: 1px solid rgba(203, 132, 51, 0.555);
+      }
+
+      .testimonial-slide img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 15px;
+        z-index: 15;
+        padding: 0.1rem;
+        margin: 0.15rem;
+        background: rgba(0, 0, 0, 0.1);
+        max-height: 500px;
       }
 
       .testimonial-avatar {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        margin: 0 auto 15px;
-        border: 2px solid #ff6135;
+        width: 100% !important;
+        height: auto !important;
+        max-height: 500px !important;
+        top: 0;
+        border-radius: 15px !important;
+        margin: 0 auto !important;
+        border: none !important;
+        object-fit: cover;
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: #000 0px 10px 20px rgba(0, 0, 0, 0.9);
+        z-index: 9;
       }
 
       /* Carousel navigation */
       .carousel-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.2);
+        position: relative;
+        top: auto;
+        transform: none;
+        background: rgba(234, 126, 48, 0.448);
         border: none;
         width: 40px;
         height: 40px;
@@ -269,20 +340,31 @@
         align-items: center;
         justify-content: center;
         backdrop-filter: blur(10px);
+        z-index: 25;
       }
 
       .carousel-nav-prev {
-        left: -20px;
+        order: 1;
       }
       .carousel-nav-next {
-        right: -20px;
+        order: 3;
+      }
+
+      .carousel-nav-container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
       }
 
       .carousel-dots {
         display: flex;
         justify-content: center;
         gap: 8px;
-        margin-top: 20px;
+        order: 2;
+        flex: 1;
       }
 
       .carousel-dot {
@@ -424,6 +506,71 @@
           padding: 15px;
           max-width: 320px;
         }
+
+        .contact-form {
+          padding: 0 5px;
+          max-width: 100%;
+        }
+
+        .form-group input,
+        .form-group textarea {
+          padding: 12px;
+          font-size: 16px;
+          border-radius: 8px;
+        }
+
+        .contact-alternatives a {
+          font-size: 0.95rem;
+          padding: 10px;
+          margin-bottom: 0.8rem;
+        }
+
+        .mobile-title {
+          font-size: 1.8rem;
+          margin-bottom: 20px;
+        }
+
+        .mobile-subtitle {
+          font-size: 1.2rem;
+          margin-bottom: 12px;
+        }
+      }
+
+      /* Extra small mobile devices */
+      @media (max-width: 320px) {
+        .mobile-content {
+          padding: 10px;
+          max-width: 300px;
+        }
+
+        .contact-form {
+          padding: 0 2px;
+        }
+
+        .form-group {
+          margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+          padding: 10px;
+          font-size: 16px;
+        }
+
+        .contact-alternatives a {
+          font-size: 0.9rem;
+          padding: 8px;
+        }
+
+        .mobile-title {
+          font-size: 1.6rem;
+          margin-bottom: 15px;
+        }
+
+        .cta-button {
+          padding: 12px 20px;
+          font-size: 1rem;
+        }
       }
 
       /* Contact form */
@@ -431,12 +578,14 @@
         width: 100%;
         max-width: 100%;
         padding: 0 10px;
+        box-sizing: border-box;
       }
 
       .form-group {
         margin-bottom: 20px;
         text-align: right;
         width: 100%;
+        box-sizing: border-box;
       }
 
       .form-group input,
@@ -452,6 +601,16 @@
         backdrop-filter: blur(10px);
         box-sizing: border-box;
         font-size: 16px; /* Prevents zoom on iOS */
+        resize: vertical;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: #ff6135;
+        background: rgba(255, 97, 53, 0.1);
+        box-shadow: 0 0 10px rgba(255, 97, 53, 0.2);
       }
 
       .form-group input::placeholder,
@@ -462,6 +621,7 @@
       .contact-alternatives {
         margin-top: 2rem;
         width: 100%;
+        box-sizing: border-box;
       }
 
       .contact-alternatives a {
@@ -475,11 +635,16 @@
         color: white;
         font-size: 1.1rem;
         transition: all 0.3s ease;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
-      .contact-alternatives a:hover {
-        background: rgba(255, 255, 255, 0.2);
+      .contact-alternatives a:hover,
+      .contact-alternatives a:active {
+        background: rgba(255, 97, 53, 0.2);
         transform: translateY(-2px);
+        border-color: #ff6135;
       }
 
       /* Responsive text sizes */
@@ -563,7 +728,7 @@
       .philosophy-container {
         position: relative;
         width: 100vw;
-        height: 100vh;
+        height: 90vh;
       }
 
       .philosophy-image {
@@ -624,7 +789,7 @@
       .final-cta-image {
         position: absolute;
         left: 50%;
-        top: 62%;
+        top: 55%;
         transform: translate(-50%, -50%) scale(0);
         width: 600px;
         height: auto;
@@ -640,7 +805,7 @@
 
       .final-cta-text {
         position: absolute;
-        top: 50%;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%) translateY(30px);
         z-index: 2;
@@ -649,22 +814,28 @@
         background: rgba(0, 0, 0, 0.7);
         backdrop-filter: blur(15px);
         border-radius: 20px;
-        padding: 30px;
-        max-width: 90vw;
-        width: 100%;
+        padding: 20px;
+        max-width: 95vw;
+        max-height: 85vh;
+        width: auto;
+        height: auto;
         text-align: center;
+        overflow-y: auto;
+        box-sizing: border-box;
       }
 
       .final-cta-text.slide-in {
         opacity: 1;
         transform: translate(-50%, -50%) translateY(0);
+        width: 100%;
+        height: auto;
       }
     </style>
   </head>
 
   <body>
     <!-- Navigation Dots -->
-    <div id="nav-dots"></div>
+    <div id="nav-dots" class="bg-black/20 p-2 rounded-xl backdrop-blur-md"></div>
 
     <!-- Sections Container -->
     <div id="sections-container">
@@ -679,7 +850,6 @@
           <div class="hero-container">
             <div class="mobile-title hero-text-row text-orange-600">
               <h1>קפיצתי אומנותי</h1>
-              <hr />
             </div>
             <h1 class="mobile-title">
               <div class="hero-text-row">הכוח בקצב</div>
@@ -694,7 +864,7 @@
 
       <!-- Why Us Section -->
       <section id="why-us" class="section why-us-section relative text-white">
-        <video autoplay loop muted playsinline class="video-bg">
+        <video autoplay loop muted playsinline class="video-bg" loading="lazy">
           <source src="./assets/Boxing-mobile.mp4" type="video/mp4" />
         </video>
         <div class="overlay"></div>
@@ -732,31 +902,35 @@
       </section>
 
       <!-- Philosophy Section -->
-      <section id="philosophy" class="section philosophy-section relative text-white">
+      <section
+        id="philosophy"
+        class="section philosophy-section relative text-white"
+      >
         <div
           class="absolute inset-0 bg-cover bg-center bg-black/60"
           style="background-image: url('./assets/philosophy-mobile-bg.PNG')"
         ></div>
         <div class="mobile-content">
           <div class="philosophy-container">
-            <img 
-              src="./assets/NatiBWTransp.png" 
-              alt="נתנאל מלקר" 
+            <img
+              src="./assets/NatiBWTransp.png"
+              alt="נתנאל מלקר"
               class="philosophy-image"
+              loading="lazy"
             />
             <div class="philosophy-text">
-              <h2 class="mobile-title">פילוסופיית הקפיצה: החיים דרך חבל אחד</h2>
+              <h2 class="mobile-title text-orange-500">פילוסופיית הקפיצה: החיים דרך חבל אחד</h2>
               <p class="mobile-text mb-6">
-                קפיצה בחבל היא השתקפות של החיים עצמם. כל קפיצה היא בחירה: לבחור לנוע
-                גם כשכואב. לטעות, להסתבך, ואז לחזור לקצב. להתאזן, לנשום, לקפוץ שוב
-                גם אחרי נפילה.
+                קפיצה בחבל היא השתקפות של החיים עצמם. כל קפיצה היא בחירה: לבחור
+                לנוע גם כשכואב. לטעות, להסתבך, ואז לחזור לקצב. להתאזן, לנשום,
+                לקפוץ שוב גם אחרי נפילה.
               </p>
               <p class="mobile-text">
-                החבל הזה לימד אותי שאם אני יכול לשלוט בתנועה אני יכול לשלוט בסיפור
-                שלי. שאם אני מצליח לסנכרן בין נשימה, קצב ותודעה אני יכול לנצח גם את
-                הפחדים הכי עמוקים שלי. זו לא רק שיטה לשיפור כושר זו דרך להתחבר
-                לעצמך. דרך לפרוץ גבולות פנימיים, לשחרר מתחים, לבנות חוסן מנטלי
-                ולהיזכר בכוח שיש בך.
+                החבל הזה לימד אותי שאם אני יכול לשלוט בתנועה אני יכול לשלוט
+                בסיפור שלי. שאם אני מצליח לסנכרן בין נשימה, קצב ותודעה אני יכול
+                לנצח גם את הפחדים הכי עמוקים שלי. <strong class="mobile-text text-orange-500 shadow-md">זו לא רק שיטה לשיפור כושר זו
+                דרך להתחבר לעצמך.</strong> דרך לפרוץ גבולות פנימיים, לשחרר מתחים, לבנות
+                חוסן מנטלי ולהיזכר בכוח שיש בך.
               </p>
               <a href="#contact" class="cta-button mt-8"> לפרטים נוספים </a>
             </div>
@@ -764,44 +938,58 @@
         </div>
       </section>
 
-
       <!-- Testimonials Section -->
       <section id="testimonials" class="section relative text-white">
-        <div
-          class="absolute inset-0 bg-cover bg-center"
-          style="background-image: url('./assets/testimonials-mobile.JPG')"
-        ></div>
-        <div class="overlay"></div>
-        <div class="mobile-content">
-          <h2 class="mobile-title mb-8">מה אומרים הלקוחות</h2>
-          <div class="testimonials-carousel">
+        <video autoplay muted playsinline class="video-bg" loading="lazy">
+          <source src="./assets/Wall.mp4" type="video/mp4" />
+        </video>
+
+        <div class="testimonials-overlay"></div>
+        
+        <!-- Logo positioned above the carousel -->
+        <div class="absolute z-1 testimonial-avatar">
+          <img
+            src="./assets/logo1.png"
+            alt="נתנאל מלקר"
+            loading="lazy"
+          />
+        </div>
+        <div class="mobile-content bg-black/30 backdrop-blur-sm p-0 rounded-lg shadow-lg z-1">
+          <h1 class="mobile-title shadow-md text-orange-500 text-center">
+            קופצים ממליצים
+          </h1>
+          <div class="testimonials-carousel p-2">
             <div class="testimonials-track" id="testimonials-track">
               <div class="testimonial-slide">
                 <img
                   src="./assets/testimonials1.jpeg"
                   alt="המלצה 1"
                   class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                  loading="lazy"
                 />
               </div>
               <div class="testimonial-slide">
                 <img
-                  src="./assets/testimonials2.PNG"
+                  src="./assets/poster2.jpg"
                   alt="המלצה 2"
                   class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                  loading="lazy"
                 />
               </div>
               <div class="testimonial-slide">
                 <img
-                  src="./assets/testimonials3.PNG"
+                  src="./assets/poster3.jpg"
                   alt="המלצה 3"
                   class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                  loading="lazy"
                 />
               </div>
               <div class="testimonial-slide">
                 <img
-                  src="./assets/testimonials4.PNG"
+                  src="./assets/poster1.jpg"
                   alt="המלצה 4"
                   class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                  loading="lazy"
                 />
               </div>
               <div class="testimonial-slide">
@@ -809,22 +997,25 @@
                   src="./assets/testimonials5.PNG"
                   alt="המלצה 5"
                   class="testimonial-avatar w-full max-w-sm mx-auto rounded-lg shadow-lg"
+                  loading="lazy"
                 />
               </div>
             </div>
-            <button
-              class="carousel-nav carousel-nav-prev"
-              id="testimonials-prev"
-            >
-              ‹
-            </button>
-            <button
-              class="carousel-nav carousel-nav-next"
-              id="testimonials-next"
-            >
-              ›
-            </button>
-            <div class="carousel-dots" id="testimonials-dots"></div>
+            <div class="carousel-nav-container">
+              <button
+                class="carousel-nav carousel-nav-prev"
+                id="testimonials-prev"
+              >
+                ‹
+              </button>
+              <div class="carousel-dots" id="testimonials-dots"></div>
+              <button
+                class="carousel-nav carousel-nav-next"
+                id="testimonials-next"
+              >
+                ›
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -837,7 +1028,7 @@
         ></div>
         <div class="overlay"></div>
         <div class="mobile-content">
-          <h2 class="mobile-title mb-6">מחירון Jump Zone</h2>
+          <h2 class="mobile-title mb-6 text-orange-500 text-center">מחירון Jump Zone</h2>
           <div class="overflow-x-auto w-full">
             <table
               class="w-full text-center bg-gray-900 bg-opacity-90 rounded-lg shadow-lg"
@@ -882,38 +1073,43 @@
       </section>
 
       <!-- Final CTA Section -->
-      <section id="final-cta" class="section final-cta-section relative text-white">
-        <video autoplay muted playsinline class="video-bg">
+      <section
+        id="final-cta"
+        class="section final-cta-section relative text-white"
+      >
+        <video autoplay muted playsinline class="video-bg" loading="lazy">
           <source src="./assets/servicesBG-mobile.mp4" type="video/mp4" />
         </video>
         <div class="overlay"></div>
         <div class="mobile-content">
           <div class="final-cta-container">
-            <img 
-              src="./assets/BeachTransp.png" 
-              alt="נתנאל מלקר" 
+            <img
+              src="./assets/BeachTransp.png"
+              alt="נתנאל מלקר"
               class="final-cta-image"
+              loading="lazy"
             />
             <div class="final-cta-text">
               <h2 class="mobile-title">שובר חומות בקפיצה.</h2>
               <p class="mobile-text mb-4">
-                אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת, חבל
-                קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו.  אסבלתי מגלאוקומה, כאבים קשים, דיכאונות וחרדות, איבדתי
-                את הראייה בעין שמאל – אבל מה שכאב יותר היה לאבד את הזהות שלי, את
-                האנרגיה, את הביטחון. את עצמי.
+                אני המאמן היחיד בארץ (ואולי בעולם) שבנה את חייו מחדש עם עין אחת,
+                חבל קפיצה אחד ולב ענק. בשנת 2018 חיי נעצרו. אסבלתי מגלאוקומה,
+                כאבים קשים, דיכאונות וחרדות, איבדתי את הראייה בעין שמאל – אבל מה
+                שכאב יותר היה לאבד את הזהות שלי, את האנרגיה, את הביטחון. את
+                עצמי.
               </p>
               <p class="mobile-text mb-8">
-                הייתי במקום חשוך. מנותק מהעולם. עם חרדה חברתית, פחדים, ואפס תקווה.
-                אבל דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה. הוא לא היה
-                רק כלי לאימון. הוא היה קצב. עוגן. דרך לנשום מחדש. דרכו בניתי את עצמי
-                מהיסוד – גוף, נפש ולב.
+                הייתי במקום חשוך. מנותק מהעולם. עם חרדה חברתית, פחדים, ואפס
+                תקווה. אבל דווקא שם, ברגע הכי נמוך, גיליתי משהו פשוט: חבל קפיצה.
+                הוא לא היה רק כלי לאימון. הוא היה קצב. עוגן. דרך לנשום מחדש.
+                דרכו בניתי את עצמי מהיסוד – גוף, נפש ולב.
               </p>
               <a
                 href="https://wa.me/972508447575?text=אני%20מוכן%20לקפוץ!%20קובעים%20אימון%20ניסיון?"
                 class="cta-button text-center mb-4 block"
               >
-              אני רוצה אימון!
-            </a>
+                אני רוצה אימון!
+              </a>
               <p class="mobile-text text-sm opacity-75">
                 050-844-7575 | melker694@gmail.com
               </p>
@@ -928,14 +1124,14 @@
           class="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"
         ></div>
         <div class="mobile-content">
-          <h2 class="mobile-title mb-8">צור קשר</h2>
+          <h2 class="mobile-title mb-8 text-center">צור קשר</h2>
           <form
             class="contact-form"
             action="https://formspree.io/f/mqaldzwl"
             method="POST"
           >
             <div class="form-group">
-              <input type="text" name="name" placeholder="שם מלא" required />
+              <input type="text" name="name" placeholder="שם מלא" required autocomplete="name" />
             </div>
             <div class="form-group">
               <input
@@ -943,16 +1139,19 @@
                 name="phone"
                 placeholder="מספר טלפון"
                 required
+                autocomplete="tel"
+                dir="ltr"
               />
             </div>
             <div class="form-group">
-              <input type="email" name="email" placeholder="אימייל" required />
+              <input type="email" name="email" placeholder="אימייל" required autocomplete="email" dir="ltr" />
             </div>
             <div class="form-group">
               <textarea
                 name="message"
                 rows="4"
                 placeholder="הודעה (אופציונלי)"
+                autocomplete="off"
               ></textarea>
             </div>
             <button type="submit" class="cta-button w-full">שלח הודעה</button>
@@ -960,13 +1159,13 @@
 
           <div class="contact-alternatives">
             <h3 class="mobile-subtitle mb-4 text-center">או צור קשר ישירות:</h3>
-            <a href="https://wa.me/972508447575">
-              📱 WhatsApp: 050-844-7575
+            <a href="https://wa.me/972508447575?text=שלום,%20אני%20רוצה%20לשמוע%20עוד%20פרטים%20על%20Jump%20Zone" target="_blank" rel="noopener"> 
+              📱 WhatsApp: 050-844-7575 
             </a>
-            <a href="tel:+972508447575">
-              📞 טלפון: 050-844-7575
+            <a href="tel:+972508447575"> 
+              📞 טלפון: 050-844-7575 
             </a>
-            <a href="mailto:melker694@gmail.com">
+            <a href="mailto:melker694@gmail.com?subject=פניה%20מאתר%20Jump%20Zone" target="_blank" rel="noopener">
               ✉️ אימייל: melker694@gmail.com
             </a>
           </div>
@@ -1004,35 +1203,56 @@
         function resetSectionAnimations(sectionIndex) {
           // Reset hero animations
           if (sectionIndex === 0) {
-            document.querySelectorAll('.hero-text-row').forEach(row => {
-              row.classList.remove('slide-in');
+            document.querySelectorAll(".hero-text-row").forEach((row) => {
+              row.classList.remove("slide-in");
             });
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-            const heroCta = document.querySelector('.hero-cta');
-            if (heroSubtitle) heroSubtitle.classList.remove('slide-in');
-            if (heroCta) heroCta.classList.remove('slide-in');
+            const heroSubtitle = document.querySelector(".hero-subtitle");
+            const heroCta = document.querySelector(".hero-cta");
+            if (heroSubtitle) heroSubtitle.classList.remove("slide-in");
+            if (heroCta) heroCta.classList.remove("slide-in");
           }
-          
+
           // Reset why-us animations
           if (sectionIndex === 1) {
-            const whyUsContent = document.querySelector('.why-us-section .mobile-content');
-            if (whyUsContent) whyUsContent.classList.remove('slide-in');
+            const whyUsContent = document.querySelector(
+              ".why-us-section .mobile-content"
+            );
+            if (whyUsContent) whyUsContent.classList.remove("slide-in");
           }
-          
+
           // Reset philosophy animations
           if (sectionIndex === 2) {
-            const philosophyImage = document.querySelector('.philosophy-image');
-            const philosophyText = document.querySelector('.philosophy-text');
-            if (philosophyImage) philosophyImage.classList.remove('slide-in');
-            if (philosophyText) philosophyText.classList.remove('slide-in');
+            const philosophyImage = document.querySelector(".philosophy-image");
+            const philosophyText = document.querySelector(".philosophy-text");
+            if (philosophyImage) philosophyImage.classList.remove("slide-in");
+            if (philosophyText) philosophyText.classList.remove("slide-in");
           }
-          
+
           // Reset final CTA animations
           if (sectionIndex === 5) {
-            const finalCtaImage = document.querySelector('.final-cta-image');
-            const finalCtaText = document.querySelector('.final-cta-text');
-            if (finalCtaImage) finalCtaImage.classList.remove('slide-in');
-            if (finalCtaText) finalCtaText.classList.remove('slide-in');
+            const finalCtaImage = document.querySelector(".final-cta-image");
+            const finalCtaText = document.querySelector(".final-cta-text");
+            if (finalCtaImage) finalCtaImage.classList.remove("slide-in");
+            if (finalCtaText) finalCtaText.classList.remove("slide-in");
+          }
+        }
+
+        // Show hero text when returning to hero section
+        function showHeroText() {
+          const textRows = document.querySelectorAll(".hero-text-row");
+          const subtitle = document.querySelector(".hero-subtitle");
+          const cta = document.querySelector(".hero-cta");
+          
+          textRows.forEach((row) => {
+            row.classList.add("slide-in");
+          });
+          
+          if (subtitle) {
+            subtitle.classList.add("slide-in");
+          }
+          
+          if (cta) {
+            cta.classList.add("slide-in");
           }
         }
 
@@ -1055,17 +1275,28 @@
           }px)`;
           updateNavDots();
 
+          // Show hero text when returning to hero section (index 0)
+          if (index === 0) {
+            setTimeout(() => {
+              showHeroText();
+            }, 300); // Small delay to ensure the transition is complete
+          }
+
           // Trigger why-us animation when scrolling to section index 1 (why-us)
           if (index === 1) {
             setTimeout(() => {
-              const whyUsContent = document.querySelector('.why-us-section .mobile-content');
-              const whyUsOverlay = document.querySelector('.why-us-section .overlay');
-              
+              const whyUsContent = document.querySelector(
+                ".why-us-section .mobile-content"
+              );
+              const whyUsOverlay = document.querySelector(
+                ".why-us-section .overlay"
+              );
+
               if (whyUsContent) {
-                whyUsContent.classList.add('slide-in');
+                whyUsContent.classList.add("slide-in");
               }
               if (whyUsOverlay) {
-                whyUsOverlay.classList.add('lighter');
+                whyUsOverlay.classList.add("lighter");
               }
             }, 1500); // 1 second delay
           }
@@ -1073,14 +1304,15 @@
           // Trigger philosophy animation when scrolling to section index 2 (philosophy)
           if (index === 2) {
             setTimeout(() => {
-              const philosophyImage = document.querySelector('.philosophy-image');
-              const philosophyText = document.querySelector('.philosophy-text');
-              
+              const philosophyImage =
+                document.querySelector(".philosophy-image");
+              const philosophyText = document.querySelector(".philosophy-text");
+
               if (philosophyImage) {
-                philosophyImage.classList.add('slide-in');
+                philosophyImage.classList.add("slide-in");
               }
               if (philosophyText) {
-                philosophyText.classList.add('slide-in');
+                philosophyText.classList.add("slide-in");
               }
             }, 500); // 0.5 second delay
           }
@@ -1089,28 +1321,42 @@
           if (index === 5) {
             // Start image animation immediately (has 1s CSS delay)
             setTimeout(() => {
-              const finalCtaImage = document.querySelector('.final-cta-image');
+              const finalCtaImage = document.querySelector(".final-cta-image");
               if (finalCtaImage) {
-                finalCtaImage.classList.add('slide-in');
+                finalCtaImage.classList.add("slide-in");
               }
             }, 200); // 0.2 second delay for image trigger
-            
+
             // Start text animation after image completes (1s CSS delay + 1.2s animation + 2.5s gap)
             setTimeout(() => {
-              const finalCtaText = document.querySelector('.final-cta-text');
+              const finalCtaText = document.querySelector(".final-cta-text");
               if (finalCtaText) {
-                finalCtaText.classList.add('slide-in');
+                finalCtaText.classList.add("slide-in");
               }
             }, 1600); // Total: 0.2 + 1 + 1.2 + 2.5 = 4.9 seconds
+          }
+
+          // Start testimonials autoplay when reaching testimonials section (index 3)
+          if (index === 3) {
+            if (typeof startTestimonialAutoplay === 'function') {
+              startTestimonialAutoplay();
+            }
+          } else {
+            // Stop testimonials autoplay when leaving testimonials section
+            if (typeof stopTestimonialAutoplay === 'function') {
+              stopTestimonialAutoplay();
+            }
           }
 
           // Restart videos for all sections except hero (index 0)
           if (index > 0) {
             const currentSection = sections[index];
-            const video = currentSection.querySelector('video');
+            const video = currentSection.querySelector("video");
             if (video) {
               video.currentTime = 0;
-              video.play().catch(e => console.log('Video play failed:', e));
+              video.play().catch(() => {
+                // Silently handle video play errors
+              });
             }
           }
 
@@ -1226,18 +1472,19 @@
         updateNavDots();
 
         // Handle internal navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-          link.addEventListener('click', function(e) {
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+          link.addEventListener("click", function (e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            
+            const targetId = this.getAttribute("href").substring(1);
+
             // Find which section contains the target element
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
-              const sectionIndex = Array.from(sections).findIndex(section => 
-                section.contains(targetElement) || section.id === targetId
+              const sectionIndex = Array.from(sections).findIndex(
+                (section) =>
+                  section.contains(targetElement) || section.id === targetId
               );
-              
+
               if (sectionIndex !== -1) {
                 goToSection(sectionIndex);
               }
@@ -1288,54 +1535,69 @@
         const testimonialSlides =
           document.querySelectorAll(".testimonial-slide");
         let currentTestimonial = 0;
+        let testimonialInterval = null;
 
-        // Create testimonial dots
-        testimonialSlides.forEach((_, index) => {
-          const dot = document.createElement("button");
-          dot.classList.add("carousel-dot");
-          dot.addEventListener("click", () => showTestimonial(index));
-          testimonialsDotsContainer.appendChild(dot);
-        });
-        const testimonialDots =
-          testimonialsDotsContainer.querySelectorAll(".carousel-dot");
+        // Only proceed if all elements are found
+        if (testimonialsTrack && testimonialsPrev && testimonialsNext && testimonialsDotsContainer && testimonialSlides.length > 0) {
 
-        function showTestimonial(index) {
-          currentTestimonial = index;
-          const translateX = -index * 100;
-          testimonialsTrack.style.transform = `translateX(${translateX}%)`;
-
-          testimonialDots.forEach((dot, i) => {
-            dot.classList.toggle("active", i === index);
+          // Create testimonial dots
+          testimonialSlides.forEach((_, index) => {
+            const dot = document.createElement("button");
+            dot.classList.add("carousel-dot");
+            dot.addEventListener("click", () => showTestimonial(index));
+            testimonialsDotsContainer.appendChild(dot);
           });
+          const testimonialDots =
+            testimonialsDotsContainer.querySelectorAll(".carousel-dot");
+
+          function showTestimonial(index) {
+            currentTestimonial = index;
+            const translateX = index * 20;
+            testimonialsTrack.style.transform = `translateX(${translateX}%)`;
+
+            testimonialDots.forEach((dot, i) => {
+              dot.classList.toggle("active", i === index);
+            });
+          }
+
+          function startTestimonialAutoplay() {
+            if (testimonialInterval) return; // Already running
+            testimonialInterval = setInterval(() => {
+              const newIndex =
+                currentTestimonial < testimonialSlides.length - 1
+                  ? currentTestimonial + 1
+                  : 0;
+              showTestimonial(newIndex);
+            }, 4000);
+          }
+
+          function stopTestimonialAutoplay() {
+            if (testimonialInterval) {
+              clearInterval(testimonialInterval);
+              testimonialInterval = null;
+            }
+          }
+
+          testimonialsPrev.addEventListener("click", () => {
+            const newIndex =
+              currentTestimonial > 0
+                ? currentTestimonial - 1
+                : testimonialSlides.length - 1;
+            showTestimonial(newIndex);
+          });
+
+          testimonialsNext.addEventListener("click", () => {
+            const newIndex =
+              currentTestimonial < testimonialSlides.length - 1
+                ? currentTestimonial + 1
+                : 0;
+            showTestimonial(newIndex);
+          });
+
+          // Initialize testimonials
+          showTestimonial(0);
+
         }
-
-        testimonialsPrev.addEventListener("click", () => {
-          const newIndex =
-            currentTestimonial > 0
-              ? currentTestimonial - 1
-              : testimonialSlides.length - 1;
-          showTestimonial(newIndex);
-        });
-
-        testimonialsNext.addEventListener("click", () => {
-          const newIndex =
-            currentTestimonial < testimonialSlides.length - 1
-              ? currentTestimonial + 1
-              : 0;
-          showTestimonial(newIndex);
-        });
-
-        // Auto-advance testimonials
-        setInterval(() => {
-          const newIndex =
-            currentTestimonial < testimonialSlides.length - 1
-              ? currentTestimonial + 1
-              : 0;
-          showTestimonial(newIndex);
-        }, 5000);
-
-        // Initialize testimonials
-        showTestimonial(0);
 
         // Handle viewport changes
         window.addEventListener("resize", () => {
