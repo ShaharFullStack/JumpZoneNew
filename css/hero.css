@@ -385,6 +385,154 @@
         transform: translateY(-10px);
     }
 }
+/* Macbook Air landscape layout optimization */
+@media (min-width: 769px) and (orientation: landscape) {
+
+    .hero-video-container {
+        width: 30%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-video-container .hero-desktop-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* Right side: Background image with content - takes more space */
+    .hero-content-container {
+        width: 70%;
+        height: 100%;
+        position: relative;
+        background-image: url('../assets/herobg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
+        text-align: center;
+        position: relative;
+        z-index: var(--z-30);
+        padding: 2rem;
+    }
+
+    /* Desktop sliding images - positioned within the right side content area */
+    .hero-content .order-2 {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    /* Desktop sliding images positioning */
+    .hero-content .order-2 img:first-child {
+        position: absolute;
+        left: -20%;
+        bottom: 0;
+        transform: translateX(-100%);
+        height: 85%;
+        width: auto;
+        object-fit: contain;
+        opacity: 0;
+        transition: all 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .hero-content .order-2 img:last-child {
+        position: absolute;
+        right: 50%;
+        bottom: 0;
+        transform: translateX(100%);
+        height: 85%;
+        width: auto;
+        object-fit: contain;
+        opacity: 0;
+        transition: all 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transition-delay: 0.3s;
+    }
+
+    /* Desktop active animations */
+    .section:first-child.active .hero-content .order-2 img:first-child {
+        transform: translateX(12%);
+        opacity: 1;
+    }
+
+    .section:first-child.active .hero-content .order-2 img:last-child {
+        transform: translateX(-12%);
+        opacity: 1;
+    }
+
+    /* Desktop scroll-out animations */
+    .section:first-child.scroll-out .hero-content .order-2 img:first-child {
+        transform: translateX(-150%);
+        opacity: 0;
+    }
+
+    .section:first-child.scroll-out .hero-content .order-2 img:last-child {
+        transform: translateX(150%);
+        opacity: 0;
+    }
+}
+
+
+
+/* Text styling for all screen sizes */
+.hero-content h1,
+.hero h1 {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.7);
+    z-index: var(--z-30);
+    position: relative;
+}
+
+.hero-content p,
+.hero p {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.7);
+    z-index: var(--z-30);
+    position: relative;
+}
+
+.hero-content a,
+.hero a {
+    z-index: var(--z-30);
+    position: relative;
+}
+
+/* Logo Container */
+.hero-logo {
+    position: relative;
+    z-index: var(--z-30);
+    filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
+    animation: logoFloat 3s ease-in-out infinite;
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
 
 /* Mobile responsive logo sizing */
 @media (max-width: 768px) and (orientation: portrait) {
